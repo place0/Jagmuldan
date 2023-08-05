@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        {{request.user.username}}
+        {% if request.user.merchant %}
+        판매자님<br>
+        한줄소개 - <input type="text" name="description" value="{{request.user.merchant.description}}"><br>
+        농장 이름 변경 - <input type="text" name="farm_name" value="{{request.user.merchant.farm_name}}"><br>
+        <p>현재: <img src="{{request.user.merchant.image.url }}" width="50"></p>
+        <p>변경 : <input type="file" name="image"></p>
+        <input type="submit" value="수정하기">
+        {% else %}
+        님
+        {% endif %}
+        
+    
+    </form>
+</body>
+</html>

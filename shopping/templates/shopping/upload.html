@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="radio" name="type" value="과일">과일
+        <input type="radio" name="type" value="채소">채소<br>
+        상품 이름-<input type="text" name="title" value=""><br>
+        가격-<input type="price" name="price" value=""><br>
+        생산지-<input type="text" name="origin" value=""><br>
+        재배 특징-<textarea name="feature"></textarea><br>
+        사진 업로드-<input multiple="multiple" type="file" name="imgs"><br>
+        사진 업로드-<input multiple="multiple" type="file" name="imgs"><br>
+        사진 업로드-<input multiple="multiple" type="file" name="imgs"><br>
+        사진 업로드-<input multiple="multiple" type="file" name="imgs"><br>
+        <input type="submit" value="상품 등록하기">
+    </form>
+    
+    
+</body>
+</html>

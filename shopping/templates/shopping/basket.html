@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<div id="cart-container">
+    <form id="cart-form" action="{% url 'final' %}" method="post">
+        {% csrf_token %}
+        {% for p in products %}
+        {% for photo in p.product.product_image.all %}
+            <img src="{{ photo.image.url }}" width="50"><br>
+        {% endfor %}
+        <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
+            data-product-price="{{ p.product.price }}" data-product-quantity="{{ p.quantity }}">
+            
+        {{ p.product.title }}<br>
+        가격 - {{ p.product.price }}원 <br>
+        주문 수량 - {{ p.quantity }}
+        <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a><br>
+        배송비 - {% if not request.user.low_income %}
+            2500원(따로 설정)
+            {% else %}
+            0원
+            {%endif%}<br>
+        도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+    {% endfor %}
+    
+        <button type="submit" id="order-button">{{ total_p }}원 주문하기</button>
+        
+    </form>
+</div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // 체크박스 선택 여부에 따라 총 주문 가격을 업데이트하는 함수
+        function updateTotalPrice() {
+            var total = 0;
+            $(".product-checkbox:checked").each(function () {
+                var productId = $(this).val();
+                var price = parseInt($(this).data('product-price'));
+                var quantity = parseInt($(this).data('product-quantity'));
+                total += price * quantity;
+            });
+
+            $("#order-button").text(total + "원 주문하기");
+        }
+
+        // 체크박스 변경 이벤트를 처리합니다
+        $(".product-checkbox").on("change", function () {
+            updateTotalPrice();
+        });
+
+        // 폼 제출을 AJAX를 이용하여 처리합니다
+
+    });
+</script>
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% for p in products %}
+        {{p.title}}<br>
+        {% for photo in p.product_image.all %}
+            <img src="{{ photo.image.url }}" width="50"><br>
+        {% endfor %}
+        <hr>
+    {% empty %}
+        찜한 상품 없음
+    {% endfor %}
+</body>
+</html>
