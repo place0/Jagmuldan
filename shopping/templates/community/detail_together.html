@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {{ask.title}}<br>
+    <a href="{{ask.url}}">오픈채팅 바로가기</a><br>
+    희망 지역 - {{ask.where}}, {{ask.detail}}<br>
+    {{ask.context}}<br>
+    
+    <hr>
+    {% if ask.community.count > 0 %}
+        {% for c in ask.community.all %}
+            {% if c.writer == True %}
+                글쓴이 : {{c.context}}<br>
+            {% else %}
+                익명 : {{ c.context }}<br>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        작성된 글 없음
+    {% endif %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="context"></input>
+        <input type="submit" value="작성">
+    </form>
+
+    
+</body>
+</html>

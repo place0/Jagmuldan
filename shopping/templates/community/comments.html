@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    식당이름 {{r.name}}<br>
+    주소 {{r.adress}}<br>
+    운영자 {{r.user.username}}-운영자 이미지 <img src="{{r.restaurant_image.url}}" width="50"><br>
+    설명 {{r.description}}<br>
+    <br>
+    {% for photo in r.restaurant_image.all %}
+        <img src="{{photo.image.url}}" width="50"><br>
+    {% endfor %}
+    {% for c in comments %}
+        {{c.comment}}<br>
+    {% empty %}
+        댓글 없음<br>
+    {% endfor %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        포인트 - <input type="number" name="point">
+        내용 - <input type="text" name="comment"></input>
+        <input type="submit" value="작성">
+    </form>
+</body>
+</html>

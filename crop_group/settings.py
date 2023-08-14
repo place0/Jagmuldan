@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'users',
     'shopping',
     'accounts',
+    'community',
+    'recommend_promotion',
 ]
 
 import os

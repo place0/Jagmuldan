@@ -5,6 +5,7 @@ from django.http import HttpResponse
 import json
 from datetime import datetime, timedelta
 from .models import Product
+from users.models import Restaurant
 from django.http import JsonResponse
 
 # 배송날짜 계산 함수
@@ -21,7 +22,14 @@ def get_next_business_day(current_date):
 # 메인페이지
 def index(request):
     products=Product.objects.all()
-    best=products[0]
+    if request.method=="POST":
+        search=request.POST['search']
+        products=Product.objects.filter(title__contains=search)
+    # 상품이 있는 경우 best 초기화 
+    if products:
+        best=products[0]
+    else:
+        best=None
     for p in products:
         if p.like_product.count() > best.like_product.count():
             best=p
@@ -33,22 +41,25 @@ def upload(request):
     if request.method=='GET':
         return render(request, 'shopping/upload.html')
     else:
-        
+        product=Product()
         title=request.POST['title']
         price=int(request.POST['price'])
         origin=request.POST['origin']
         feature=request.POST['feature']
         type=request.POST['type']
-        product=Product()
+        total_quantity=int(request.POST['total_quantity'])
+        discount_rate=int(request.POST['discount_rate'])
         product.title=title
         product.type=type
-        
+        product.total_quantity=total_quantity
+        product.discount_rate=discount_rate
         product.price=price
         product.production_features=feature
         product.origin=origin
-        product.discount_rate=0
+        product.discount_rate=discount_rate
         product.seller=request.user.merchant
         product.save()
+        # 여러 이미지 저장 
         for img in request.FILES.getlist('imgs'):
             photo = Photo()
             photo.product = product
@@ -63,20 +74,34 @@ def detail(request, id):
     discount_rate = product.discount_rate or 0
     discount_price = product.price * (1 - discount_rate / 100)
     if request.method == 'POST':
-        quantity = request.POST.get('quantity')
-        user_id = request.user.id
-        quantity = int(quantity)
 
         action = request.POST.get('action')
-        print(action)
+
+        # 절반만 구매하기 버튼을 누른 경우 > 결제 화면과 연결 
+        if action == 'half_purchase':
+            return redirect('index')
+        
+        # 절반만 구매하기 +장바구니 버튼 선택 
+        elif action== "half_goto_basket":
+            total_quantity = int(request.POST.get('total_quantity'))
+            user_id = request.user.id
+            user = User.objects.get(pk=user_id)
+
+            ShoppingBasket.objects.create(half_purchased=True, customer=user, product=product, quantity= total_quantity/2)
+            
+        # 장바구니에 디폴트 구매하기 옵션 선택 > 결제 화면과 연결 
         if action == 'purchase':
             return redirect('index')
-
-        elif action == 'goto_basket':
         
+        # 한번에 결제 + 장바구니 버튼
+        elif action == 'goto_basket':
+            quantity = request.POST.get('quantity')
+            user_id = request.user.id
+            quantity = int(quantity)
             user = User.objects.get(pk=user_id)
             order, created = ShoppingBasket.objects.get_or_create(customer=user, product=product, defaults={'quantity': quantity})
-
+        
+            # 장바구니에 이미 기존의 상품이 있는 경우 수량 +n
             if not created:
                 order.quantity += quantity
                 order.save()
@@ -84,7 +109,8 @@ def detail(request, id):
     return render(request, 'shopping/detail.html', {'product': product,'discount_price': discount_price})
 
 # 좋아요
-def add_remove_whishlist(request):
+def add_remove_whishlist(request): 
+    # ajax 요청만 처리 
     if request.method == "POST" and request.is_ajax():
         product_id = request.POST.get("product_id")
         product = get_object_or_404(Product, id=product_id)
@@ -152,10 +178,14 @@ def update_upload(request, id):
         origin=request.POST['origin']
         feature=request.POST['feature']
         type=request.POST['type']
-
+        total_quantity=int(request.POST['total_quantity'])
+        discount_rate=int(request.POST['discount_rate'])
+        print(total_quantity)
         product.title=title
         product.price=price
         product.origin=origin
+        product.total_quantity=total_quantity
+        product.discount_rate=discount_rate
         product.production_features=feature
         product.type=type
         product.save()
@@ -163,35 +193,45 @@ def update_upload(request, id):
             for img in product.product_image.all():
                 img.delete()
             for img in request.FILES.getlist('imgs'):
-                # Photo 객체를 하나 생성한다.
                 photo = Photo()
-                # 외래키로 현재 생성한 Post의 기본키를 참조한다.
                 photo.product = product
-                # imgs로부터 가져온 이미지 파일 하나를 저장한다.
                 photo.image = img
-                # 데이터베이스에 저장
             photo.save()
         return redirect('my_product')
 
 # 장바구니
 def basket(request):
-    # GET 요청일 경우에는 모든 상품 목록을 출력
     products = ShoppingBasket.objects.filter(customer=request.user)
-    total_price = sum(p.product.price * p.quantity for p in products)
+    total_price=0
+    for p in products:
+        if p.half_purchased==True:
+            total_price+=p.product.discounted_price * p.quantity*2
+        else:
+            total_price+=p.product.discounted_price
     current_date = datetime.now().date()
+    # 배송 도착일 설정 
     arrive_day = get_next_business_day(current_date)
+
+    # 결제하기 버튼 >> 결제 화면과 연결 
     return render(request, 'shopping/basket.html', {'products': products, 'total_p': total_price, 'arrive_day':arrive_day})
 
 # 장바구니 삭제
 def basket_delete(request, id):
     product = get_object_or_404(Product, id=id)
-    try:
-        order = ShoppingBasket.objects.get(product=product)
-        order.delete()
-    except ShoppingBasket.DoesNotExist:
-        pass
+    order = ShoppingBasket.objects.get(product=product)
+    order.delete()
     return redirect('basket')
 
+# 절반만 구매했던 상품 필터링 > 구매한 후랑 연결 
+def half_purchased_products(request):
+    half_purchased_products = Storage.objects.filter(basket_product__customer=request.user)
+    
+    context = {
+        'half_purchased_products': half_purchased_products,
+    }
+    return render(request, 'shopping/half_purchased)products.html', context)
+
+# 장바구니에서 구매 >> post 참고..
 def final(request):
     if request.method == "POST":
         selected_products = request.POST.getlist('selected_products')
@@ -200,36 +240,4 @@ def final(request):
         request.session['selected_products'] = selected_products  # 선택한 제품의 ID 리스트 저장
         for p in products:
             total_price += p.product.price * p.quantity
-        valid_coupon = []
-        for c in request.user.coupons.all():
-            if c.is_valid == True:
-                valid_coupon.append(c)
-        return render(request, 'shopping/purchase.html', {'products': products, 'total_p': total_price, 'valid_coupon': valid_coupon})
-    else:  # GET 요청인 경우
-        selected_product_ids = request.session.get('selected_products', [])  # 선택한 제품의 ID 리스트 가져오기
-        products = ShoppingBasket.objects.filter(customer=request.user, product__id__in=selected_product_ids)  # 해당 제품들 조회
-        total_price = sum(p.product.price * p.quantity for p in products)  # 가격 계산
-        valid_coupon = []
-        for c in request.user.coupons.all():
-            if c.is_valid == True:
-                valid_coupon.append(c)
-        return render(request, 'shopping/purchase.html', {'products': products, 'total_p': total_price, 'valid_coupon': valid_coupon})
-
-@login_required
-# @require_POST # 해당 뷰는 POST method 만 받는다.
-def product_like(request):
-    pk = request.POST.get('pk', None) # ajax 통신을 통해서 template에서 POST방식으로 전달
-    product = get_object_or_404(Product, pk=pk)
-    product_like, product_like_created = Product.like_set.get_or_create(user=request.user)
-
-    if not product_like_created:
-        product_like.delete()
-        message = "좋아요 취소"
-    else:
-        message = "좋아요"
-
-    context = {'like_count': product.like_count,
-               'message': message,
-               'nickname': request.user.profile.nickname }
-    
-    return HttpResponse(json.dumps(context), content_type="application/json")
+        

@@ -2,49 +2,81 @@ from django.shortcuts import render, redirect
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login,logout
-
+from users.models import Photo
 # Create your views here.
+
+#회원가입 유형 선택
 def signup(request):
     return render(request, 'accounts/signup.html')
         
 from django.shortcuts import render, redirect
-from .forms import FarmSignUpForm
+from .forms import FarmSignUpForm, RestaurnatSignupForm
 
+# 음식점 회원가입
+def restaurant_signup(request):
+    if request.method == 'POST':
+        form = RestaurnatSignupForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save(commit=True)  # 유저 정보 저장
+            for img in request.FILES.getlist('imgs'):
+                photo = Photo()
+                photo.restaurant = user.restaurant  # 유저와 이미지 연결
+                photo.image = img
+                photo.save()
+
+            return redirect('index')
+    else:
+        form = RestaurnatSignupForm()
+    return render(request, 'accounts/restaurant_signup.html', {'form': form})
+
+# 판매자 회원가입
 def merchant_signup(request):
     if request.method == 'POST':
         form = FarmSignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            # 회원가입이 성공한 경우 리다이렉트 등을 처리
             return redirect('index')
     else:
         form = FarmSignUpForm()
     return render(request, 'accounts/merchant_signup.html', {'form': form})
 
+# 일반 고객 회원가입
+def user_signup(request):
+    if request.method == 'POST':
+        form = UserSignupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = UserSignupForm()
+    return render(request, 'accounts/user.html', {'form': form})
 
-        
+# 저소득층 회원가입
+def low_income_signup(request):
+    if request.method == 'POST':
+        form = LowIncomeSignupForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()  # User 저장
+            return redirect('index')
+    else:
+        form = LowIncomeSignupForm()
+    return render(request, 'accounts/low_income_signup.html', {'form': form})
+
+
+# 로그인 
 def login_view(request):
-    #get,post분리
     if request.method=='GET':
-        #로그인 html 파일 응답 
         return render(request, 'accounts/login.html',{'form':AuthenticationForm()})
     else: 
-        #데이터 유효성 검사
         form=AuthenticationForm(request,data=request.POST)
         if form.is_valid(): 
-            #비즈니스 로직 처리 - 로그인 성공 - 로그인처리 
-            login(request, form.user_cache)  #로그인 처리를 하는 함수
-            #응답
-            return redirect('index') #인덱스 페이지로 돌려보냄 
+            login(request, form.user_cache)  
+            return redirect('index') 
         else:
-            #비즈니스 로직 처리 - 로그인 실패
-            #응답
             return render(request, 'accounts/login.html',{'form':form})
-        
+
+# 로그아웃     
 def logout_view(request):
-    #유효성 검사
-    if request.user.is_authenticated:  #프로퍼티라고 설정되어 있어서 괄호 없어도 됨 
-        #비즈니스 로직 처리-로그아웃
+    if request.user.is_authenticated:
         logout(request)
-    #응답 
     return redirect('index')

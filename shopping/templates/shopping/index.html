@@ -14,21 +14,30 @@
 <a href="{% url 'accounts:logout' %}">로그아웃</a>
 <a href="{% url 'basket' %}">장바구니</a><BR>
 {% endif %}
+<a href="{% url 'community:main' %}">커뮤니티</a>
 <a href="{% url 'mypage' %}">마이페이지</a>
 {% if request.user.merchant %}
 판매자 계정 - <a href="{% url 'upload' %}">상품등록</a>
 {% endif %}
+<a href="{% url 'recommend_promotion:rp' %}">농산물 추천&홍보</a>
+
 <h1>Product List<br></h1>
 
-<button type="button" class="filter-btn" data-type="">전체</button>
+<form action="" method="post">
+    {% csrf_token %}
+    <input type="text" name="search">
+</form>
+<button type="button" class="filter-btn" data-type="">전체</button>  <!--자바스크립트에 type 전달-->
 <button type="button" class="filter-btn" data-type="과일">과일</button>
 <button type="button" class="filter-btn" data-type="채소">채소</button>
+
 <div style="background-color: yellow;">광고 영역입니다</div>
 
 <ul id="product-list">
     가장 찜한 사람 수가 많은 - {{best.title}}<br><br><br>
+
     {% for product in products %}
-    <li data-type="{{ product.type }}">
+    <li data-type="{{ product.type }}">  <!--해당 상품의 타입을 나타냄-->
         <strong>Title:</strong> {{ product.title }}<br>
         <strong>Price:</strong> {{ product.price }}<br>
         <strong>Discount Rate:</strong> {{ product.discount_rate }}<br><br>
@@ -43,17 +52,17 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     function filterProducts(type) {
-        $('#product-list li').hide();
+        $('#product-list li').hide(); // 상품 리스트의 모든 항목을 숨김
         if (type === '') {
-            $('#product-list li').show();
+            $('#product-list li').show(); // type이 빈 문자열인 경우, 모든 상품 항목을 보여줌
         } else {
-            $('#product-list li[data-type="' + type + '"]').show();
+            $('#product-list li[data-type="' + type + '"]').show(); // 해당 type에 해당하는 상품 항목만 보여줌
         }
     }
 
-    $('.filter-btn').on('click', function () {
+    $('.filter-btn').on('click', function () { // 클릭한 버튼의 data-type 속성을 가져옴
         var productType = $(this).data('type');
-        filterProducts(productType);
+        filterProducts(productType); // filterProducts 함수를 호출하여 해당 type에 해당하는 상품만 보여줌
     });
 
 </script>

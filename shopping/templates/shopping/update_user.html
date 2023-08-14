@@ -17,8 +17,11 @@
         <p>현재: <img src="{{request.user.merchant.image.url }}" width="50"></p>
         <p>변경 : <input type="file" name="image"></p>
         <input type="submit" value="수정하기">
-        {% else %}
-        님
+        {% elif request.user.restaurant %}
+        님<br>
+        <p>현재: <img src="{{request.user.restaurant.image.url }}" width="50"></p>
+        <p>변경 : <input type="file" name="image"></p>
+        <a href="">식당 홍보물 내용 수정</a>
         {% endif %}
         
     

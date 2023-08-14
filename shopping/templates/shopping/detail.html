@@ -22,14 +22,68 @@
         <a href="#" class="like-btn" data-product-id="{{ product.id }}">찜하기</a>
     {% endif %}<br><br>
     가격 - {{product.price}}원<br>
-    할인 적용된 가격 - {{ discount_price }}원<br>
+    할인 적용된 가격 - {{ discount_price|floatformat:"0" }}원<br>
     할인률 - {{ product.discount_rate }}%
-    <form action="" method="post">
+
+    <form action="" method="post" id="main-form">
         {% csrf_token %}
-        <input type="number" name="quantity" min="1" required> <!-- quantity 값을 입력받는 input 요소 -->
-        <button type="submit" name="action" value="goto_basket" id="basket-button">장바구니에 추가</button>
-        <button type="submit" name="action" value="purchase" id="order-button">주문하기</button>
+        <button type="button" name="action" value="buy" id="buy-button">구매하기</button>
     </form>
+    
+    <div id="additional-buttons" style="display: none;">
+        <button type="button" id="half-buy-button">반만 담기</button>
+        <button type="button" id="full-buy-button">한번에 결제</button>
+    </div>
+
+    
+    <form action="" method="post" id="half-purchase-form" style="display: none;">
+        {% csrf_token %}
+        <input type="number" name="total_quantity" min="1" required placeholder="총 결제할 수량">
+        * 이 중 절반의 수량만 배송갑니다
+        
+        <button type="submit" name="action" value="half_purchase" id="half-purchase-button">반만 배송받기</button>
+        <button type="submit" name="action" value="half_goto_basket" id="basket-button">장바구니에 추가</button>
+    </form>
+
+    <form action="" method="post" id="full-purchase-form" style="display: none;">
+        {% csrf_token %}
+        <input type="number" name="quantity" min="1" required placeholder="배송받을 수량">
+        <button type="submit" name="action" value="purchase" id="purchase-direct-button">바로 결제하기</button>
+        <button type="submit" name="action" value="goto_basket" id="basket-button">장바구니에 추가</button>
+    </form>
+    
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#buy-button").on("click", function () {
+                $("#main-form").hide();
+                $("#additional-buttons").show();
+                $("#additional-form").show();
+                $("#half-purchase-form, #full-purchase-form").hide();
+            });
+    
+            $("#half-buy-button").on("click", function () {
+                $("#additional-form").show();
+                $("#half-purchase-form").show();
+                $("#full-purchase-form").hide();
+            });
+    
+            $("#full-buy-button").on("click", function () {
+                $("#additional-form").show();
+                $("#half-purchase-form").hide();
+                $("#full-purchase-form").show();
+            });
+    
+            // 초기에는 추가 폼을 숨겨둠
+            $("#additional-form, #half-purchase-form, #full-purchase-form").hide();
+        });
+    </script>
+    
+    
+    
+    
+    
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
@@ -46,7 +100,7 @@
                         product_id: productId,  // product_id와 csrfmiddlewaretoken을 함께 서버로 전송
                         csrfmiddlewaretoken: "{{ csrf_token }}",
                     },
-                    success: function (response) {  // Ajax 요청이 성공적으로 완료된 경우 실행되는 함수입니다. 서버에서 받은 응답을 처리
+                    success: function (response) {  
                         // 좋아요 버튼 상태 업데이트
                         if (response.liked) {  // response 객체의 liked 속성을 확인하여, 좋아요 상태를 업데이트
                             $(".like-btn[data-product-id=" + productId + "]").text("찜 취소");

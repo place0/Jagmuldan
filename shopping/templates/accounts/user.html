@@ -27,18 +27,6 @@
             <p class="error">{{ form.password2.errors.as_text }}</p>
         {% endif %}
         <br>
-        <label for="{{ form.farm_name.id_for_label }}">농장 위치-이름:</label>
-        {{ form.farm_name }}
-        {% if form.farm_name.errors %}
-            <p class="error">{{ form.farm_name.errors.as_text }}</p>
-        {% endif %}
-        <br>
-        <label for="{{ form.farm_adress_for_label }}">농장 주소:</label>
-        {{ form.farm_adress }}
-        {% if form.farm_adress.errors %}
-            <p class="error">{{ form.farm_adress.errors.as_text }}</p>
-        {% endif %}
-        <br>
         <button type="submit">Sign Up</button>
     </form>
 </body>

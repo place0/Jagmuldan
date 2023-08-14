@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 <body>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="{{ form.username.id_for_label }}">이름(아이디) :</label>
         {{ form.username }}
@@ -26,19 +25,8 @@
         {% if form.password2.errors %}
             <p class="error">{{ form.password2.errors.as_text }}</p>
         {% endif %}
-        <br>
-        <label for="{{ form.farm_name.id_for_label }}">농장 위치-이름:</label>
-        {{ form.farm_name }}
-        {% if form.farm_name.errors %}
-            <p class="error">{{ form.farm_name.errors.as_text }}</p>
-        {% endif %}
-        <br>
-        <label for="{{ form.farm_adress_for_label }}">농장 주소:</label>
-        {{ form.farm_adress }}
-        {% if form.farm_adress.errors %}
-            <p class="error">{{ form.farm_adress.errors.as_text }}</p>
-        {% endif %}
-        <br>
+        <br><br>
+        사진 업로드-<input name="image" multiple="multiple" type="file" name="imgs"><br>
         <button type="submit">Sign Up</button>
     </form>
 </body>

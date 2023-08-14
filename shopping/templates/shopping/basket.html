@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,28 +8,37 @@
 </head>
 <body>
 <div id="cart-container">
-    <form id="cart-form" action="{% url 'final' %}" method="post">
+    <!--결제하기 화면과 연결 -->
+    <form id="cart-form" action="" method="post">
         {% csrf_token %}
         {% for p in products %}
-        {% for photo in p.product.product_image.all %}
-            <img src="{{ photo.image.url }}" width="50"><br>
-        {% endfor %}
-        <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
-            data-product-price="{{ p.product.price }}" data-product-quantity="{{ p.quantity }}">
+            {% for photo in p.product.product_image.all %}
+                <img src="{{ photo.image.url }}" width="50"><br>
+            {% endfor %}
+            <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
+            data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
             
-        {{ p.product.title }}<br>
-        가격 - {{ p.product.price }}원 <br>
-        주문 수량 - {{ p.quantity }}
+            {{ p.product.title }}<br>
+            가격 - {{ p.product.discounted_price|floatformat:"0" }}원
+            <br>
+            {% if p.half_purchased %}
+                주문 수량 - {{ p.quantity|multiply:2 }}<br>
+                배송 수량 - {{p.quantity}}<br>
+                반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지 수량을 배송받을 수 있습니다.
+            {% else %}
+                수량 - {{p.quantity}}<br>
+            {% endif %}
         <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a><br>
         배송비 - {% if not request.user.low_income %}
             2500원(따로 설정)
             {% else %}
-            0원
+            0원 - 저소득층 지원
             {%endif%}<br>
         도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
     {% endfor %}
+    <hr>
     
-        <button type="submit" id="order-button">{{ total_p }}원 주문하기</button>
+        <button type="submit" id="order-button">{{ total_price|default:0 }}원 주문하기</button>
         
     </form>
 </div>
@@ -44,23 +54,25 @@
                 var productId = $(this).val();
                 var price = parseInt($(this).data('product-price'));
                 var quantity = parseInt($(this).data('product-quantity'));
-                total += price * quantity;
+                var half_purchased =$(this).data('half_purchased');
+                if (half_purchased==='True'){
+                    total += price * quantity*2;
+                }
+                else{
+                    total += price * quantity;
+                }
             });
-
             $("#order-button").text(total + "원 주문하기");
         }
 
-        // 체크박스 변경 이벤트를 처리합니다
+        // 체크박스 변경 이벤트를 처리
         $(".product-checkbox").on("change", function () {
             updateTotalPrice();
         });
 
-        // 폼 제출을 AJAX를 이용하여 처리합니다
-
+        // 초기 로드 시 총 주문 가격 업데이트
+        updateTotalPrice();
     });
 </script>
-
-    
-    
 </body>
 </html>
