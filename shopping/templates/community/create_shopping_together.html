@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <select name="where">
+            {% for p in places %}
+            위치-<option value="{{p}}">{{p}}</option>
+            {% endfor %}
+        </select>
+            디테일 위치 - <input type="text" name="detail">
+        <br>url - <input type="url" name="url">
+        <br>title - <input type="text" name="title">
+        <br><textarea name="context"></textarea>
+        <input type="submit" value="글 등록하기">
+    </form>
+</body>
+</html>

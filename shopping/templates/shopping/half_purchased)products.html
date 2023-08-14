@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Half Purchased Products</title>
+</head>
+<body>
+    <h1>Half Purchased Products</h1>
+    <ul>
+        {% for product in half_purchased_products %}
+        <li>
+            <h2>{{ product.title }}</h2>
+            <p>Price: {{ product.price }}</p>
+            <p>Discount Rate: {{ product.discount_rate }}%</p>
+            <!-- 추가 필드들도 표시 -->
+            <p><a href="#">Purchase Remaining Half</a></p>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
