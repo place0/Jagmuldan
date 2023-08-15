@@ -36,4 +36,10 @@ class Storage(models.Model):
     expiry_date=models.DurationField()
     half_purchased = models.BooleanField(default=False)
 
-
+# 구매내역
+class Order(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='order')
+    product = models.ForeignKey(Product, related_name='order_product', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    half_purchased = models.BooleanField(default=False)
+    time = models.DateTimeField(auto_now_add=True)

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'accounts',
     'community',
     'recommend_promotion',
+    'kakao',
 ]
 
 import os

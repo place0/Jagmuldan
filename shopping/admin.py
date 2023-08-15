@@ -5,3 +5,4 @@ admin.site.register(Product)
 
 admin.site.register(ShoppingBasket)
 
+admin.site.register(Order)

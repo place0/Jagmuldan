@@ -9,7 +9,7 @@
 <body>
 <div id="cart-container">
     <!--결제하기 화면과 연결 -->
-    <form id="cart-form" action="" method="post">
+    <form id="cart-form" action="/kakaoPayLogic/" method="post">
         {% csrf_token %}
         {% for p in products %}
             {% for photo in p.product.product_image.all %}
@@ -35,10 +35,15 @@
             0원 - 저소득층 지원
             {%endif%}<br>
         도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+        <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
+        <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
+        <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
+        <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
+
     {% endfor %}
     <hr>
     
-        <button type="submit" id="order-button">{{ total_price|default:0 }}원 주문하기</button>
+        <button type="submit" id="order-button"><input type="submit" value="결제">{{ total_price|default:0 }}원 주문하기</button>
         
     </form>
 </div>

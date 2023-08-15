@@ -79,7 +79,7 @@ def detail(request, id):
 
         # 절반만 구매하기 버튼을 누른 경우 > 결제 화면과 연결 
         if action == 'half_purchase':
-            return redirect('index')
+            return redirect('kakao:kakaoPay')
         
         # 절반만 구매하기 +장바구니 버튼 선택 
         elif action== "half_goto_basket":
@@ -91,7 +91,7 @@ def detail(request, id):
             
         # 장바구니에 디폴트 구매하기 옵션 선택 > 결제 화면과 연결 
         if action == 'purchase':
-            return redirect('index')
+            return redirect('kakao:kakaoPay')
         
         # 한번에 결제 + 장바구니 버튼
         elif action == 'goto_basket':
