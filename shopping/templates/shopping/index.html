@@ -1,70 +1,228 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/index.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
-</head>
-<body>
-{{request.user.username}}
-<a href="{% url 'accounts:signup' %}">회원가입</a><br>
-{% if not request.user.is_authenticated %}
-<a href="{% url 'accounts:login' %}">로그인</a>
-{% else %}
-<a href="{% url 'accounts:logout' %}">로그아웃</a>
-<a href="{% url 'basket' %}">장바구니</a><BR>
-{% endif %}
-<a href="{% url 'community:main' %}">커뮤니티</a>
-<a href="{% url 'mypage' %}">마이페이지</a>
-{% if request.user.merchant %}
-판매자 계정 - <a href="{% url 'upload' %}">상품등록</a>
-{% endif %}
-<a href="{% url 'recommend_promotion:rp' %}">농산물 추천&홍보</a>
+  </head>
+  <body>
+    <div id="frame">
+      <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="login">{{request.user.username}}</div>
+        <div class="signup">
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </div>
 
-<h1>Product List<br></h1>
+        {% if not request.user.is_authenticated %}
+        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        {% else %}
+        <div class="logout">
+          <a href="{% url 'accounts:logout' %}">로그아웃</a>
+        </div>
+        {% endif %}
+        <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
+      </nav>
 
-<form action="" method="post">
-    {% csrf_token %}
-    <input type="text" name="search">
-</form>
-<button type="button" class="filter-btn" data-type="">전체</button>  <!--자바스크립트에 type 전달-->
-<button type="button" class="filter-btn" data-type="과일">과일</button>
-<button type="button" class="filter-btn" data-type="채소">채소</button>
+      <!-- 과일, 채소 -->
 
-<div style="background-color: yellow;">광고 영역입니다</div>
+      <div class="btn">
+        <div class="all">
+          <button id="allButton" class="filter-btn" data-type="">전체</button>
+        </div>
+        <div class="fruit">
+          <button id="fruitButton" class="filter-btn" data-type="과일">
+            과일
+          </button>
+        </div>
+        <div class="vegi">
+          <button id="vegiButton" class="filter-btn" data-type="채소">
+            채소
+          </button>
+        </div>
+      </div>
+      <!-- 검색 -->
+      <form action="" method="post" class="searchBox">
+        {% csrf_token %}
+        <input type="text" name="search" id="search" />
+        <button type="button" name="search" id="searchBtn">검색</button>
+      </form>
 
-<ul id="product-list">
-    가장 찜한 사람 수가 많은 - {{best.title}}<br><br><br>
+      <ul id="product-list">
+        <!-- 가장 잘 나가는 상품 -->
+        <div class="hot">
+          <div><span>오늘의 HOT 상품!</span></div>
+          <p>{{best.title}}</p>
+        </div>
+      </ul>
+      <article id="product_list_all">
+        <ul>
+          {% for product in products %}
+          <li data-type="{{ product.type }}">
+            {% for photo in product.product_image.all %}
+            <img src="{{photo.image.url}}" width="50" /><br />
+            {% endfor %}
+            <div class="infoBox">
+              <span>{{ product.title }}</span>
+              <p>{{ product.price }}</p>
+              <p>{{ product.discount_rate }}</p>
+              <a href="{% url 'detail' product.id %}"
+                ><button>상세보기</button></a
+              >
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </article>
+      <!-- +버튼 (게시물 등록) -->
+      {% if request.user.merchant %}
+      <div class="upload">
+        <button type="button">
+          <a href="{% url 'upload' %}">
+            <iconify-icon
+              icon="simple-line-icons:plus"
+              style="color: rgba(255, 202, 13, 1)"
+              width="70"
+              height="70"
+            ></iconify-icon
+          ></a>
+        </button>
+      </div>
 
-    {% for product in products %}
-    <li data-type="{{ product.type }}">  <!--해당 상품의 타입을 나타냄-->
-        <strong>Title:</strong> {{ product.title }}<br>
-        <strong>Price:</strong> {{ product.price }}<br>
-        <strong>Discount Rate:</strong> {{ product.discount_rate }}<br><br>
-        {% for photo in product.product_image.all %}
-            <img src="{{photo.image.url}}" width="50"><br>
-        {% endfor %}
-        <a href="{% url 'detail' product.id %}"><button>상세보기</button></a>
-    </li>
-    {% endfor %}
-</ul>
+      <!-- 광고 배너 -->
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function filterProducts(type) {
-        $('#product-list li').hide(); // 상품 리스트의 모든 항목을 숨김
-        if (type === '') {
-            $('#product-list li').show(); // type이 빈 문자열인 경우, 모든 상품 항목을 보여줌
+      <div class="ad">
+        <img src="/image/홍보물_임영웅.png" alt="" />
+        <img src="{% static '/img/홍보물_임영웅.png' %}" />
+      </div>
+      <div class="ad_x">
+        <button>x</button>
+      </div>
+
+      <!-- 하단 나브바 -->
+      {% endif %}
+      <nav class="nav_bottom">
+        <div class="logo">
+          <a href="{% url 'recommend_promotion:rp' %}">
+            <iconify-icon
+              icon="mdi:corn"
+              style="color: #008d3f"
+              width="45"
+              height="43"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        <div class="home">
+          <iconify-icon
+            icon="octicon:home-24"
+            style="color: #008d3f"
+            width="38"
+            height="38"
+          ></iconify-icon>
+        </div>
+        <div class="community">
+          <a href="{% url 'community:main' %}">
+            <iconify-icon
+              icon="clarity:talk-bubbles-line"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+      </nav>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function filterProducts(type) {
+        $("#product-list li").hide(); // 상품 리스트의 모든 항목을 숨김
+        if (type === "") {
+          $("#product-list li").show(); // type이 빈 문자열인 경우, 모든 상품 항목을 보여줌
         } else {
-            $('#product-list li[data-type="' + type + '"]').show(); // 해당 type에 해당하는 상품 항목만 보여줌
+          $('#product-list li[data-type="' + type + '"]').show(); // 해당 type에 해당하는 상품 항목만 보여줌
         }
-    }
+      }
 
-    $('.filter-btn').on('click', function () { // 클릭한 버튼의 data-type 속성을 가져옴
-        var productType = $(this).data('type');
+      $(".filter-btn").on("click", function () {
+        // 클릭한 버튼의 data-type 속성을 가져옴
+        var productType = $(this).data("type");
         filterProducts(productType); // filterProducts 함수를 호출하여 해당 type에 해당하는 상품만 보여줌
-    });
+      });
 
-</script>
-</body>
+      //버튼 색상 변경
+      document.addEventListener("DOMContentLoaded", function () {
+        const allButton = document.getElementById("allButton");
+        const fruitButton = document.getElementById("fruitButton");
+        const vegiButton = document.getElementById("vegiButton");
+
+        const productAll = document.getElementById("product_list_all");
+        const productFruit = document.getElementById("product_list_fruit");
+        const productVegi = document.getElementById("product_list_vegi");
+
+        allButton.addEventListener("click", function () {
+          resetButtonColors();
+          allButton.classList.add("green");
+          productAll.style.display = "block";
+          productFruit.style.display = "none";
+          productVegi.style.display = "none";
+        });
+
+        fruitButton.addEventListener("click", function () {
+          resetButtonColors();
+          fruitButton.classList.add("green");
+          productAll.style.display = "none";
+          productFruit.style.display = "block";
+          productVegi.style.display = "none";
+        });
+
+        vegiButton.addEventListener("click", function () {
+          resetButtonColors();
+          vegiButton.classList.add("green");
+          productAll.style.display = "none";
+          productFruit.style.display = "none";
+          productVegi.style.display = "block";
+        });
+
+        // 초기에 allButton을 클릭한 상태로 설정
+        allButton.click();
+
+        function resetButtonColors() {
+          allButton.classList.remove("green");
+          fruitButton.classList.remove("green");
+          vegiButton.classList.remove("green");
+        }
+      });
+      // 광고 배너와 버튼에 대해 이벤트 처리
+      document.addEventListener("DOMContentLoaded", function () {
+        const adContainers = document.querySelectorAll(".ad, .ad_x button");
+
+        adContainers.forEach(function (element) {
+          element.addEventListener("click", function () {
+            adContainers.forEach(function (adElement) {
+              adElement.style.display = "none";
+            });
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
