@@ -14,7 +14,7 @@
       <!-- 상단 나브바 -->
       <nav class="nav_header">
         <div class="logo">
-          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+          <a href=""><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
         </div>
         <div class="cart">
           <a href="{% url 'basket' %}">
@@ -65,15 +65,15 @@
         <button type="button" name="search" id="searchBtn">검색</button>
       </form>
 
-      <ul id="product-list">
+      
         <!-- 가장 잘 나가는 상품 -->
         <div class="hot">
           <div><span>오늘의 HOT 상품!</span></div>
           <p>{{best.title}}</p>
         </div>
-      </ul>
-      <article id="product_list_all">
-        <ul>
+   
+        <article id="product_list_all">
+        <ul id="product-list">
           {% for product in products %}
           <li data-type="{{ product.type }}">
             {% for photo in product.product_image.all %}
@@ -89,8 +89,10 @@
             </div>
           </li>
           {% endfor %}
+        
         </ul>
       </article>
+      
       <!-- +버튼 (게시물 등록) -->
       {% if request.user.merchant %}
       <div class="upload">
@@ -181,25 +183,16 @@
         allButton.addEventListener("click", function () {
           resetButtonColors();
           allButton.classList.add("green");
-          productAll.style.display = "block";
-          productFruit.style.display = "none";
-          productVegi.style.display = "none";
         });
 
         fruitButton.addEventListener("click", function () {
           resetButtonColors();
           fruitButton.classList.add("green");
-          productAll.style.display = "none";
-          productFruit.style.display = "block";
-          productVegi.style.display = "none";
         });
 
         vegiButton.addEventListener("click", function () {
           resetButtonColors();
           vegiButton.classList.add("green");
-          productAll.style.display = "none";
-          productFruit.style.display = "none";
-          productVegi.style.display = "block";
         });
 
         // 초기에 allButton을 클릭한 상태로 설정
