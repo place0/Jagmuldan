@@ -1,0 +1,372 @@
+#frame {
+  width: 390px;
+  height: 844px;
+  background-color: white;
+  margin: 50px auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  font-family: "Pretendard", sans-serif;
+}
+
+/* nav_heaer */
+.nav_header > .logo {
+  left: 7.44%;
+  right: 81.79%;
+  top: 1.3%;
+  bottom: 93.13%;
+  position: absolute;
+}
+.nav_header > .logo img {
+  width: 73px;
+  height: 68px;
+  object-fit: contain;
+}
+.nav_header > .cart {
+  position: absolute;
+  left: 71.54%;
+  right: 19.49%;
+  top: 2.49%;
+  bottom: 93.36%;
+}
+/* 로그인 */
+.nav_header > .login {
+  position: absolute;
+  left: 83.33%;
+  top: 3.55%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+.nav_header > .signup {
+  position: absolute;
+  left: 83.33%;
+  top: 6.4%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .logout {
+  position: absolute;
+  left: 67%;
+  top: 6.4%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .mypage {
+  position: absolute;
+  left: 83.33%;
+  top: 3.55%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .login a,
+.logout a,
+.signup a,
+.mypage a {
+  text-decoration: none;
+}
+/* 잉여농산물구매 */
+.title {
+  width: 200px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 12.44%;
+  left: 24.62%;
+  background: #008d3f;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  font-size: large;
+}
+
+/* 과일, 채소 버튼 */
+.btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  position: absolute;
+  top: 14%;
+  left: -50%;
+  right: -50%;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.btn > .fruit,
+.vegi .all {
+  padding: 0 15px;
+}
+
+.btn button {
+  width: 90px;
+  height: 35px;
+  background-color: rgba(217, 217, 217, 1);
+  border-radius: 10px;
+  border: none;
+}
+
+.btn button:hover {
+  background-color: #008d3f;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  font-weight: 800;
+  color: white;
+}
+
+button.green {
+  background-color: #008d3f;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  font-weight: 800;
+  color: white;
+}
+
+/* 검색 */
+.searchBox {
+  position: relative;
+  top: 21%;
+}
+#search {
+  position: absolute;
+  left: 15%;
+  width: 210px;
+  height: 33px;
+
+  background: #eaeaea;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border: none;
+}
+/* 적용이 안됨.. */
+input[type="text"]:focus {
+  border: solidrgb(0, 141, 63) 3px;
+  font-weight: 600;
+}
+#searchBtn {
+  position: absolute;
+  width: 50px;
+  height: 30px;
+  top: 10%;
+  left: 72%;
+  background: rgb(0, 141, 63);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+
+#searchBtn:hover {
+  border: solid black 2px;
+}
+
+/* 가장 잘 나가는 상품 */
+.hot {
+  position: absolute;
+  left: 5.64%;
+  top: 28%;
+  width: 345px;
+  height: 170px;
+  background-image: url(/Jagmuldan/shopping/static/img/농작물/옥수수1.png);
+  overflow: hidden;
+  border: #008d3f solid 3px;
+  border-radius: 10px;
+}
+.hot img {
+  object-fit: cover;
+}
+
+.hot span {
+  position: absolute;
+  top: 10%;
+  left: 7%;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  width: max-content;
+}
+.hot p {
+  position: absolute;
+  top: 13%;
+  left: 7%;
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+}
+/* 상품 리스트 */
+#product_list_fruit,
+#product_list_vegi,
+#product_list_all {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+  width: 345px;
+  height: 350px;
+  overflow: scroll;
+}
+#product_list_fruit::-webkit-scrollbar,
+#product_list_vegi::-webkit-scrollbar,
+#product_list_all::-webkit-scrollbar {
+  width: 1px;
+}
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+li {
+  list-style: none;
+  width: 150px;
+  height: 150px;
+  padding: 6px;
+  overflow: hidden;
+  object-fit: cover;
+  position: relative;
+}
+
+li img {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+li .infoBox {
+  position: absolute;
+  width: 150px;
+  height: 110px;
+  background: rgba(217, 217, 217, 0.65);
+  opacity: 0;
+}
+
+li .infoBox:hover {
+  animation: modalSlideIn 0.3s ease-in;
+  opacity: 1;
+}
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* 상품이름 title */
+li .infoBox span {
+  font-weight: 700;
+  font-size: 20px;
+  color: #454444;
+  position: absolute;
+  top: 5%;
+  left: 7%;
+}
+/* 상품 가격 price */
+li .infoBox p {
+  position: absolute;
+  top: 20%;
+  left: 7%;
+  font-size: 16px;
+  color: #454444;
+}
+
+.discount_rate {
+  position: absolute;
+  top: 53%;
+  left: 7%;
+  font-size: 12px;
+  color: red;
+  font-weight: lighter;
+}
+
+li .infoBox a button {
+  border: none;
+  background-color: #008d3f;
+  color: #454444;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  border-radius: 5px;
+}
+#product_list_fruit > .infoBox,
+#product_list_vegi > .infoBox,
+#product_list_all > .infoBox {
+  width: 150px;
+  height: 150px;
+  background: rgba(217, 217, 217, 0.65);
+}
+
+/* + 게시물등록버튼 */
+.upload {
+  position: absolute;
+  left: 77.44%;
+  right: 4.62%;
+  top: 70.62%;
+  bottom: 12.09%;
+}
+
+.upload button {
+  background-color: transparent;
+  border: none;
+}
+
+/* 광고 배너 */
+.ad {
+  position: absolute;
+  top: 80.5%;
+  bottom: 61.14%;
+  width: 390px;
+  height: 85px;
+  display: flex;
+  justify-content: center;
+}
+
+.ad img {
+  overflow: hidden;
+  object-fit: cover;
+}
+
+.ad_x {
+  position: absolute;
+  top: 80.5%;
+  left: 94%;
+}
+.ad_x button {
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-weight: bold;
+}
+/* nav_bottom */
+.nav_bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+  width: 390px;
+  height: 80px;
+  background: rgba(244, 244, 244, 1);
+}
+.nav_bottom > .logo {
+  display: flex;
+}

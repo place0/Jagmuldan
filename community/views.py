@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def main(request):
     places=[
             '서울특별시','경기도','인천광역시'
@@ -18,29 +20,18 @@ def main(request):
             '전라북도',
             '제주특별자치도',
         ]
-    restaurants = Restaurant.objects.all()
     asks=JointShipping.objects.all()
-    page=False
-    if request.session.get('page'):
-        page=True
-        del request.session['page']
 
     if request.method=="POST":
         search=request.POST['search']
         action=request.POST['action']
-        if action=="restaurant_search":
-            restaurants=Restaurant.objects.filter(name__contains=search)
         if action=="local_search":
             where=request.POST['where']
             asks=JointShipping.objects.filter(detail__contains=search, where=where)
-            page=True
     context={
-        'restaurants':restaurants,
         'asks':asks,
         'places':places,
-        'page':page
     }
-    print(page)
     return render(request, 'community/main.html', context)
 
 def create_review(request, id):
