@@ -21,6 +21,8 @@
             <p class="error">{{ form.password1.errors.as_text }}</p>
         {% endif %}<br>
         <button type="submit">Sign Up</button>
+        아직 회원이 아니신가요?
+        <a href="{% url 'accounts:signup' %}">회원가입</a>
     </form>
 </body>
 </html>

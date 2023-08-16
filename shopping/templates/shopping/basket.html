@@ -1,35 +1,21 @@
-{% load custom_filters %}
-{% load static %}
+{% load custom_filters %} {% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-    rel="stylesheet"
-    href="{% static '/css/basket.css' %}"
-/>
         <title>Document</title>
     </head>
     <body>
-        
-        <main>
-            <div id="cart-container">
-                <!--결제하기 화면과 연결 -->
-            {% csrf_token %} {% for p in products %}
+        <div id="cart-container">
+            <!--결제하기 화면과 연결 -->
             <form id="cart-form" action="" method="post">
-            <div class="info">
-                <div class="title">결제 정보</div>
-                
-                    <div class="first">
-                        <div id="number1">
-                            <div class="pic">
-                                {% for photo in p.product.product_image.all %}
-                <img src="{{ photo.image.url }}" width="50" />
+                {% csrf_token %} {% for p in products %} {% for photo in
+                p.product.product_image.all %}
+                <img src="{{ photo.image.url }}" width="50" /><br />
                 {% endfor %}
                 <input
                     type="checkbox"
-                    data-low-income="{{request.user.low_income}}"
                     data-real-price="{{p.product.price}}"
                     class="product-checkbox"
                     name="selected_products"
@@ -40,115 +26,55 @@
                     data-half_purchased="{{p.half_purchased}}"
                     data-product-quantity="{{ p.quantity }}"
                 />
-                </div>
-                            
-                            <div class="detail">
-                                <div class="title_product">
-                                    <div class="title_text">
-                                        {{ p.product.title }}
-                                    </div>
-                                </div>
-                                <div class="moredetail">
-                                    <div class="number">
-                                        {% if p.half_purchased %} 주문 수량 - {{ p.quantity|multiply:2
-                                        }}<br />
-                                        배송 수량 - {{p.quantity}}<br />
-                                        반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지
-                                        수량을 배송받을 수 있습니다. {% else %} 수량 - {{p.quantity}}<br />
-                                        {% endif %}
-                                    </div>
-                                    <div class="cost">
-                                        가격: {{ p.product.discounted_price|floatformat:"0" }}원
-                                    </div>
-                                    <div class="discount">할인금액:</div>
-                                    <div class="arrival">
-                                        도착
-                                        예정일:{{arrive_day}}{{arrive_day|date:"l"}}(일요일
-                                        제외)
-                                    </div>
-                                    <div class="delivery">
-                                        배송비 - {% if not request.user.low_income %} 2500원(따로 설정)
+
+                {{ p.product.title }}<br />
+                가격 - {{ p.product.discounted_price|floatformat:"0" }}원
+                <br />
+                {% if p.half_purchased %} 주문 수량 - {{ p.quantity|multiply:2
+                }}<br />
+                배송 수량 - {{p.quantity}}<br />
+                반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지
+                수량을 배송받을 수 있습니다. {% else %} 수량 - {{p.quantity}}<br />
+                {% endif %}
+                <a href="{% url 'basket-delete' p.product.id %}"
+                    >장바구니 삭제</a
+                ><br />
+                배송비 - {% if not request.user.low_income %} 2500원(따로 설정)
                 {% else %} 0원 - 저소득층 지원 {%endif%}<br />
                 도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일
-                제외)
-                                    </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="cancled">
-                                <button type="button" id="btn_delete" onclick="deletediv()">x</button></div>
-                        </div>
-                    </div>
-                    <div class="point_coupon">
-                    <div class="title">쿠폰</div>
-                    <div class="coupon">
-                        
-                        <div class="coupon_option">
-                            <select name="coupon" id="coupon-select">
-                                <option value="0">선택안함</option>
-                                <option value="5">5% 할인쿠폰</option>
-                                <option value="10">10% 할인쿠폰</option>
-                                <option value="20">20% 할인쿠폰</option>
-                            </select>
+                제외)<br />
+                <hr />
+                <br />
+                {% endfor %}
+                <hr />
+                총 결제 금액 : <span id="total"></span><br />
+                상품 할인 :
+                <span id="saved_price">{{saved_price|floatformat:"0"}}</span
+                ><br />
+                쿠폰 할인 : <span id="coupon-discount"></span>원<br />
+                배송비 : <span id="delivery"></span><br />
+                <br />
+                쿠폰 :
+                <select name="coupon" id="coupon-select">
+                    <option value="0">선택안함</option>
+                    <option value="5">5% 할인쿠폰</option>
+                    <option value="10">10% 할인쿠폰</option>
+                    <option value="20">20% 할인쿠폰</option>
+                </select>
 
-                            <button type="button" id="apply-coupon-button">
-                                쿠폰 적용
-                            </button>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-                    <div class="cost_total_info">
-                        <div class="cost_total_title">총 결제 금액 : <span id="total"></div>
-                        <div class="product_discount">상품 할인 :
-                            <span id="saved_price">{{saved_price|floatformat:"0"}}</span
-                            ></div>
-                        <div class="coupon_discount">쿠폰 할인 : <span id="coupon-discount"></span>원</div>
-                        <div class="delivery_cost">배송비 : <span id="delivery"></span></div>
-                    </div>
-                </div>
-                
-            </div>
-            
-            
-            <div class="address">
-                <div class="edit" id="edit_link">
-                    수정하기
-                </div>
-                <div class="address_detailed">
-                    <div class="addressinfo">받는 분</div>
-                    <div class="complete">전화번호</div>
-                    <div class="option">주소</div>
-                    <div class="wanted">상세 주소</div>
-                </div>
-            </div>
-            <div class="address_btn">
-                <button type="submit" id="address-button">완료하기</button>
-            </div>
-            <div class="option_delivery">
-                <input type="checkbox" id="delivery-checkbox" />이 주소를 기본
-                주소로 사용하기
-            </div>
-            <div class="deliverywanted">
-                <input
-                    type="text"
-                    name="wanted"
-                    id="deliverywanted"
-                    placeholder="배송시 요청 사항을 적어주세요."
-                />
-            </div>
-        </form>
-        </div>
-        </main>
-        <a href="{% url 'mypage
-        '%}"
-            ><div class="order">
-                <button type="submit" id="order-button" data-original-price="{{ total_price|default:0 }}">
-                    {{ total_p }}원 주문하기
+                <button type="button" id="apply-coupon-button">
+                    쿠폰 적용
                 </button>
-            </div></a
-        >
+                <button
+                    type="submit"
+                    id="order-button"
+                    data-original-price="{{ total_price|default:0 }}"
+                >
+                    주문하기
+                </button>
+            </form>
+        </div>
+
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -175,8 +101,8 @@
                             var real_price = parseInt(
                                 $(this).data("real-price")
                             );
-                            var low_income = $(this).data("low-income");
-                            console.log(low_income);
+
+                            saved_price += (real_price - price) * quantity;
 
                             var flag = true;
                             for (let i = 0; i < seller_list.length; i++) {
@@ -195,15 +121,8 @@
 
                             if (half_purchased === "True") {
                                 total += price * quantity * 2;
-                                saved_price +=
-                                    (real_price - price) * quantity * 2;
                             } else {
                                 total += price * quantity;
-                                saved_price += (real_price - price) * quantity;
-                            }
-
-                            if (low_income) {
-                                add = 0; // 저소득층인 경우 add를 0으로 설정
                             }
                             total += add;
                             only_delivery_price += add;
@@ -264,12 +183,13 @@
                     updateTotalPrice();
                 });
             });
-            
         </script>
-          <script>function deletediv() {
-            const div = document.getElementById("number1");
+        <script>
+            function deletediv() {
+                const div = document.getElementById("number1");
 
-            div.remove();
-        }</script>
-</body>
+                div.remove();
+            }
+        </script>
+    </body>
 </html>

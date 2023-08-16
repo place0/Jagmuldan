@@ -26,19 +26,14 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
-        <div class="signup">
-          <a href="{% url 'accounts:signup' %}">회원가입</a>
-        </div>
+        
+
 
         {% if not request.user.is_authenticated %}
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
-        <div class="logout">
-          <a href="{% url 'accounts:logout' %}">로그아웃</a>
-        </div>
+        <div class="mypage"><a href="{% url 'mypage' %}">{{request.user.username}}</a></div>
         {% endif %}
-        <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
       </nav>
 
       <!-- 과일, 채소 -->
@@ -65,34 +60,38 @@
         <button type="button" name="search" id="searchBtn">검색</button>
       </form>
 
-      
-        <!-- 가장 잘 나가는 상품 -->
-        <div class="hot">
-          <div><span>오늘의 HOT 상품!</span></div>
-          <p>{{best.title}}</p>
-        </div>
-   
-        <article id="product_list_all">
+      <!-- 가장 잘 나가는 상품 -->
+      <div class="hot">
+        <div><span>오늘의 HOT 상품!</span></div>
+        <p>{{best.title}}</p>
+      </div>
+
+      <article id="product_list_all">
         <ul id="product-list">
           {% for product in products %}
           <li data-type="{{ product.type }}">
             {% for photo in product.product_image.all %}
-            <img src="{{photo.image.url}}" width="50" /><br />
+            <img
+              src="{{photo.image.url}}"
+              width="150px,"
+              height="150px"
+            /><br />
             {% endfor %}
             <div class="infoBox">
               <span>{{ product.title }}</span>
-              <p>{{ product.price }}</p>
-              <p>{{ product.discount_rate }}</p>
+              <p>가격 : {{ product.price }}원</p>
+              <div class="discount_rate">
+                할인률 : {{ product.discount_rate }} %
+              </div>
               <a href="{% url 'detail' product.id %}"
                 ><button>상세보기</button></a
               >
             </div>
           </li>
           {% endfor %}
-        
         </ul>
       </article>
-      
+
       <!-- +버튼 (게시물 등록) -->
       {% if request.user.merchant %}
       <div class="upload">
@@ -107,7 +106,7 @@
           ></a>
         </button>
       </div>
-
+      {% endif %}
       <!-- 광고 배너 -->
 
       <div class="ad">
@@ -119,7 +118,7 @@
       </div>
 
       <!-- 하단 나브바 -->
-      {% endif %}
+
       <nav class="nav_bottom">
         <div class="logo">
           <a href="{% url 'recommend_promotion:rp' %}">
