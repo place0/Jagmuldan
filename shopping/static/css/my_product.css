@@ -1,0 +1,204 @@
+@media (max-width: 590px) {
+    /*내 등록 상품*/
+    .title {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas: "one" "two" "three";
+        margin: 5%;
+    }
+    .bincan {
+        grid-area: "one";
+    }
+    .cancled {
+        grid-area: "three";
+        display: flex;
+        justify-content: right;
+    }
+    #btn_delete {
+        border-style: none;
+        font-size: 180%;
+    }
+    .title_text {
+        grid-area: "two";
+        display: flex;
+        justify-content: center;
+        font-size: 140%;
+        font-weight: 950;
+    }
+    #delete_img {
+        width: 130%;
+    }
+    /*제품*/
+    .box_1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 10%;
+        margin-top: 10%;
+    }
+    .pic {
+        margin-right: 3%;
+    }
+    .thing_cost {
+        margin: 2%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10%;
+    }
+    .thing_title {
+        font-weight: 900;
+        font-size: 100%;
+    }
+    .discount {
+        margin-right: 3%;
+        font-size: 100%;
+        font-weight: 900;
+        color: #008d3f;
+    }
+    .cost {
+        font-size: 100%;
+        font-weight: 900;
+    }
+    .buttons {
+        margin: 2%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10%;
+    }
+    .edit_btn {
+        margin-right: 15%;
+    }
+    #edit {
+        border-style: none;
+        background-color: #008d3f;
+        border-radius: 10px;
+        color: white;
+        font-size: 90%;
+        font-weight: 900;
+        width: 150%;
+        height: 30px;
+    }
+    #delete {
+        border-style: none;
+        background-color: #008d3f;
+        border-radius: 10px;
+        color: white;
+        font-size: 90%;
+        font-weight: 900;
+        width: 150%;
+        height: 30px;
+    }
+    /*이미지*/
+    #register_img {
+        width: 100%;
+        height: 100%;
+    }
+    /*없을 때*/
+    .empty {
+        font-size: 150%;
+        font-weight: 900;
+        color: #008d3f;
+        margin-top: 30%;
+        display: flex;
+        justify-content: center;
+    }
+}
+@media (min-width: 590px) {
+    /*내 등록 상품*/
+    .title {
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+        grid-template-areas: "one" "two" "three";
+        margin: 5%;
+    }
+    .bincan {
+        grid-area: "one";
+    }
+    .cancled {
+        grid-area: "three";
+        display: flex;
+        justify-content: right;
+    }
+    #btn_delete {
+        border-style: none;
+        font-size: 180%;
+    }
+    .title_text {
+        grid-area: "two";
+        display: flex;
+        justify-content: center;
+        font-size: 150%;
+        font-weight: 1000;
+    }
+    #delete_img {
+        width: 160%;
+    }
+    /*제품*/
+    .box_1 {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 10%;
+    }
+    .pic {
+        margin-right: 3%;
+    }
+    .thing_cost {
+        margin: 2%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 10%;
+    }
+    .thing_title {
+        font-weight: 1000;
+        font-size: 120%;
+    }
+    .discount {
+        margin-right: 3%;
+        font-size: 130%;
+        font-weight: 900;
+        color: #008d3f;
+    }
+    .cost {
+        font-size: 130%;
+        font-weight: 900;
+    }
+    .buttons {
+        margin: 2%;
+        display: flex;
+        flex-direction: row;
+        margin-top: 8%;
+    }
+    .edit_btn {
+        margin-right: 20%;
+    }
+    #edit {
+        border-style: none;
+        background-color: #008d3f;
+        border-radius: 10px;
+        color: white;
+        font-size: 110%;
+        font-weight: 900;
+        width: 150%;
+        height: 30px;
+    }
+    #delete {
+        border-style: none;
+        background-color: #008d3f;
+        border-radius: 10px;
+        color: white;
+        font-size: 110%;
+        font-weight: 900;
+        width: 150%;
+        height: 30px;
+    }
+    /*없을 때*/
+    .empty {
+        font-size: 150%;
+        font-weight: 900;
+        color: #008d3f;
+        margin-top: 30%;
+        display: flex;
+        justify-content: center;
+    }
+}

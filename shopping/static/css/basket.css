@@ -1,0 +1,225 @@
+/*링크 연결 */
+a {
+    text-decoration: none;
+    color: black;
+}
+/*박스*/
+#number1 {
+    display: flex;
+    width: 100%;
+    margin-top: 10%;
+    flex-direction: row;
+    justify-content: center;
+}
+.pic {
+    margin-right: 5%;
+}
+.title_text {
+    margin-bottom: 5%;
+}
+.number {
+    margin-bottom: 1%;
+}
+.cost {
+    margin-bottom: 1%;
+}
+.discount {
+    margin-bottom: 1%;
+}
+.arrival {
+    margin-bottom: 1%;
+}
+.first {
+    margin-bottom: 3%;
+}
+
+.title {
+    font-size: 1.5em;
+    margin: 8%;
+    font-weight: 1000;
+}
+/*삭제 버튼 */
+#btn_delete {
+    border-style: none;
+    background-color: none;
+    color: none;
+}
+/*체크박스*/
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    position: relative;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    outline: none !important;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: #fbfbfb;
+}
+
+input[type="checkbox"]::before {
+    content: "\2713";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    transform: scale(0) translate(-50%, -50%);
+    line-height: 1;
+}
+
+input[type="checkbox"]:checked {
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+input[type="checkbox"]:checked::before {
+    border-radius: 2px;
+    transform: scale(1) translate(-50%, -50%);
+}
+/*결제 금액*/
+.cost_total_info {
+    margin: 10%;
+}
+.cost_total_info div {
+    font-size: 120%;
+}
+/*쿠폰 /  포인트 */
+.coupon {
+    display: flex;
+    justify-content: center;
+    margin: 5%;
+    margin-bottom: 2%;
+}
+.point_title {
+    font-weight: 1000;
+    font-size: 120%;
+    margin-bottom: 3%;
+}
+.coupon_option {
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    justify-content: right;
+}
+#coupon-select {
+    width: 400px;
+    height: 40px;
+    margin-right: 5%;
+    border-width: 2px solid;
+}
+#apply-coupon-button {
+    border-style: none;
+    background-color: #008d3f;
+    color: white;
+    width: 200px;
+    height: 40px;
+    border-radius: 30px;
+
+    font-weight: 800;
+}
+.point {
+    margin: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.point_option {
+    display: flex;
+    flex-direction: row;
+    width: 40%;
+    justify-content: right;
+}
+#point_btn {
+    border-style: none;
+    margin-left: 2%;
+    font-size: 110%;
+}
+.exist {
+    font-size: 110%;
+}
+/*결제 수단*/
+.ways {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+#pay-button {
+    width: 100px;
+    height: 100px;
+    border: none;
+    border-radius: 10%;
+    font-size: 110%;
+}
+/*주소*/
+.edit {
+    display: flex;
+    justify-content: right;
+    margin: 4%;
+    margin-top: 5%;
+}
+.address_detailed {
+    margin: 5%;
+}
+#address-button {
+    background-color: #008d3f;
+    border-style: none;
+    border-radius: 15px;
+    color: white;
+    font-weight: 1000;
+    font-size: 130%;
+    width: 30%;
+    height: 60px;
+}
+.address_btn {
+    display: flex;
+    justify-content: center;
+}
+#edit_link {
+    font-size: 110%;
+    color: #008d3f;
+}
+.address_detailed div {
+    font-size: 120%;
+    font-weight: 1000;
+    margin-bottom: 3%;
+    border-bottom: 1px solid black;
+    padding-bottom: 5px;
+}
+/*하단 고정*/
+.order {
+    position: sticky;
+    bottom: 9px;
+    width: 100%;
+}
+
+#order-button {
+    background-color: #008d3f;
+    border-style: none;
+    width: 100%;
+    height: 75px;
+    border-radius: 15px;
+    color: white;
+    font-weight: 1000;
+    font-size: 130%;
+}
+/*체크 박스_기본 주소*/
+.option_delivery {
+    display: flex;
+    margin: 4%;
+    font-size: 110%;
+    font-weight: 500;
+}
+#delivery-checkbox {
+    margin-right: 2%;
+}
+/* 배송 요청 사항 */
+#deliverywanted {
+    border-style: none;
+    border-radius: 10px;
+    background-color: #eaeaea;
+    width: 90%;
+    height: 60px;
+    margin: 3%;
+    color: #646464;
+    font-size: 120%;
+}

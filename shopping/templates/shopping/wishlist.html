@@ -1,19 +1,52 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for p in products %}
-        {{p.title}}<br>
-        {% for photo in p.product_image.all %}
-            <img src="{{ photo.image.url }}" width="50"><br>
-        {% endfor %}
-        <hr>
-    {% empty %}
-        찜한 상품 없음
-    {% endfor %}
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static '/css/wishlist.css' %}" />
+        <title>Document</title>
+    </head>
+    <body>
+        <nav>
+            <div class="title">
+                <div class="bincan"></div>
+                <div class="title_text">내가 찜한 상품</div>
+                <div class="exit">
+                    <div class="cancled">
+                        <a href="{% url 'mypage'%}">
+                            <button type="button" id="btn_delete">
+                                x</button
+                        ></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        {% for p in products %}
+            <div class="box_1">
+                
+                <div class="img">
+                    <a href="{% url 'mypage_seller' %}">
+                        {% for photo in p.product_image.all %}
+                        <img src="{{ photo.image.url }}" width="50" /></a
+                    >{% endfor %}
+                    <div class="heart_icon">
+                        <div class="heart"></div>
+                        <div class="animation-heart"></div>
+                    </div>
+                </div>
+                <div class="info">
+                    <div class="info_title">{{p.title}}</div>
+                    <div class="info_detail">
+                        <div class="info_discount">32%</div>
+                        <div class="info_cost">13000 원</div>
+                    </div>
+                </div>
+                
+            </div>
+            {% empty %} 
+            <div class="empty">
+            찜한 상품 없음 </div>{% endfor %}
+        </main>
+    </body>
 </html>

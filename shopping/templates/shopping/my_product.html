@@ -1,21 +1,65 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="{% static '/css/my_product.css' %}"
+/>
     <title>Document</title>
 </head>
 <body>
-    {% for p in products %}
+  
+    <nav>
+        <div class="title">
+            <div class="bincan"></div>
+            <div class="title_text">내 등록 상품</div>
+            <div class="exit">
+                <div class="cancled">
+                    <a href="{% url 'mypage'%}">
+                        <button type="button" id="btn_delete">
+                           x</button
+                    ></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main>
+       
 
-        <a href="{% url 'update_upload' p.id %}">{{p.title}}</a><br>
-        <a href="{% url 'delete_product' p.id %}">상품 삭제하기</a><br>
-        {% for photo in p.product_image.all %}
+        <div class="box_1"> 
+            {% for p in products %}
+            <div class="pic">
+                {% for photo in p.product_image.all %}
             <img src="{{ photo.image.url }}" width="50"><br>
-        {% endfor %}
-        <hr>
-    {% empty %}
-        등록한 상품 없음
+            </div>
+            <div class="thing_info">
+                <div class="thing_title">
+                    <a href="{% url 'update_upload' p.id %}">{{p.title}}</a><br>
+                </div>
+                <div class="thing_cost">
+                    <div class="discount">32%</div>
+                    <div class="cost">13000 원</div>
+                </div>
+                <div class="buttons">
+                    <div class="edit_btn">
+                        <button type="submit" id="edit">수정</button>
+                    </div>
+                    <div class="delete_btn">
+                        <a href="{% url 'delete_product' p.id %}">상품 삭제하기
+                        <button type="submit" id="delete">삭제</button></a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% empty %}
+        <div class="empty">등록한 상품 없음</div>
     {% endfor %}
+    
+    </main>
 </body>
+</html>
 </html>
