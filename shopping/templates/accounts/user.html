@@ -1,33 +1,53 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/user.css' %}" />
 </head>
 <body>
+    <div style="display: flex; justify-content: space-between">
+        <span style="margin-left: 120px">고객으로 회원가입</span>
+        <span>X</span>
+
     <form method="post">
         {% csrf_token %}
-        <label for="{{ form.username.id_for_label }}">이름(아이디) :</label>
-        {{ form.username }}
-        {% if form.username.errors %}
-            <p class="error">{{ form.username.errors.as_text }}</p>
-        {% endif %}
-        <br>
-        <label for="{{ form.password1.id_for_label }}">비밀번호:</label>
-        {{ form.password1 }}
-        {% if form.password1.errors %}
-            <p class="error">{{ form.password1.errors.as_text }}</p>
-        {% endif %}
-        <br>
-        <label for="{{ form.password2.id_for_label }}">비밀번호 확인:</label>
-        {{ form.password2 }}
-        {% if form.password2.errors %}
-            <p class="error">{{ form.password2.errors.as_text }}</p>
-        {% endif %}
-        <br>
-        <button type="submit">Sign Up</button>
+        <section class="customer_list">
+        <label for="{{ form.username.id_for_label }}">이름 :</label>
+                <div class="graybox">{{ form.username }}</div>
+                {% if form.username.errors %}
+                <p class="error">{{ form.username.errors.as_text }}</p>
+                {% endif %}
+                <br />
+                <label for="{{ form.password1.id_for_label }}">비밀번호:</label>
+                <div class="graybox">{{ form.password1 }}</div>
+                {% if form.password1.errors %}
+                <p class="error">{{ form.password1.errors.as_text }}</p>
+                {% endif %}
+                <br />
+                <label for="{{ form.password2.id_for_label }}"
+                    >비밀번호 확인:</label
+                >
+                <div class="graybox">{{ form.password2 }}</div>
+                {% if form.password2.errors %}
+                <p class="error">{{ form.password2.errors.as_text }}</p>
+                {% endif %}
+                <br /><br />
+                
+                <div style="margin-top: 20px">
+                    <label>관심 상품</label><br />
+                    <select name="interest" style="width: 336px; height: 56px">
+                        <option value="fruit">과일</option>
+                        <option value="vege">채소</option>
+                        <option value="etc">기타</option>
+                    </select>
+                </div>
+            </section>
+            <br />
+            <button type="submit" class="button">로그인</button>
     </form>
 </body>
 </html>

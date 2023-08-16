@@ -1,0 +1,38 @@
+* {
+    padding: 3px;
+    font-family: "Pretendard", sans-serif;
+}
+.graybox {
+    display: block;
+    border-radius: 10px;
+    background-color: rgba(217, 217, 217, 0.66);
+    width: 330px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0 auto;
+    border: none;
+    margin-top: 5px;
+}
+.restaurant_list {
+    margin-top: 50px;
+}
+.button {
+    width: 100px;
+    height: 40px;
+    background-color: rgba(0, 141, 63, 1);
+    border-radius: 20px;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    font-weight: bold;
+    font-size: 13pt;
+    line-height: 30px;
+}
+label {
+    font-weight: bold;
+    margin-left: 12px;
+}
+input {
+    margin-left: 12px;
+}

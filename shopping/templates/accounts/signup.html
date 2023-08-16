@@ -1,17 +1,29 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/signup_first.css' %}" />
 </head>
 <body>
-    
-    <a href="{% url 'accounts:merchant_signup' %}">판매자</a><br>
-    <a href="{% url 'accounts:restaurant_signup' %}">음식점</a><br>
-    <a href="{% url 'accounts:user_signup' %}">고객</a><br>
-    <a href="{% url 'accounts:low_income_signup' %}">저소득층</a><br>
-    
+    <div style="display: flex; justify-content: space-between">
+        <span style="margin-left: 150px">회원가입</span>
+        <span>X</span>
+    </div>
+
+    <div style="margin-top: 50px; margin-left: 30px" class="box1">
+        <img style="width: 100px; height: 150px" src="Vector.svg" /><br />
+        <b>안녕하세요. 4989입니다!</b>
+    </div>
+
+    <section class="sign_list">
+        <div><a href="{% url 'accounts:merchant_signup' %}"><b>판매자</b>로 시작하기<b style="margin-left: 150px">></a></b></div>
+            <div><a href="{% url 'accounts:restaurant_signup' %}"><b>음식점</b>으로 시작하기<b style="margin-left: 135px">></a></b></div>
+                <div><a href="{% url 'accounts:user_signup' %}"><b>고객</b>으로 시작하기<b style="margin-left: 152px">></a></b></div>
+                    <div><a href="{% url 'accounts:low_income_signup' %}"><b>저소득층</b>으로 시작하기<b style="margin-left: 120px">></a></b></div>
+</section>
     
 </body>
 </html>
