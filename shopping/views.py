@@ -149,13 +149,9 @@ def detail(request, id):
     return render(request, 'shopping/detail.html', {'product': product,'discount_price': discount_price})
 
 # 좋아요
-def add_remove_whishlist(request): 
-    # ajax 요청만 처리 
-    if request.method == "POST" and request.is_ajax():
-        product_id = request.POST.get("product_id")
-        product = get_object_or_404(Product, id=product_id)
+def add_remove_whishlist(request, id): 
+        product = get_object_or_404(Product, id=id)
         user = request.user
-        liked = False
 
         if product in user.like_product.all():
             # 이미 좋아요한 상품이라면 제거
@@ -165,8 +161,7 @@ def add_remove_whishlist(request):
             user.like_product.add(product)
             liked = True
 
-        return JsonResponse({"liked": liked})
-    return JsonResponse({}, status=400)
+        return redirect('detail', product.id)
 
 # 마이페이지
 @ login_required
