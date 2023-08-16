@@ -26,18 +26,11 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
-        <div class="signup">
-          <a href="{% url 'accounts:signup' %}">회원가입</a>
-        </div>
         {% if not request.user.is_authenticated %}
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
-        <div class="logout">
-          <a href="{% url 'accounts:logout' %}">로그아웃</a>
-        </div>
+        <div class="mypage"><a href="{% url 'mypage' %}">{{request.user.username}}</a></div>
         {% endif %}
-        <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
       </nav>
 
       <!-- 뒤로가기 -->
@@ -70,7 +63,7 @@
             id="image"
             accept="image/*"
             onchange="setThumbnail(event);"
-            multiple="multiple"
+            multiple
             type="file"
             name="imgs"
           />

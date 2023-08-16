@@ -21,7 +21,7 @@ urlpatterns = [
 
 
     # path('like/<int:id>/',product_like, name='product_like'),
-    path('add_remove_whishlist/', add_remove_whishlist, name='add_remove_whishlist'),
+    path('add_remove_whishlist/<int:id>/', add_remove_whishlist, name='add_remove_whishlist'),
     
     path('half_purchased/', half_purchased_products, name='half_purchased_products'),
     # path('restaurant/review/')
