@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="text" name="username" value="{{request.user.username}}"> 음식점님
+        <br>
+        <p>현재: <img src="{{request.user.restaurant.image.url }}" width="50"></p>
+        <p>변경 : <input type="file" name="image"></p><br>
+        식당이름 변경 - <input type="text" name="restaurant_name" value="{{request.user.restaurant.name}}"><br>
+        식당 주소 변경 - <input type="text" name="restaurant_adress" value="{{request.user.restaurant.address}}">
+        <a href="">식당 홍보물 내용 수정</a>
+
+        <input type="submit" value="수정하기">
+    
+    </form>
+
+</body>
+</html>

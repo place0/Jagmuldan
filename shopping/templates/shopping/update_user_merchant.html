@@ -8,22 +8,14 @@
 <body>
     <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
-        
-        {{request.user.username}}
-        {% if request.user.merchant %}
+        <input type="text" name="username" value="{{request.user.username}}">
         판매자님<br>
-        한줄소개 - <input type="text" name="description" value="{{request.user.merchant.description}}"><br>
         농장 이름 변경 - <input type="text" name="farm_name" value="{{request.user.merchant.farm_name}}"><br>
+        농장 주소 변경 - <input type="text" name="farm_adress" value="{{request.user.merchant.farm_adress}}">
         <p>현재: <img src="{{request.user.merchant.image.url }}" width="50"></p>
         <p>변경 : <input type="file" name="image"></p>
+
         <input type="submit" value="수정하기">
-        {% elif request.user.restaurant %}
-        님<br>
-        <p>현재: <img src="{{request.user.restaurant.image.url }}" width="50"></p>
-        <p>변경 : <input type="file" name="image"></p>
-        <a href="">식당 홍보물 내용 수정</a>
-        {% endif %}
-        
     
     </form>
 </body>

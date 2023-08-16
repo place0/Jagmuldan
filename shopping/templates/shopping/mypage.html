@@ -6,7 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="{% url 'update_user' %}">회원 정보 수정</a><br>
+    {% if request.user.merchant %}
+    <a href="{% url 'update_user_merchant' %}">판매자 회원 정보 수정</a>
+    {% elif request.user.restaurant %}
+    <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
+    {% endif %}
+    <br>
     {% if request.user.merchant %}
     <a href="{% url 'my_product' %}">등록 상품 관리</a><br>
     {% endif %}
