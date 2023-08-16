@@ -1,0 +1,157 @@
+/*중앙(사진이랑 수정링크)*/
+
+.main_one {
+    display: flex;
+    flex-direction: column;
+}
+
+.edit {
+    display: flex;
+    justify-content: end;
+}
+.main_pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main_intro {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+/*링크 연결 */
+a {
+    text-decoration: none;
+    color: black;
+}
+
+/*아래 수정 */
+.main_intro_change {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 5px;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+.name_change {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 5px;
+    margin-top: 3%;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.text {
+    font-size: 110%;
+    margin-left: 4%;
+}
+.text_id {
+    font-weight: 900;
+    font-size: 110%;
+    margin-left: 3%;
+}
+
+.id_box {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border-bottom: 1px solid #d9d9d9;
+    padding-bottom: 5px;
+    margin-top: 3%;
+    text-align: center;
+    min-width: 110%;
+    margin-bottom: 3%;
+}
+.input_submit {
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+/* nav_heaer */
+.nav_header > .logo {
+    left: 7.44%;
+    right: 81.79%;
+    top: 1.3%;
+    bottom: 93.13%;
+    position: absolute;
+}
+.nav_header > .logo img {
+    width: 73px;
+    height: 68px;
+    object-fit: contain;
+}
+.nav_header > .cart {
+    position: absolute;
+    left: 71.54%;
+    right: 19.49%;
+    top: 2.49%;
+    bottom: 93.36%;
+}
+/* 로그인 */
+.nav_header > .login {
+    position: absolute;
+    left: 83.33%;
+    top: 3.55%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
+.nav_header > .signup {
+    position: absolute;
+    left: 83.33%;
+    top: 6.4%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
+
+.nav_header > .logout {
+    position: absolute;
+    left: 67%;
+    top: 6.4%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
+
+.nav_header > .mypage {
+    position: absolute;
+    left: 83.33%;
+    top: 3.55%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
+
+.nav_header > .login a,
+.logout a,
+.signup a,
+.mypage a {
+    text-decoration: none;
+}
+body {
+    margin-top: 30%;
+}
+/*레스토랑*/
+.move_to_edit_restaurant {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%;
+
+    font-size: 120%;
+}
+#input_btn {
+    border-style: none;
+    color: white;
+    background-color: #008d3f;
+    width: 40%;
+    height: 60px;
+    font-size: 120%;
+    font-weight: 500;
+    border-radius: 14px;
+}
