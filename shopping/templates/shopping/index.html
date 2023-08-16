@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="{% static '/css/index.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/font.css'}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
   </head>
@@ -26,13 +26,13 @@
             ></iconify-icon
           ></a>
         </div>
-        
-
 
         {% if not request.user.is_authenticated %}
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
-        <div class="mypage"><a href="{% url 'mypage' %}">{{request.user.username}}</a></div>
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
         {% endif %}
       </nav>
 

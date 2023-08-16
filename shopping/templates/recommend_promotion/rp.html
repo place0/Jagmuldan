@@ -1,20 +1,435 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/rp.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
-</head>
-<body>
-    {% for c in crops %}
-        {{c.month}}<br>
-        {{c.crop}}<br><hr>
+  </head>
+  <body>
+    <div id="frame">
+      <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="login">{{request.user.username}}</div>
+        <div class="signup">
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </div>
+      </nav>
+
+      <!-- 월작물/음식점 이동 버튼 -->
+      <article class="move_btn">
+        <button type="button" id="crops_btn">月작물</button>
+        <button type="button" id="store_btn">음식점</button>
+      </article>
+      <!-- 월작물/음식점 설명 text -->
+      <article class="move_btn_text">
+        <div class="crops_btn_text">
+          작물단이 추천하는 이달의 <span>"농산물"</span>
+        </div>
+        <div class="store_btn_text">
+          작물단이 추천하는 이달의 <span>"음식점"</span>
+        </div>
+      </article>
+      <!-- 월작물/음식점 나오는 곳 -->
+      <!-- 월작물 -->
+      <article class="content_crops">
+        <ul>
+          <li
+            id="month_11"
+            onclick="toggleContent('month_1')"
+            data-target-month="month_1"
+          >
+            <div class="month">1月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/팥.jpg' %}" />
+            </div>
+          </li>
+          <li
+            id="month_12"
+            onclick="toggleContent('month_2')"
+            data-target-month="month_2"
+          >
+            <div class="month">2月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/딸기2.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_13">
+            <div class="month">3月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/미나리.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_14">
+            <div class="month">4月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/개.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_15">
+            <div class="month">5月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/양배추.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_16">
+            <div class="month">6月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/복숭아.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_17">
+            <div class="month">7月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/토마토2.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_18">
+            <div class="month">8月</div>
+            <div class="img">
+              <img src="{% static '/img/농작물/무화과.jpg' %}" />
+            </div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- 월별농산물 자세한 정보 -->
+      <article class="content_crops_info" id="content_crops_info">
+        <ul>
+          <li id="month_1" class="crop_info">
+            <div class="month">1月</div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/팥.jpg' %}" />
+            </div>
+            <div class="title">팥</div>
+            <div class="text">
+              나트륨을 배출시키는데 도움을 주는 칼륨을 쌀의 10배, 바나나의 4배
+              이상 함유하고 있다. 부기 제거 및 혈압 상승 억제에 효과적으로
+              알려있다.
+            </div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/팥.jpg' %}" />
+            </div>
+            <div class="title">팥</div>
+            <div class="text">
+              나트륨을 배출시키는데 도움을 주는 칼륨을 쌀의 10배, 바나나의 4배
+              이상 함유하고 있다. 부기 제거 및 혈압 상승 억제에 효과적으로
+              알려있다.
+            </div>
+          </li>
+          <li id="month_2" class="crop_info">
+            <div class="month">2月</div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/딸기2.jpg' %}" />
+            </div>
+            <div class="title">딸기</div>
+            <div class="text">
+              딸기에는 수분이 89%, 탄수화물 7.1%, 이느카로틴 등이 들어있고
+              100g중에는 비타민C가 80~90mg로 귤의35mg보다 3배 가량 많아
+              천연비타민C의 보고로 손꼽히는 식품이다. 때문에 딸기 6, 7개를
+              먹으면 하루에 필요한 비타민 C의 양을 모두 섭취할 수 있다. 딸기에
+              가장 많이 들어있는 비타민C는 암세포를 박멸시키는 세포의 능력을
+              강화시켜 항암작용을 하고 바이러스를 죽이는 힘도 가지고 있다.
+            </div>
+          </li>
+          <li id="month_3" class="crop_info"></li>
+          <li id="month_4" class="crop_info"></li>
+        </ul>
+      </article>
+
+      <!-- 음식점 -->
+      <article class="content_store">
+        <ul>
+          <li
+            id="month_11"
+            onclick="toggleContent('month_1')"
+            data-target-month="month_1"
+          >
+            <div class="month">아리랑 한식집</div>
+            <div class="month_place">서울 양정구 가가동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/비빔밥.jpg' %}" />
+            </div>
+          </li>
+          <li
+            id="month_12"
+            onclick="toggleContent('month_2')"
+            data-target-month="month_2"
+          >
+            <div class="month">울지밀면</div>
+            <div class="month_place">서울 야야구 가나동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/울지밀면.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_13">
+            <div class="month">농작동 닭갈비</div>
+            <div class="month_place">서울 바송구 바바동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/닭갈비.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_14">
+            <div class="month">샐러듀이</div>
+            <div class="month_place">서울 양정구 라라동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/샐러드.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_15">
+            <div class="month">김밥집</div>
+            <div class="month_place">서울 양정구 나가동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/김밥.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_16">
+            <div class="month">신선도</div>
+            <div class="month_place">서울 날라구 가돠동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/고기.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_17">
+            <div class="month">이탈리안</div>
+            <div class="month_place">서울 나진구 고닥동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/피자.jpg' %}" />
+            </div>
+          </li>
+          <li id="month_18">
+            <div class="month">써니싸이드업</div>
+            <div class="month_place">서울 양정구 가가동</div>
+            <div class="img">
+              <img src="{% static '/img/음식점/써니.jpg' %}" />
+            </div>
+          </li>
+        </ul>
+      </article>
+      <!-- 월별음식점 자세한 정보 -->
+      <article class="content_store_info" id="content_store_info">
+        <ul>
+          <li id="store1" class="store_info">
+            <div class="store">아리랑 한식집</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/비빔밥.jpg' %}" />
+            </div>
+            <div class="text">
+              나트륨을 배출시키는데 도움을 주는 칼륨을 쌀의 10배, 바나나의 4배
+              이상 함유하고 있다. 부기 제거 및 혈압 상승 억제에 효과적으로
+              알려있다.
+            </div>
+          </li>
+          <li id="store2" class="store_info">
+            <div class="store">2月</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/비빔밥.jpg' %}" />
+            </div>
+            <div class="text">
+              딸기에는 수분이 89%, 탄수화물 7.1%, 이느카로틴 등이 들어있고
+              100g중에는 비타민C가 80~90mg로 귤의35mg보다 3배 가량 많아
+              천연비타민C의 보고로 손꼽히는 식품이다. 때문에 딸기 6, 7개를
+              먹으면 하루에 필요한 비타민 C의 양을 모두 섭취할 수 있다. 딸기에
+              가장 많이 들어있는 비타민C는 암세포를 박멸시키는 세포의 능력을
+              강화시켜 항암작용을 하고 바이러스를 죽이는 힘도 가지고 있다.
+            </div>
+          </li>
+          <li id="store3" class="store_info"></li>
+          <li id="store4" class="store_info"></li>
+        </ul>
+      </article>
+      <!-- 하단 나브바 -->
+
+      <nav class="nav_bottom">
+        <div class="logo">
+          <a href="{% url 'recommend_promotion:rp' %}">
+            <iconify-icon
+              icon="mdi:corn"
+              style="color: #008d3f"
+              width="45"
+              height="43"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        <div class="home">
+          <iconify-icon
+            icon="octicon:home-24"
+            style="color: #008d3f"
+            width="38"
+            height="38"
+          ></iconify-icon>
+        </div>
+        <div class="community">
+          <a href="{% url 'community:main' %}">
+            <iconify-icon
+              icon="clarity:talk-bubbles-line"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+      </nav>
+    </div>
+    {% for c in crops %} {{c.month}}<br />
+    {{c.crop}}<br />
+    <hr />
+    {% endfor %} {% for r in restaurants %} {{ r.restaurant.name }}<br />
+    {{ r.restaurant.address }}<br />
+    <hr />
     {% endfor %}
 
-    {% for r in restaurants %}
-        {{ r.restaurant.name }}<br>
-        {{ r.restaurant.address }}<br>
-        <hr>
-    {% endfor %}
-</body>
+    <script>
+      //월작물, 음식점 홍보내용 이동하는 코드
+      document.addEventListener("DOMContentLoaded", function () {
+        var cropsBtn = document.getElementById("crops_btn");
+        var storeBtn = document.getElementById("store_btn");
+        var contentCrops = document.querySelector(".content_crops");
+        var contentStore = document.querySelector(".content_store");
+        var cropsBtnText = document.querySelectorAll(".crops_btn_text");
+        var storeBtnText = document.querySelectorAll(".store_btn_text");
+
+        // 처음 로드 시 'crops_btn' 내용만 보이게 설정
+        contentCrops.style.display = "block";
+
+        cropsBtnText.forEach(function (text) {
+          text.style.display = "block";
+        });
+
+        storeBtnText.forEach(function (text) {
+          text.style.display = "none";
+        });
+
+        cropsBtn.addEventListener("click", function () {
+          contentCrops.style.display = "block";
+          contentStore.style.display = "none";
+
+          cropsBtnText.forEach(function (text) {
+            text.style.display = "block";
+          });
+
+          storeBtnText.forEach(function (text) {
+            text.style.display = "none";
+          });
+
+          cropsBtn.classList.add("active");
+          storeBtn.classList.remove("active");
+        });
+
+        storeBtn.addEventListener("click", function () {
+          contentCrops.style.display = "none";
+          contentStore.style.display = "block";
+
+          cropsBtnText.forEach(function (text) {
+            text.style.display = "none";
+          });
+
+          storeBtnText.forEach(function (text) {
+            text.style.display = "block";
+          });
+
+          cropsBtn.classList.remove("active");
+          storeBtn.classList.add("active");
+        });
+      });
+
+      //월 클릭하면 해당 내용 나오는 코드
+      document.addEventListener("DOMContentLoaded", function () {
+        var contentCropsInfo = document.getElementById("content_crops_info");
+        var monthLinks = document.querySelectorAll(".content_crops li");
+        var contentStoreInfo = document.getElementById("content_crops_info");
+        var storeLinks = document.querySelectorAll(".content_store li");
+
+        // content_crops_info 숨기기
+        contentCropsInfo.style.display = "none";
+        contentStoreInfo.style.display = "none";
+
+        //   month 클릭되면 content_crops_info 나타내기
+        monthLinks.forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevent the click event from propagating
+
+            var targetMonth = link.getAttribute("data-target-month");
+            if (targetMonth) {
+              toggleContent(targetMonth);
+              contentCropsInfo.style.display = "block";
+            }
+          });
+        });
+        //   store 클릭되면 content_store_info 나타내기
+        storeLinks.forEach(function (link) {
+          link.addEventListener("click", function (event) {
+            event.stopPropagation(); // Prevent the click event from propagating
+
+            var targetMonth = link.getAttribute("data-target-month");
+            if (targetMonth) {
+              toggleContent(targetMonth);
+              contentStoreInfo.style.display = "block";
+            }
+          });
+        });
+
+        // 배경 누르면 content_crops_info 없애기
+        document.body.addEventListener("click", function () {
+          contentCropsInfo.style.display = "none";
+        });
+        // 배경 누르면 content_store_info 없애기
+        document.body.addEventListener("click", function () {
+          contentStoreInfo.style.display = "none";
+        });
+
+        // Prevent content_crops_info from hiding when clicked
+        contentCropsInfo.addEventListener("click", function (event) {
+          event.stopPropagation();
+        });
+      });
+      // Prevent content_crops_info from hiding when clicked
+      contentStoreInfo.addEventListener("click", function (event) {
+        event.stopPropagation();
+      });
+
+      function toggleContent(targetId) {
+        var contentElements = document.querySelectorAll(".crop_info");
+
+        contentElements.forEach(function (element) {
+          element.style.display = "none";
+        });
+
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.style.display = "block";
+        }
+      }
+
+      function toggleContent2(targetId) {
+        var contentElements = document.querySelectorAll(".store_info");
+
+        contentElements.forEach(function (element) {
+          element.style.display = "none";
+        });
+
+        var targetElement = document.getElementById(targetId);
+        if (targetElement) {
+          targetElement.style.display = "block";
+        }
+      }
+    </script>
+  </body>
 </html>
