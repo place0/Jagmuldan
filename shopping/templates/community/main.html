@@ -19,25 +19,7 @@
     </script>
 </head>
 <body>
-    <input type="button" value="음식점 리뷰" onclick="showContent('reviewContent')">
-    <input type="button" value="함께 배송" onclick="showContent('deliveryContent')">
-    
-    <div id="reviewContent" class="content" style="display:none">
-        음식점 리뷰 내용이 여기에 출력됩니다.<br><br>
-        <form action="" method="POST">
-            {% csrf_token %}
-            음식점 검색<input type="text" name="search">
-            <button type="submit" name="action" value="restaurant_search">검색</button><br><br>
-        </form>
-        
-        {% for r in restaurants %}
-            <a href="{% url 'community:comments' r.id %}">{{r.name}}</a><br>
-        {% empty %}
-            음식점 없음
-        {% endfor %}
-    </div>
-    
-    <div id="deliveryContent" class="content" style="display:none">
+
         <a href="{% url 'community:create_shopping_together' %}">글 작성하기</a><br><br>
         
         지역 찾기 - <form action="" method="POST">
@@ -55,16 +37,7 @@
         {% empty %}
             올라온 글 없음
         {% endfor %}
-    </div>
-    {% if page %}
-        <script>
-            showContent('deliveryContent');
-        </script>
-        {% else %}
-        <script>
-        showContent('reviewContent')
-    </script>
-    {% endif %}
+
 
 </body>
 </html>
