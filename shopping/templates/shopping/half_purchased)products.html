@@ -1,20 +1,57 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
-<head>
-    <title>Half Purchased Products</title>
-</head>
-<body>
-    <h1>Half Purchased Products</h1>
-    <ul>
-        {% for product in half_purchased_products %}
-        <li>
-            <h2>{{ product.title }}</h2>
-            <p>Price: {{ product.price }}</p>
-            <p>Discount Rate: {{ product.discount_rate }}%</p>
-            <!-- 추가 필드들도 표시 -->
-            <p><a href="#">Purchase Remaining Half</a></p>
-        </li>
-        {% endfor %}
-    </ul>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Half Purchased Products</title>
+        <link rel="stylesheet" href="half_use.css" />
+    </head>
+    <body>
+        <div style="display: flex; justify-content: space-between">
+            <span style="margin-left: 130px">사용하기</span>
+            <span>X</span>
+        </div>
+
+        
+        <!--<h1>Half Purchased Products</h1>-->
+
+        <ul style="list-style: none;">
+            {% for product in half_purchased_products %}
+            <div style="margin-top: 40px">
+                <img
+                    src=""
+                    style="
+                        width: 320px;
+                        height: 250px;
+                        display: block;
+                        margin: 0 auto;
+                    "
+                />
+            </div>
+            <section style="margin-left: 25px; margin-top: 20px; line-height: 30px">
+            <li>
+                <h2>상품명: {{ product.title }}</h2>
+                <p>수량: </p>
+                <p>가격: {{ product.price }}</p>
+                <p>할인율: {{ product.discount_rate }}%</p>
+                <!-- 추가 필드들도 표시 --> <p>유효기간</p> 
+            </section>
+            <div style="display: flex; justify-content: space-around">
+                <div class="usebox"><a href="#">바로 구매</a></div>
+                <div class="usebox"><a href="#">장바구니</a></div>
+            </div>
+            <footer>
+                <div class="footer">
+                    <img src="Vector.svg" />
+                    <img src="octicon_home-24.svg" />
+                    <img src="icon-park-outline_me.svg" />
+                </div>
+            </footer>
+
+                <p><a href="#">Purchase Remaining Half</a></p>
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
 </html>
