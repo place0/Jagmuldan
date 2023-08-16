@@ -4,14 +4,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static '/css/basket.css' %}" />
         <title>Document</title>
     </head>
     <body>
         <div id="cart-container">
-            <!--결제하기 화면과 연결 -->
+            <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
             <form id="cart-form" action="" method="post">
-                {% csrf_token %} {% for p in products %} {% for photo in
-                p.product.product_image.all %}
+                {% for photo in p.product.product_image.all %}
                 <img src="{{ photo.image.url }}" width="50" /><br />
                 {% endfor %}
                 <input
@@ -54,24 +54,52 @@
                 쿠폰 할인 : <span id="coupon-discount"></span>원<br />
                 배송비 : <span id="delivery"></span><br />
                 <br />
-                쿠폰 :
-                <select name="coupon" id="coupon-select">
-                    <option value="0">선택안함</option>
-                    <option value="5">5% 할인쿠폰</option>
-                    <option value="10">10% 할인쿠폰</option>
-                    <option value="20">20% 할인쿠폰</option>
-                </select>
+                <div class="point_title">쿠폰</div>
+                <div class="coupon">
+                    <select name="coupon" id="coupon-select">
+                        <option value="0">선택안함</option>
+                        <option value="5">5% 할인쿠폰</option>
+                        <option value="10">10% 할인쿠폰</option>
+                        <option value="20">20% 할인쿠폰</option>
+                    </select>
 
-                <button type="button" id="apply-coupon-button">
-                    쿠폰 적용
-                </button>
-                <button
-                    type="submit"
-                    id="order-button"
-                    data-original-price="{{ total_price|default:0 }}"
-                >
-                    주문하기
-                </button>
+                    <button type="button" id="apply-coupon-button">
+                        쿠폰 적용
+                    </button>
+                </div>
+                <div class="address">
+                    <div class="edit" id="edit_link">수정하기</div>
+                    <div class="address_detailed">
+                        <div class="addressinfo">받는 분</div>
+                        <div class="complete">전화번호</div>
+                        <div class="option">주소</div>
+                        <div class="wanted">상세 주소</div>
+                    </div>
+                </div>
+                <div class="address_btn">
+                    <button type="submit" id="address-button">완료하기</button>
+                </div>
+                <div class="option_delivery">
+                    <input type="checkbox" id="delivery-checkbox" />이 주소를
+                    기본 주소로 사용하기
+                </div>
+                <div class="deliverywanted">
+                    <input
+                        type="text"
+                        name="wanted"
+                        id="deliverywanted"
+                        placeholder="배송시 요청 사항을 적어주세요."
+                    />
+                </div>
+                <div class="order">
+                    <button
+                        type="submit"
+                        id="order-button"
+                        data-original-price="{{ total_price|default:0 }}"
+                    >
+                        주문하기
+                    </button>
+                </div>
             </form>
         </div>
 
