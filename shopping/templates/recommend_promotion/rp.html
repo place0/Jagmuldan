@@ -8,57 +8,8 @@
     <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
-    <style>
-        .details {
-            display: none;
-        }
-    </style>
-</head>
-<body>
-    <!--월별 작물-->
-    <h2>Crops:</h2>
-    {% for c in crops %}
-        <a href="#" class="details-link" data-target="crop-{{ c.id }}">{{ c.month }}월</a><img src="{{c.image.url}}" width="50"></a><br>
-        {{ c.crop }}</a>
-        <div class="details" id="crop-{{ c.id }}">
-            {{ c.month }}<br>
-            {{ c.crop }}<br>
-        <img src="{{c.image.url}}" width="50">
-            {{ c.crop }}<br>
-            {{c.detail}}
-            <hr>
-        </div>
-    {% endfor %}
-
-    <!--음식점 홍보-->
-    <h2>Restaurants:</h2>
-    {% for r in restaurants %}
-    <a href="#" class="details-link" data-target="restaurant-{{ r.restaurant.id }}">{{ r.restaurant.name }}</a><br>
-    <div class="details" id="restaurant-{{ r.restaurant.id }}">
-        {{ r.restaurant.name }}<br>
-        {{ r.restaurant.address }}<br>
-        {{ r.restaurant.description }}<br>
-        {% for photo in r.restaurant.restaurant_image.all %}
-        <img src="{{photo.image.url}}" width="50"><br>
-    {% endfor %}
-        <hr>
-    </div>
-{% endfor %}
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $(".details-link").click(function () {
-                var targetId = $(this).data("target");
-                $("#" + targetId).toggle();
-            });
-        });
-        $(".details").click(function () {
-            $(this).hide(); // 클릭한 div 닫기
-        });
-    </script>
-
+  </head>
+  <body>
     <div id="frame">
       <!-- 상단 나브바 -->
       <nav class="nav_header">
