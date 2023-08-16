@@ -15,7 +15,7 @@
             {% for photo in p.product.product_image.all %}
                 <img src="{{ photo.image.url }}" width="50"><br>
             {% endfor %}
-            <input type="checkbox" data-real-price="{{p.product.price}}" class="product-checkbox" name="selected_products" data-seller={{p.product.seller}} value="{{ p.product.id }}" checked
+            <input type="checkbox" data-low-income="{{request.user.low_income}}" data-real-price="{{p.product.price}}" class="product-checkbox" name="selected_products" data-seller={{p.product.seller}} value="{{ p.product.id }}" checked
             data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
             
             {{ p.product.title }}<br>
@@ -32,6 +32,7 @@
         배송비 - {% if not request.user.low_income %}
             2500원(따로 설정)
             {% else %}
+            
             0원 - 저소득층 지원
             {%endif%}<br>
         도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
@@ -79,8 +80,8 @@
                 var half_purchased = $(this).data('half_purchased');
                 var seller = $(this).data('seller');
                 var real_price = parseInt($(this).data('real-price'));
-
-                saved_price += (real_price - price) * quantity;
+                var low_income = $(this).data('low-income');
+                console.log(low_income);
 
                 var flag = true;
                 for (let i = 0; i < seller_list.length; i++) {
@@ -99,8 +100,14 @@
 
                 if (half_purchased === 'True') {
                     total += price * quantity * 2;
+                    saved_price += (real_price - price) * quantity*2;
                 } else {
                     total += price * quantity;
+                    saved_price += (real_price - price) * quantity;
+                }
+
+                if (low_income) {
+                    add = 0; // 저소득층인 경우 add를 0으로 설정
                 }
                 total += add;
                 only_delivery_price += add;
