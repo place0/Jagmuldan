@@ -12,9 +12,9 @@
     <form id="cart-form" action="" method="post">
         {% csrf_token %}
         {% for p in products %}
-            {% for photo in p.product.product_image.all %}
-                <img src="{{ photo.image.url }}" width="50"><br>
-            {% endfor %}
+        {% if p.product.product_image.all %}
+        <img src="{{ p.product.product_image.first.image.url }}" width="50"><br>
+    {% endif %}
             <input type="checkbox" data-low-income="{{request.user.low_income}}" data-real-price="{{p.product.price}}" class="product-checkbox" name="selected_products" data-seller={{p.product.seller}} value="{{ p.product.id }}" checked
             data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
             
