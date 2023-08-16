@@ -9,9 +9,9 @@
     <body>
         <div id="cart-container">
             <!--결제하기 화면과 연결 -->
+            {% csrf_token %} {% for p in products %}
             <form id="cart-form" action="" method="post">
-                {% csrf_token %} {% for p in products %} {% for photo in
-                p.product.product_image.all %}
+                {% for photo in p.product.product_image.all %}
                 <img src="{{ photo.image.url }}" width="50" /><br />
                 {% endfor %}
                 <input
