@@ -1,0 +1,293 @@
+#frame {
+  width: 390px;
+  height: 844px;
+  background-color: white;
+  margin: 50px auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+}
+body {
+  font-family: "Pretendard", sans-serif;
+}
+
+/* nav_heaer */
+.nav_header > .logo {
+  left: 7.44%;
+  right: 81.79%;
+  top: 1.3%;
+  bottom: 93.13%;
+  position: absolute;
+}
+.nav_header > .logo img {
+  width: 73px;
+  height: 68px;
+  object-fit: contain;
+}
+.nav_header > .cart {
+  position: absolute;
+  left: 71.54%;
+  right: 19.49%;
+  top: 2.49%;
+  bottom: 93.36%;
+}
+/* 로그인 */
+.nav_header > .login {
+  position: absolute;
+  left: 83.33%;
+  top: 3.55%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+.nav_header > .signup {
+  position: absolute;
+  left: 83.33%;
+  top: 6.4%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .logout {
+  position: absolute;
+  left: 67%;
+  top: 6.4%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .mypage {
+  position: absolute;
+  left: 83.33%;
+  top: 3.55%;
+  font-size: 16px;
+  font-weight: 700;
+  color: #454444;
+}
+
+.nav_header > .login a,
+.logout a,
+.signup a,
+.mypage a {
+  text-decoration: none;
+}
+
+/* 월작물/음식점이동버튼 */
+.move_btn {
+  position: relative;
+  top: 13%;
+  left: -15px;
+}
+
+.move_btn > #crops_btn {
+  position: absolute;
+  left: 25%;
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  color: rgba(69, 68, 68, 1);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.move_btn > #store_btn {
+  position: absolute;
+  left: 55%;
+  border: none;
+  width: 100px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: rgba(217, 217, 217, 1);
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+  color: rgba(69, 68, 68, 1);
+  font-size: 20px;
+  font-weight: bold;
+}
+#crops_btn:hover,
+#store_btn:hover {
+  background-color: rgba(0, 141, 63, 1);
+  color: white;
+}
+.crops_btn_text span,
+.store_btn_text span {
+  color: rgba(0, 141, 63, 1);
+  font-weight: bolder;
+  font-size: 18px;
+}
+/* 월작물/음식점 설명 text*/
+.move_btn_text {
+  position: relative;
+  top: 22%;
+}
+
+.crops_btn_text,
+.store_btn_text {
+  position: absolute;
+  left: 20%;
+  font-size: 15px;
+  font-weight: bold;
+  color: rgba(69, 68, 68, 1);
+}
+
+/* 월작물/음식점 나오는 곳 */
+.content_crops,
+.content_store {
+  position: relative;
+  top: 26%;
+  overflow: scroll;
+  height: 550px;
+}
+
+.content_crops::-webkit-scrollbar,
+.content_store::-webkit-scrollbar {
+  width: 1px;
+}
+.content_crops ul,
+.content_store ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+  align-items: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+.content_crops li,
+.content_store li {
+  width: 150px;
+  height: 150px;
+  background-color: rgba(255, 199, 0, 1);
+  list-style: none;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  position: relative;
+  margin: 10px;
+}
+
+.content_crops li > .month,
+.content_store li > .month {
+  position: absolute;
+  top: 8%;
+  left: 5%;
+  color: rgba(69, 68, 68, 1);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.content_store li > .month_place {
+  position: absolute;
+  top: 26%;
+  left: 5%;
+  color: rgba(69, 68, 68, 1);
+  font-size: 12px;
+  font-weight: bold;
+}
+.content_crops li > .img,
+.content_store li > .img {
+  position: absolute;
+  top: 40%;
+  width: 150px;
+  height: 89px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.content_crops li img,
+.content_store li img {
+  width: 150px;
+  height: 89px;
+  overflow: hidden;
+  object-fit: cover;
+}
+
+/* <!-- 월별농산물 자세한 정보 --> */
+
+.content_crops_info,
+.content_store_info {
+  position: sticky;
+  bottom: 30%;
+  left: 12%;
+  width: 300px;
+  height: 350px;
+  border-radius: 10px;
+  overflow: scroll;
+  position: relative;
+  background: white;
+  box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
+  animation: modalSlideIn 0.5s ease-in;
+  opacity: 1;
+}
+
+@keyframes modalSlideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.content_crops_info::-webkit-scrollbar,
+.content_store_info::-webkit-scrollbar {
+  width: 1px;
+}
+
+.content_crops_info ul,
+.content_store_info ul {
+  padding: 0 18px;
+}
+.content_crops_info li,
+.content_store_info li {
+  list-style: none;
+}
+
+.content_crops_info li > .month,
+.content_store_info li > .store {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgba(69, 68, 68, 1);
+  padding: 5px 0;
+}
+.content_crops_info li > .month_img,
+.content_store_info li > .store_img {
+  width: 250px;
+  height: 130px;
+  padding: 6px 0;
+}
+.content_crops_info li > .month_img img,
+.content_store_info li > .store_img img {
+  width: 250px;
+  height: 130px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.content_crops_info li > .title,
+.content_store_info li > .title {
+  font-weight: 600;
+  font-size: 18px;
+  padding: 6px 0;
+}
+
+.content_crops_info li > .text,
+.content_store_info li > .text {
+  font-size: 15px;
+  padding: 6px 0;
+}
+/* nav_bottom */
+.nav_bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  position: absolute;
+  bottom: 0px;
+  width: 390px;
+  height: 80px;
+  background: rgba(244, 244, 244, 1);
+}
+.nav_bottom > .logo {
+  display: flex;
+}
