@@ -37,6 +37,7 @@ def index(request):
 
     
 # 상품 등록
+@ login_required
 def upload(request):
     if request.method=='GET':
         return render(request, 'shopping/upload.html')
@@ -168,6 +169,7 @@ def add_remove_whishlist(request):
     return JsonResponse({}, status=400)
 
 # 마이페이지
+@ login_required
 def mypage(request):
     products=request.user.like_product.all()
     return render(request,'shopping/mypage.html',{'products':products})
@@ -270,6 +272,7 @@ def update_upload(request, id):
         return redirect('my_product')
 
 # 장바구니
+@ login_required
 def basket(request):
     products = ShoppingBasket.objects.filter(customer=request.user)
     total_price=0
