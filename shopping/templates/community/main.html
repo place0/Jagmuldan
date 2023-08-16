@@ -1,43 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script>
-        function showContent(contentId) {
-            var contents = document.getElementsByClassName("content");
-            for (var i = 0; i < contents.length; i++) {
-                contents[i].style.display = "none";
-            }
-            
-            var selectedContent = document.getElementById(contentId);
-            if (selectedContent) {
-                selectedContent.style.display = "block";
-            }
-        }
-    </script>
-</head>
-<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script>
+            function showContent(contentId) {
+                var contents = document.getElementsByClassName("content");
+                for (var i = 0; i < contents.length; i++) {
+                    contents[i].style.display = "none";
+                }
 
-        <a href="{% url 'community:create_shopping_together' %}">글 작성하기</a><br><br>
-        
-        지역 찾기 - <form action="" method="POST">
-            {% csrf_token %}
-            지역 검색<select name="where">
+                var selectedContent = document.getElementById(contentId);
+                if (selectedContent) {
+                    selectedContent.style.display = "block";
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <a href="{% url 'community:create_shopping_together' %}">글 작성하기</a
+        ><br /><br />
+
+        지역 찾기 -
+        <form action="" method="POST">
+            {% csrf_token %} 지역 검색<select name="where">
                 {% for p in places %}
-                    <option value="{{p}}">{{p}}</option>
-                    {% endfor %}
-            </select>디테일 위치 - <input type="text" name="search">
-            <button type="submit" name="action" value="local_search">검색</button><br><br>
-                
+                <option value="{{p}}">{{p}}</option>
+                {% endfor %}</select
+            >디테일 위치 - <input type="text" name="search" />
+            <button type="submit" name="action" value="local_search">
+                검색</button
+            ><br /><br />
         </form>
         {% for a in asks %}
-            <a href="{% url 'community:detail_together' a.id %}">{{a.title}}</a>-{{a.where}}, {{a.detail}}<br>
-        {% empty %}
-            올라온 글 없음
-        {% endfor %}
-
-
-</body>
+        <a href="{% url 'community:detail_together' a.id %}">{{a.title}}</a
+        >-{{a.where}}, {{a.detail}}<br />
+        {% empty %} 올라온 글 없음 {% endfor %}
+    </body>
 </html>
