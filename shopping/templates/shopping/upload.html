@@ -42,13 +42,14 @@
 
       <!-- 뒤로가기 -->
       <div class="back">
-        <iconify-icon
-          icon="ion:caret-back-outline"
-          style="color: #646464"
-          width="30"
-          height="30"
-        ></iconify-icon>
-        뒤로가기
+        <a href="{% url 'index' %}">
+          <iconify-icon
+            icon="ion:caret-back-outline"
+            style="color: #646464"
+            width="30"
+            height="30"
+          ></iconify-icon
+        ></a>
       </div>
 
       <!-- 상세내용입력 폼-->
@@ -58,11 +59,22 @@
         enctype="multipart/form-data"
       >
         {% csrf_token %}
-        <!-- 사진 담음 -->
-        <div id="img_contain">
-          <input multiple="multiple" type="file" name="imgs" />
+        <!-- 사진 보여지는 부분 -->
+
+        <div id="img_contain"></div>
+
+        <div class="file_upload">
+          <label for="image">사진업로드</label>
+          <input
+            type="file"
+            id="image"
+            accept="image/*"
+            onchange="setThumbnail(event);"
+            multiple="multiple"
+            type="file"
+            name="imgs"
+          />
         </div>
-        <br />
         <!-- 종류선택 -->
         <div class="select">
           <div>종류선택</div>
@@ -115,9 +127,9 @@
           <!-- 재배특징 -->
           <div class="ch">
             <label for=""
-              ><span>재배특징</span> <input type="text" name="" id="product_ch"
+              ><span>재배특징</span>
+              <input type="text" name="feature" id="product_ch"
             /></label>
-            <textarea name="feature"></textarea><br />
           </div>
 
           <!-- 상품등록하기 -->
@@ -132,7 +144,6 @@
       </form>
 
       <!-- 하단 나브바 -->
-      {% endif %}
       <nav class="nav_bottom">
         <div class="logo">
           <a href="{% url 'recommend_promotion:rp' %}">
@@ -165,5 +176,19 @@
         </div>
       </nav>
     </div>
+
+    <script>
+      function setThumbnail(event) {
+        var reader = new FileReader();
+
+        reader.onload = function (event) {
+          var img = document.createElement("img");
+          img.setAttribute("src", event.target.result);
+          document.querySelector("div#img_contain").appendChild(img);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+      }
+    </script>
   </body>
 </html>
