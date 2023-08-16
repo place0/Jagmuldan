@@ -15,7 +15,7 @@
             <!--뒤로 가기-->
         </div>
         <div style="display: flex; justify-content: center; margin-top: 50px">
-            <img style="width: 100px; height: 150px" src="Vector.svg" />
+            <img src="{% static '/img/logo/4989_logo_L.png' %}" />
         </div>
         <form method="post">
             {% csrf_token %}
@@ -53,8 +53,8 @@
                 {% if form.farm_adress.errors %}
                 <p class="error">{{ form.farm_adress.errors.as_text }}</p>
                 {% endif %}
-                <br />
             </section>
+            <br /><br />
             <button type="submit" class="button">회원가입</button>
         </form>
     </body>
