@@ -49,6 +49,10 @@
     {% endif %}
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     <br>{% if request.user.merchant %}
+=======
+    <br>
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    {% if request.user.merchant %}
     <a href="{% url 'my_product' %}">등록 상품 관리</a><br>
     {% endif %}
             </div>  
