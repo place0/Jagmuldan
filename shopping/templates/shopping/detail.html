@@ -1,122 +1,236 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/detail.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
-</head>
-<body>
-    {% for photo in product.product_image.all %}
-                <img src="{{photo.image.url}}" width="50"><br>
-            {% endfor %}
-    생산지-{{product.origin}}<br>
-    재배 특징 - {{product.production_features}}<br>
-    생산자-{{ product.seller.user.username }}<br>
+  </head>
+  <body>
+    <div id="frame">
+      <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="login">{{request.user.username}}</div>
+        <div class="signup">
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </div>
+      </nav>
 
-    (생산자 프로필)<img src="{{product.seller.image.url}}" width="50"><br>
-    한줄소개 - {{ product.seller.description }}<br><br><br>
-    좋아요 수 : <span id="like-count">{{product.like_product.count}}</span>
-    {% if product in request.user.like_product.all %}
-        <a href="#" class="like-btn" data-product-id="{{ product.id }}">찜 취소</a>
-    {% else %}
-        <a href="#" class="like-btn" data-product-id="{{ product.id }}">찜하기</a>
-    {% endif %}<br><br>
-    가격 - {{product.price}}원<br>
-    할인 적용된 가격 - {{ discount_price|floatformat:"0" }}원<br>
-    할인률 - {{ product.discount_rate }}%
+      {% for photo in product.product_image.all %}
+      <img src="{{photo.image.url}}" width="50" /><br />
+      {% endfor %} 생산지-{{product.origin}}<br />
+      재배 특징 - {{product.production_features}}<br />
+      생산자-{{ product.seller.user.username }}<br />
 
-    <form action="" method="post" id="main-form">
+      (생산자 프로필)<img src="{{product.seller.image.url}}" width="50" /><br />
+      한줄소개 - {{ product.seller.description }}<br /><br /><br />
+      좋아요 수 : <span id="like-count">{{product.like_product.count}}</span>
+      {% if product in request.user.like_product.all %}
+      <a href="#" class="like-btn" data-product-id="{{ product.id }}"
+        >찜 취소</a
+      >
+      {% else %}
+      <a href="#" class="like-btn" data-product-id="{{ product.id }}">찜하기</a>
+      {% endif %}<br /><br />
+      가격 - {{product.price}}원<br />
+      할인 적용된 가격 - {{ discount_price|floatformat:"0" }}원<br />
+      할인률 - {{ product.discount_rate }}%
+
+      <form action="" method="post" id="main-form">
         {% csrf_token %}
-        <button type="button" name="action" value="buy" id="buy-button">구매하기</button>
-    </form>
-    
-    <div id="additional-buttons" style="display: none;">
+        <button type="button" name="action" value="buy" id="buy-button">
+          구매하기
+        </button>
+      </form>
+
+      <div id="additional-buttons" style="display: none">
         <button type="button" id="half-buy-button">반만 담기</button>
         <button type="button" id="full-buy-button">한번에 결제</button>
+      </div>
+
+      <form
+        action=""
+        method="post"
+        id="half-purchase-form"
+        style="display: none"
+      >
+        {% csrf_token %}
+        <input
+          type="number"
+          name="total_quantity"
+          min="1"
+          required
+          placeholder="총 결제할 수량"
+        />
+        * 이 중 절반의 수량만 배송갑니다
+
+        <button
+          type="submit"
+          name="action"
+          value="half_purchase"
+          id="half-purchase-button"
+        >
+          반만 배송받기
+        </button>
+        <button
+          type="submit"
+          name="action"
+          value="half_goto_basket"
+          id="basket-button"
+        >
+          장바구니에 추가
+        </button>
+      </form>
+
+      <form
+        action=""
+        method="post"
+        id="full-purchase-form"
+        style="display: none"
+      >
+        {% csrf_token %}
+        <input
+          type="number"
+          name="quantity"
+          min="1"
+          required
+          placeholder="배송받을 수량"
+        />
+        <button
+          type="submit"
+          name="action"
+          value="purchase"
+          id="purchase-direct-button"
+        >
+          바로 결제하기
+        </button>
+        <button
+          type="submit"
+          name="action"
+          value="goto_basket"
+          id="basket-button"
+        >
+          장바구니에 추가
+        </button>
+      </form>
+      <!-- 하단 나브바 -->
+
+      <nav class="nav_bottom">
+        <div class="logo">
+          <a href="{% url 'recommend_promotion:rp' %}">
+            <iconify-icon
+              icon="mdi:corn"
+              style="color: #008d3f"
+              width="45"
+              height="43"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        <div class="home">
+          <iconify-icon
+            icon="octicon:home-24"
+            style="color: #008d3f"
+            width="38"
+            height="38"
+          ></iconify-icon>
+        </div>
+        <div class="community">
+          <a href="{% url 'community:main' %}">
+            <iconify-icon
+              icon="clarity:talk-bubbles-line"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+      </nav>
     </div>
 
-    
-    <form action="" method="post" id="half-purchase-form" style="display: none;">
-        {% csrf_token %}
-        <input type="number" name="total_quantity" min="1" required placeholder="총 결제할 수량">
-        * 이 중 절반의 수량만 배송갑니다
-        
-        <button type="submit" name="action" value="half_purchase" id="half-purchase-button">반만 배송받기</button>
-        <button type="submit" name="action" value="half_goto_basket" id="basket-button">장바구니에 추가</button>
-    </form>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#buy-button").on("click", function () {
+          $("#main-form").hide();
+          $("#additional-buttons").show();
+          $("#additional-form").show();
+          $("#half-purchase-form, #full-purchase-form").hide();
+        });
 
-    <form action="" method="post" id="full-purchase-form" style="display: none;">
-        {% csrf_token %}
-        <input type="number" name="quantity" min="1" required placeholder="배송받을 수량">
-        <button type="submit" name="action" value="purchase" id="purchase-direct-button">바로 결제하기</button>
-        <button type="submit" name="action" value="goto_basket" id="basket-button">장바구니에 추가</button>
-    </form>
-    
-    
+        $("#half-buy-button").on("click", function () {
+          $("#additional-form").show();
+          $("#half-purchase-form").show();
+          $("#full-purchase-form").hide();
+        });
+
+        $("#full-buy-button").on("click", function () {
+          $("#additional-form").show();
+          $("#half-purchase-form").hide();
+          $("#full-purchase-form").show();
+        });
+
+        // 초기에는 추가 폼을 숨겨둠
+        $("#additional-form, #half-purchase-form, #full-purchase-form").hide();
+      });
+    </script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function () {
-            $("#buy-button").on("click", function () {
-                $("#main-form").hide();
-                $("#additional-buttons").show();
-                $("#additional-form").show();
-                $("#half-purchase-form, #full-purchase-form").hide();
-            });
-    
-            $("#half-buy-button").on("click", function () {
-                $("#additional-form").show();
-                $("#half-purchase-form").show();
-                $("#full-purchase-form").hide();
-            });
-    
-            $("#full-buy-button").on("click", function () {
-                $("#additional-form").show();
-                $("#half-purchase-form").hide();
-                $("#full-purchase-form").show();
-            });
-    
-            // 초기에는 추가 폼을 숨겨둠
-            $("#additional-form, #half-purchase-form, #full-purchase-form").hide();
+      $(document).ready(function () {
+        //페이지가 완전히 로드된 후에 실행되는 JavaScript코드 블록 정의
+        $(".like-btn").on("click", function (event) {
+          // 클래스가 like-btn 인 모든 요소에 대해 클릭 이벤트 처리 -> 좋아요 버튼들에 대한 클릭 이벤트를 처리하도록 함
+          event.preventDefault(); // 클릭 이벤트의 기본 동작 취소, 좋아요 버튼 클릭 시 페이지의 이동을 막기 위함
+          var productId = $(this).data("product-id"); //클릭한 좋아요 버튼의 data-product-id 속성을 가져와서 productId 변수에 저장
+          var likeCountElement = $("#like-count"); // 좋아요 수를 표시하는 HTML 요소(id)를 가져와서 likeCountElement 변수에 저장
+
+          $.ajax({
+            // Ajax 요청을 수행하는 코드 블록
+            url: "{% url 'add_remove_whishlist' %}", // Ajax 요청의 URL을 "/add_remove_whishlist/"로 설정
+            type: "POST",
+            data: {
+              product_id: productId, // product_id와 csrfmiddlewaretoken을 함께 서버로 전송
+              csrfmiddlewaretoken: "{{ csrf_token }}",
+            },
+            success: function (response) {
+              // 좋아요 버튼 상태 업데이트
+              if (response.liked) {
+                // response 객체의 liked 속성을 확인하여, 좋아요 상태를 업데이트
+                $(".like-btn[data-product-id=" + productId + "]").text(
+                  "찜 취소"
+                );
+                likeCountElement.text(parseInt(likeCountElement.text()) + 1);
+              } else {
+                $(".like-btn[data-product-id=" + productId + "]").text(
+                  "찜하기"
+                );
+                likeCountElement.text(parseInt(likeCountElement.text()) - 1);
+              }
+            },
+            error: function () {
+              // Ajax 요청이 실패한 경우 실행되는 함수
+              alert("에러가 발생했습니다.");
+            },
+          });
         });
+      });
     </script>
-    
-    
-    
-    
-    
-    
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () { //페이지가 완전히 로드된 후에 실행되는 JavaScript코드 블록 정의 
-            $(".like-btn").on("click", function (event) { // 클래스가 like-btn 인 모든 요소에 대해 클릭 이벤트 처리 -> 좋아요 버튼들에 대한 클릭 이벤트를 처리하도록 함 
-                event.preventDefault();  // 클릭 이벤트의 기본 동작 취소, 좋아요 버튼 클릭 시 페이지의 이동을 막기 위함 
-                var productId = $(this).data("product-id"); //클릭한 좋아요 버튼의 data-product-id 속성을 가져와서 productId 변수에 저장
-                var likeCountElement = $("#like-count"); // 좋아요 수를 표시하는 HTML 요소(id)를 가져와서 likeCountElement 변수에 저장
-    
-                $.ajax({  // Ajax 요청을 수행하는 코드 블록
-                    url: "{% url 'add_remove_whishlist' %}",  // Ajax 요청의 URL을 "/add_remove_whishlist/"로 설정
-                    type: "POST",
-                    data: {
-                        product_id: productId,  // product_id와 csrfmiddlewaretoken을 함께 서버로 전송
-                        csrfmiddlewaretoken: "{{ csrf_token }}",
-                    },
-                    success: function (response) {  
-                        // 좋아요 버튼 상태 업데이트
-                        if (response.liked) {  // response 객체의 liked 속성을 확인하여, 좋아요 상태를 업데이트
-                            $(".like-btn[data-product-id=" + productId + "]").text("찜 취소");
-                            likeCountElement.text(parseInt(likeCountElement.text()) + 1);
-                        } else {
-                            $(".like-btn[data-product-id=" + productId + "]").text("찜하기");
-                            likeCountElement.text(parseInt(likeCountElement.text()) - 1);
-                        }
-                    },
-                    error: function () {  // Ajax 요청이 실패한 경우 실행되는 함수
-                        alert("에러가 발생했습니다.");
-                    },
-                });
-            });
-        });
-    </script>
-    
-    </body>
-    </html>
+  </body>
+</html>

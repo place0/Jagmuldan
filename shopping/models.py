@@ -28,6 +28,13 @@ class ShoppingBasket(models.Model):
     quantity = models.PositiveIntegerField()
     half_purchased = models.BooleanField(default=False)
 
+# 바로 결제하기
+class DirectPurchase(models.Model):
+    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='direct_purchase')
+    product = models.ForeignKey(Product, related_name='direct_basket_product', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField()
+    half_purchased = models.BooleanField(default=False)
+
 # 곳간 
 class Storage(models.Model):
     customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='storage')

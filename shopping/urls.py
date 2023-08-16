@@ -9,7 +9,9 @@ urlpatterns = [
 
     path('mypage/',mypage, name='mypage'),
     path('my_product/',my_product, name='my_product'),
-    path('update_user/',update_user, name='update_user'),
+    path('update_user_merchant/',update_user_merchant, name='update_user_merchant'),
+    path('update_user_restaurant/',update_user_restaurant, name='update_user_restaurant'),
+    
     path('update_upload/<int:id>/',update_upload, name='update_upload'),
     path('delete_product/<int:id>/',delete_product, name='delete_product'),  
     
