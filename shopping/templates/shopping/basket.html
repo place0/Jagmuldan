@@ -82,8 +82,6 @@
                 var real_price = parseInt($(this).data('real-price'));
                 var low_income = $(this).data('low-income');
                 console.log(low_income);
-                
-                saved_price += (real_price - price) * quantity;
 
                 var flag = true;
                 for (let i = 0; i < seller_list.length; i++) {
@@ -102,8 +100,10 @@
 
                 if (half_purchased === 'True') {
                     total += price * quantity * 2;
+                    saved_price += (real_price - price) * quantity*2;
                 } else {
                     total += price * quantity;
+                    saved_price += (real_price - price) * quantity;
                 }
 
                 if (low_income) {

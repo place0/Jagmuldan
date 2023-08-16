@@ -14,7 +14,7 @@
     생산자-{{ product.seller.user.username }}<br>
 
     (생산자 프로필)<img src="{{product.seller.image.url}}" width="50"><br>
-    한줄소개 - {{ product.seller.description }}<br><br><br>
+    <br><br><br>
     좋아요 수 : <span id="like-count">{{product.like_product.count}}</span>
     {% if product in request.user.like_product.all %}
         <a href="#" class="like-btn" data-product-id="{{ product.id }}">찜 취소</a>
