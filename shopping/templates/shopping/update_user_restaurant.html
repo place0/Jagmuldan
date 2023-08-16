@@ -1,24 +1,91 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="{% static '/css/update_user_merchant.css' %}"
+/>
     <title>Document</title>
 </head>
 <body>
-    <form method="POST" action="" enctype="multipart/form-data">
-        {% csrf_token %}
-        <input type="text" name="username" value="{{request.user.username}}"> 음식점님
-        <br>
-        <p>현재: <img src="{{request.user.restaurant.image.url }}" width="50"></p>
-        <p>변경 : <input type="file" name="image"></p><br>
-        식당이름 변경 - <input type="text" name="restaurant_name" value="{{request.user.restaurant.name}}"><br>
-        식당 주소 변경 - <input type="text" name="restaurant_adress" value="{{request.user.restaurant.address}}">
-        <a href="">식당 홍보물 내용 수정</a>
+    <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="login">{{request.user.username}}</div>
+        <div class="signup">
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </div>
 
-        <input type="submit" value="수정하기">
+        {% if not request.user.is_authenticated %}
+        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        {% else %}
+        <div class="logout">
+          <a href="{% url 'accounts:logout' %}">로그아웃</a>
+        </div>
+        {% endif %}
+        <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
+      </nav>
+
+
+
+    <main>
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="main_one">
+            <div class="main_pic">
+                <picture
+                    ><p>현재: <img src="{{request.user.restaurant.image.url }}" width="50"></p>
+                    <p>변경 : <input type="file" name="image"></p><br></picture>
+
+                <div class="id">
+                    
+                        <div class="id_change">
+                            <div class="id_box">
+                                <div class="text_id">사장님</div>
+                                <div class="pencil_pic">
+                                    <img
+                                        src="{% static 'image/해커톤_연필.png' %}"
+                                    />
+                                </div>
+                            </div></div
+                    >
+                </div>
+            </div>
+        </div>
+    </main>
     
-    </form>
-
+        <div class="main_intro_change">
+            <div class="text">식당 주소 변경 - <input type="text" name="restaurant_adress" value="{{request.user.restaurant.address}}"></div>
+            <div class="pencil_pic">
+                <img src="{% static 'image/해커톤_연필.png' %}" />
+            </div></div
+    >
+    
+        <div class="name_change">
+            <div class="text">식당이름 변경 - <input type="text" name="restaurant_name" value="{{request.user.restaurant.name}}"></div>
+            <div class="pencil_pic">
+                <img src="{% static 'image/해커톤_연필.png' %}" />
+            </div></div
+    >
+    <div class="move_to_edit_restaurant">
+    <a href="">식당 홍보물 내용 수정</a></div>
+    <div class="input_submit">
+        <input type="submit" id="input_btn"
+        value="수정하기"></div>
+</form>
 </body>
 </html>

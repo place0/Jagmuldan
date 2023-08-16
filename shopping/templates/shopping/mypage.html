@@ -1,25 +1,108 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/mypage.css' %}" />
     <title>Document</title>
+
 </head>
 <body>
-    {% if request.user.merchant %}
+    
+    <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="login">{{request.user.username}}</div>
+        <div class="signup">
+          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        </div>
+
+        {% if not request.user.is_authenticated %}
+        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        {% else %}
+        <div class="logout">
+          <a href="{% url 'accounts:logout' %}">로그아웃</a>
+        </div>
+        {% endif %}
+        <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
+      </nav>
+    <main>
+        <div class="main_one">
+            <div class="edit">{% if request.user.merchant %}
     <a href="{% url 'update_user_merchant' %}">판매자 회원 정보 수정</a>
     {% elif request.user.restaurant %}
     <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
     {% endif %}
-    <br>
-    {% if request.user.merchant %}
+    <br>{% if request.user.merchant %}
     <a href="{% url 'my_product' %}">등록 상품 관리</a><br>
     {% endif %}
-    <a href="{% url 'wishlist' %}">내가 찜한 상품</a><br>
-    <a href="">주문목록</a><br>
-    <a href="">취소 반품 교환</a><br>
-    <a href="">구매후기</a><br>
-    <a href="{% url 'half_purchased_products' %}">내 곳간 보기</a><br>
+            </div>  
+            <div class="main_pic">
+                <picture
+                    ><img id="mypage_img " src="{% static '/img/마이페이지/해커톤_마이페이지.png' %}" /></picture>
+                <div class="id_font">아이디</div>
+            </div>
+        
+        <div class="main_intro">
+            <h3>한 줄 소개~~~~</h3>
+        </div>
+        <div class="line"></div>
+        <div class="main_two">
+            <div class="btn_saved">
+                <a href="{% url 'wishlist' %}"><button>
+                        <div class="btn_text">내가 찜한 상품</div>
+                    </button></a
+                >
+            </div>
+
+            <div class="btn_orderlist">
+                <a href="{% url 'index' %}"
+                    ><button><div class="btn_text">목록</div></button></a
+                >
+            </div>
+            <div class="btn_cancel">
+                <a href="{% url 'index' %}"
+                    ><button>
+                        <div class="btn_text">취소 반품 교환</div>
+                    </button></a
+                >
+            </div>
+            <div class="btn_review">
+                <a href="{% url 'index' %}"
+                    ><button>
+                        <div class="btn_text">구매후기</div>
+                    </button></a
+                >
+            </div>
+            <div class="btn_mine">
+                <a href="{% url 'half_purchased_products' %}"><button>
+                        <div class="btn_text">내 곳간 보기</div>
+                    </button></a
+                >
+            </div>
+        </div>
+    </main>
+
+
+
+
+
+
+    
+    
+    
     
     
 </body>

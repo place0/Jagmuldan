@@ -1,33 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% for p in products %}
-    {{ p.product.title }}<br>
-{% empty %}
-    없음
-{% endfor %}
-{{ total_p }}
-<hr>
-{% if request.user.coupons.all %}
-{{request.user.coupons.count}}개의 쿠폰 중 사용가능한 쿠폰 {{valid_coupon|length}}개
-<form method="POST" action="">
-    {% csrf_token %}
-    {% for c in valid_coupon %}
-    <input type="radio" name='coupon' value="{{c}}">{{c.title}}
-{% endfor %}
-<input type="submit" value="적용하기">
-</form>
-{% for c in valid_coupon %}
-    {{c.title}}
-{% endfor %}
-<a href="">선택</a>
-{% else %}
-쿠폰없음
-{% endif %}
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        {% for p in products %} {{ p.product.title }}<br />
+        {% empty %} 없음 {% endfor %} {{ total_p }}
+        <hr />
+        {% if request.user.coupons.all %} {{request.user.coupons.count}}개의
+        쿠폰 중 사용가능한 쿠폰 {{valid_coupon|length}}개
+        <form method="POST" action="">
+            {% csrf_token %} {% for c in valid_coupon %}
+            <input type="radio" name="coupon" value="{{c}}" />{{c.title}} {%
+            endfor %}
+            <input type="submit" value="적용하기" />
+        </form>
+        {% for c in valid_coupon %} {{c.title}} {% endfor %}
+        <a href="">선택</a>
+        {% else %} 쿠폰없음 {% endif %}
+    </body>
 </html>
