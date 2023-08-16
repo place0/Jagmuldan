@@ -236,6 +236,7 @@ li {
   padding: 6px;
   overflow: hidden;
   object-fit: cover;
+  position: relative;
 }
 
 li img {
@@ -247,41 +248,63 @@ li img {
 }
 
 li .infoBox {
-  position: relative;
+  position: absolute;
   width: 150px;
-  height: 150px;
+  height: 110px;
   background: rgba(217, 217, 217, 0.65);
   opacity: 0;
 }
 
 li .infoBox:hover {
-  animation: modalSlideIn 0.7s ease-in;
+  animation: modalSlideIn 0.3s ease-in;
   opacity: 1;
 }
 @keyframes modalSlideIn {
   0% {
     opacity: 0;
-    transform: translateY(55%);
+    transform: translateY(30%);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
+/* 상품이름 title */
 li .infoBox span {
   font-weight: 700;
   font-size: 20px;
   color: #454444;
   position: absolute;
-  top: 7%;
+  top: 5%;
   left: 7%;
 }
-
+/* 상품 가격 price */
 li .infoBox p {
   position: absolute;
-  top: 18%;
+  top: 20%;
   left: 7%;
   font-size: 16px;
+  color: #454444;
+}
+
+.discount_rate {
+  position: absolute;
+  top: 53%;
+  left: 7%;
+  font-size: 12px;
+  color: red;
+  font-weight: lighter;
+}
+
+li .infoBox a button {
+  border: none;
+  background-color: #008d3f;
+  color: #454444;
+  font-weight: bold;
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+  border-radius: 5px;
 }
 #product_list_fruit > .infoBox,
 #product_list_vegi > .infoBox,
@@ -303,22 +326,6 @@ li .infoBox p {
 .upload button {
   background-color: transparent;
   border: none;
-}
-
-/* nav_bottom */
-.nav_bottom {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-items: center;
-  position: absolute;
-  bottom: 0px;
-  width: 390px;
-  height: 80px;
-  background: rgba(217, 217, 217, 0.5);
-}
-.nav_bottom > .logo {
-  display: flex;
 }
 
 /* 광고 배너 */
