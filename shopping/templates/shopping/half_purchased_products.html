@@ -34,10 +34,10 @@
             <section style="margin-left: 25px; margin-top: 20px; line-height: 30px">
             <li>
                 <h2>상품명: {{ product.title }}</h2>
-                <p>수량: </p><!--수량-->
+                <p>수량: {{ product.total_quantity }}</p>
                 <p>가격: {{ product.price }}</p>
                 <p>할인율: {{ product.discount_rate }}%</p>
-                <!-- 추가 필드들도 표시 --> <p>유효기간</p> <!--유효기간-->
+                <p>유효기간: D-13</p> <!--유효기간-->
             </section>
             <div style="display: flex; justify-content: space-around">
                 <div class="usebox"><a href="#">바로 구매</a></div> <!--구매 링크-->
