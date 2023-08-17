@@ -82,7 +82,7 @@ body {
 /*위치 조절*/
 .main_one {
     top: 12%;
-    left: 20%%;
+    left: 14%;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -148,4 +148,9 @@ a {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.logout_btn {
+    margin-top: 5%;
+    font-size: 90%;
+    font-weight: 800;
 }
