@@ -233,6 +233,9 @@ input[type="checkbox"]:checked::before {
     color: #646464;
     font-size: 120%;
 }
+#cart-container {
+    margin: 3%;
+}
 /*제품 구조*/
 .product_info {
     display: flex;
