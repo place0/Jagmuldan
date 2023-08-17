@@ -9,14 +9,16 @@
             rel="stylesheet"
             href="{% static 'css/restaurant_signup.css' %}"
         />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     </head>
     <body>
         <div style="display: flex; justify-content: space-between">
             <span style="margin-left: 100px">음식점으로 회원가입</span>
-            <span>X</span>
+            <span>X</span
+            ><!--뒤로가기-->
         </div>
         <div style="display: flex; justify-content: center; margin-top: 50px">
-            <img style="width: 100px; height: 150px" src="Vector.svg" />
+            <img src="{% static '/img/logo/4989_logo_L.png' %}" />
         </div>
 
         <form method="post" enctype="multipart/form-data">
@@ -28,48 +30,71 @@
                 <p class="error">{{ form.username.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <label for="{{ form.password1.id_for_label }}">비밀번호:</label>
+                <label for="{{ form.password1.id_for_label }}"
+                    >비밀번호 :</label
+                >
                 <div class="graybox">{{ form.password1 }}</div>
                 {% if form.password1.errors %}
                 <p class="error">{{ form.password1.errors.as_text }}</p>
                 {% endif %}
                 <br />
                 <label for="{{ form.password2.id_for_label }}"
-                    >비밀번호 확인:</label
+                    >비밀번호 확인 :</label
                 >
                 <div class="graybox">{{ form.password2 }}</div>
                 {% if form.password2.errors %}
                 <p class="error">{{ form.password2.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <label for="{{ form.name.id_for_label }}">음식점 이름:</label>
+                <label for="{{ form.name.id_for_label }}">음식점 이름 :</label>
                 <div class="graybox">{{ form.name }}</div>
                 {% if form.name.errors %}
                 <p class="error">{{ form.name.errors.as_text }}</p>
                 {% endif %}
                 <br />
                 <label for="{{ form.description.id_for_label }}"
-                    >식당 소개:</label
+                    >식당 소개 :</label
                 >
                 <div class="graybox">{{ form.description }}</div>
                 {% if form.description.errors %}
                 <p class="error">{{ form.description.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <br />
+
                 <label for="{{ form.address.id_for_label }}">식당 주소:</label>
                 <div class="graybox">{{ form.address }}</div>
                 {% if form.address.errors %}
                 <p class="error">{{ form.address.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <label>사진 업로드:</label><br />
-                <input multiple="multiple" type="file" name="imgs" /><br />
-                <input multiple="multiple" type="file" name="imgs" /><br />
-                <input multiple="multiple" type="file" name="imgs" /><br />
-                <input multiple="multiple" type="file" name="imgs" /><br />
-                <br />
+                <label>사진 업로드 :</label><br />
+                <input
+                    multiple="multiple"
+                    type="file"
+                    name="imgs"
+                    style="margin-left: 20px"
+                /><br />
+                <input
+                    multiple="multiple"
+                    type="file"
+                    name="imgs"
+                    style="margin-left: 20px"
+                /><br />
+                <input
+                    multiple="multiple"
+                    type="file"
+                    name="imgs"
+                    style="margin-left: 20px"
+                /><br />
+                <input
+                    multiple="multiple"
+                    type="file"
+                    name="imgs"
+                    style="margin-left: 20px"
+                />
             </section>
+            <br />
+            <br />
             <button type="submit" class="button">회원가입</button>
         </form>
     </body>

@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="{% static 'css/merchant_signup.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     </head>
     <body>
         <div style="display: flex; justify-content: space-between">
@@ -15,7 +16,7 @@
             <!--뒤로 가기-->
         </div>
         <div style="display: flex; justify-content: center; margin-top: 50px">
-            <img style="width: 100px; height: 150px" src="Vector.svg" />
+            <img src="{% static '/img/logo/4989_logo_L.png' %}" />
         </div>
         <form method="post">
             {% csrf_token %}
@@ -26,14 +27,16 @@
                 <p class="error">{{ form.username.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <label for="{{ form.password1.id_for_label }}">비밀번호:</label>
+                <label for="{{ form.password1.id_for_label }}"
+                    >비밀번호 :</label
+                >
                 <div class="graybox">{{ form.password1 }}</div>
                 {% if form.password1.errors %}
                 <p class="error">{{ form.password1.errors.as_text }}</p>
                 {% endif %}
                 <br />
                 <label for="{{ form.password2.id_for_label }}"
-                    >비밀번호 확인:</label
+                    >비밀번호 확인 :</label
                 >
                 <div class="graybox">{{ form.password2 }}</div>
                 {% if form.password2.errors %}
@@ -41,20 +44,22 @@
                 {% endif %}
                 <br />
                 <label for="{{ form.farm_name.id_for_label }}"
-                    >농장 위치-이름:</label
+                    >농장 이름 :</label
                 >
                 <div class="graybox">{{ form.farm_name }}</div>
                 {% if form.farm_name.errors %}
                 <p class="error">{{ form.farm_name.errors.as_text }}</p>
                 {% endif %}
                 <br />
-                <label for="{{ form.farm_adress_for_label }}">농장 주소:</label>
+                <label for="{{ form.farm_adress_for_label }}"
+                    >농장 주소 :</label
+                >
                 <div class="graybox">{{ form.farm_adress }}</div>
                 {% if form.farm_adress.errors %}
                 <p class="error">{{ form.farm_adress.errors.as_text }}</p>
                 {% endif %}
-                <br />
             </section>
+            <br /><br />
             <button type="submit" class="button">회원가입</button>
         </form>
     </body>
