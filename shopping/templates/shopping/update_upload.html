@@ -39,27 +39,24 @@
                     value="{{product.origin}}"
                 /><br />
                 재배 특징-<textarea name="feature">
+                    
 {{product.production_features}}</textarea
                 ><br />
+                판매수량
+                        <input type="number" value="{{product.total_quantity}}" name="total_quantity"
+                      /><br>
+                      <div class="discount">
+                        <label for="price3"
+                          ><span>할인률</span
+                          ><input type="number" id="price3" name="discount_rate" value={{product.discount_rate}}
+                        /></label>
+                      </div><br>
                 기존 이미지 <br />
+                
+                
                 {% for photo in product.product_image.all %}
                 <img src="{{photo.image.url}}" width="50" /><br />
                 {% endfor %} 사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
                     multiple="multiple"
                     type="file"
                     name="imgs"
