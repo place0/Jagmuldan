@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
+    <style>
+      #product_list_all li .infoBox {
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        background: rgba(217, 217, 217, 0.65);
+        opacity: 0;
+      }
+      #product_list_all li .infoBox:hover {
+        animation: modalSlideIn 0.3s ease-in;
+        opacity: 1;
+      }
+    </style>
   </head>
   <body>
     <div id="frame">
@@ -63,7 +76,14 @@
       <!-- 가장 잘 나가는 상품 -->
       <div class="hot">
         <div><span>오늘의 HOT 상품!</span></div>
-        <p>{{best.title}}</p>
+        {% for product in products %}
+        <div data-type="{{ product.type }}">
+          {% for photo in product.product_image.all %}
+          <img src="{{photo.image.url}}" width="345px" height="170px" />
+          {% endfor %}
+          <p>"{{best.title}}"</p>
+        </div>
+        {% endfor %}
       </div>
 
       <article id="product_list_all">
@@ -71,11 +91,7 @@
           {% for product in products %}
           <li data-type="{{ product.type }}">
             {% for photo in product.product_image.all %}
-            <img
-              src="{{photo.image.url}}"
-              width="150px,"
-              height="150px"
-            /><br />
+            <img src="{{photo.image.url}}" width="150px," height="150px" />
             {% endfor %}
             <div class="infoBox">
               <span>{{ product.title }}</span>

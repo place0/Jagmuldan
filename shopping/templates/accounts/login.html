@@ -1,67 +1,63 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>로그인</title>
-        <link rel="stylesheet" href="{% static 'css/login.css' %}" />
-    </head>
-    <body>
-        <div style="display: flex; justify-content: space-between">
-            <span style="margin-left: 150px">로그인</span>
-            <span>X</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+  </head>
+  <body>
+    <div style="display: flex; justify-content: space-between">
+      <span style="margin-left: 150px">로그인</span>
+      <span>X</span>
+    </div>
+    <div
+      style="
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+      "
+    >
+      <img style="width: 100px; height: 150px" src="#" />
+      <b style="font-size: 15pt">서비스명</b>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <section class="customer_list">
+        <div>
+          <label for="{{ form.username.id_for_label }}">이름:</label><br />
+          <div class="graybox">{{ form.username }}</div>
+          {% if form.username.errors %}
         </div>
 
-        <div
-            style="
-                margin-top: 30px;
-                display: flex;
-                flex-direction: column;
-                justify-items: center;
-                align-items: center;
-            "
+        <p class="error">{{ form.username.errors.as_text }}</p>
+        {% endif %}
+        <br />
+
+        <div>
+          <label for="{{ form.password1.id_for_label }}">비밀번호:</label>
+          <div class="graybox">{{ form.password }}</div>
+          {% if form.password1.errors %}
+        </div>
+
+        <p class="error">{{ form.password1.errors.as_text }}</p>
+        {% endif %}<br />
+      </section>
+      <button type="submit" class="button">로그인</button>
+
+      <div style="text-align: center; margin-top: 30px">
+        <a href="#"> 아직 회원이 아니신가요? > <b>회원가입</b></a>
+      </div>
+      <div class="kakao">
+        <a href="#">
+          카카오톡으로 로그인하기<b style="margin-left: 10px">></b></a
         >
-            <img style="width: 100px; height: 150px" src="#" />
-            <b style="font-size: 15pt">서비스명</b>
-        </div>
-
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <section class="customer_list">
-                <div>
-                    <label for="{{ form.username.id_for_label }}">이름:</label
-                    ><br />
-                    <div class="graybox">{{ form.username }}</div>
-                    {% if form.username.errors %}
-                </div>
-
-                <p class="error">{{ form.username.errors.as_text }}</p>
-                {% endif %}
-                <br />
-
-                <div>
-                    <label for="{{ form.password1.id_for_label }}"
-                        >비밀번호:</label
-                    >
-                    <div class="graybox">{{ form.password }}</div>
-                    {% if form.password1.errors %}
-                </div>
-
-                <p class="error">{{ form.password1.errors.as_text }}</p>
-                {% endif %}<br />
-            </section>
-            <button type="submit" class="button">로그인</button>
-
-            <div style="text-align: center; margin-top: 30px">
-                <a href="#"> 아직 회원이 아니신가요? > <b>회원가입</b></a>
-            </div>
-            <div class="kakao">
-                <a href="#">
-                    카카오톡으로 로그인하기<b style="margin-left: 10px">></b></a
-                >
-            </div>
-        </form>
-    </body>
+      </div>
+    </form>
+  </body>
 </html>
