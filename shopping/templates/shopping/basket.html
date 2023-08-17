@@ -48,25 +48,20 @@
                     {%endif%}<br>
                 도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
-<<<<<<< HEAD
+
                 <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
-=======
-                <input type="hidden"  name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
-                <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
-                <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
-<<<<<<< HEAD
+
                 
                 
                 
-=======
+
                     </div>
                 {% endfor %}  
                 </div>
         
->>>>>>> 34499ac419317b6623260d1f4dc4b7e60632f9e5
->>>>>>> upstream/main
+
         
                     <hr />
                     총 결제 금액 : <span id="total"></span><br />
@@ -160,14 +155,7 @@
                             var real_price = parseInt(
                                 $(this).data("real-price")
                             );
-<<<<<<< HEAD
 
-                            saved_price += (real_price - price) * quantity;
-=======
-                            
-                            //상품 할인 가격 더함 ( 원래 금액 - 할인받은 금액)*수량 
-                            
->>>>>>> upstream/main
 
                             var flag = true;
                             for (let i = 0; i < seller_list.length; i++) {
@@ -185,16 +173,12 @@
                             }
 
                             if (half_purchased === "True") {
-                                total += price * quantity * 2;
-<<<<<<< HEAD
-                            } else {
-=======
-                                saved_price += (real_price - price) * quantity *2;
-                            } else { // 반만 구매 상품이 아닌 경우 원래의 가격 x 수량 
->>>>>>> upstream/main
-                                total += price * quantity;
-                                saved_price += (real_price - price) * quantity;
+                                quantity= quantity * 2;
                             }
+
+                            total += price * quantity;
+                            saved_price += (real_price - price) * quantity;
+         
                             total += add;
                             only_delivery_price += add;
 
@@ -230,11 +214,6 @@
 
                         $("#total").text(finalPrice + "원");
                         $("#coupon-discount").text(couponDiscount + "원");
-<<<<<<< HEAD
-=======
-                        
-                        
->>>>>>> upstream/main
                     }
 
                     $("#apply-coupon-button").on("click", function () {
@@ -258,14 +237,11 @@
 
                         $("#total").text(finalPrice + "원");
                         $("#order-button").text(finalPrice + "원 주문하기");
-<<<<<<< HEAD
-                        $("#coupon-discount").text(couponDiscount + "원"); // 쿠폰 할인 가격을 출력
-=======
+
 
                         //쿠폰 할인 가격 출력 
                         $("#coupon-discount").text(couponDiscount + "원"); 
-                        
->>>>>>> upstream/main
+
                     });
 
                     // 체크박스 변경 이벤트를 처리
