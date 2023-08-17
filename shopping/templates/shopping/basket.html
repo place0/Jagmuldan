@@ -10,18 +10,29 @@
     <body>
         <div id="frame">
         <div id="cart-container">
-            <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
+            <!--결제하기 화면과 연결 -->{% csrf_token %} 
+            <div class="product_info">
+                <div class="product_img">
+            {% for p in products %}
             <form id="cart-form" action="/kakaoPayLogic/" method="post">
                 {% csrf_token %} 
                     {% for photo in p.product.product_image.all %}
                         <img src="{{ photo.image.url }}" width="50"><br>
-                    {% endfor %}
+                    {% endfor %}</div>
+                    <div class="infomation">
+<div class="product_title">
+    <div class="product_front">
                     <input type="checkbox" class="product-checkbox" data-real-price="{{p.product.price}}" name="selected_products" data-seller="{{p.product.seller}}"
                      value="{{ p.product.id }}" checked
                     data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
                     
-                    {{ p.product.title }}<br>
-                    가격 - {{ p.product.discounted_price|floatformat:"0" }}원
+                    {{ p.product.title }}</div>
+                    <div class="delet">
+                    <a href="{% url 'basket-delete' p.product.id %}">x</a></div>
+                    
+                    </div>
+                    <br>
+                    <div class="product_detail">가격 - {{ p.product.discounted_price|floatformat:"0" }}원
                     <br>
                     {% if p.half_purchased %}
                         주문 수량 - {{ p.quantity|multiply:2|floatformat:"0" }}<br>
@@ -30,13 +41,13 @@
                     {% else %}
                         수량 - {{p.quantity}}<br>
                     {% endif %}
-                <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a><br>
+                
                 배송비 - {% if not request.user.low_income %}
                     2500원(따로 설정)
                     {% else %}
                     0원 - 저소득층 지원
                     {%endif%}<br>
-                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
                 <input type="hidden"  name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
@@ -46,7 +57,12 @@
                 
                 
         
-                {% endfor %}    
+                {% empty %}
+                없음
+                
+                
+        
+                {% endfor %}  </div></div>  </div>
                     <hr />
                     총 결제 금액 : <span id="total"></span><br />
                     상품 할인 :
