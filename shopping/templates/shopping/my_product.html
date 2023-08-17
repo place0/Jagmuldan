@@ -11,7 +11,7 @@
     <title>Document</title>
 </head>
 <body>
-  
+    <div id="frame">
     <nav>
         <div class="title">
             <div class="bincan"></div>
@@ -27,9 +27,8 @@
         </div>
     </nav>
     <main>
-       
 
-        <div class="box_1"> 
+        <div class="main_box">
             {% for p in products %}
             <div class="pic">
                 {% for photo in p.product_image.all %}
@@ -48,18 +47,18 @@
                         <button type="submit" id="edit">수정</button>
                     </div>
                     <div class="delete_btn">
-                        <a href="{% url 'delete_product' p.id %}">상품 삭제하기
+                        <a href="{% url 'delete_product' p.id %}">
                         <button type="submit" id="delete">삭제</button></a>
                     </div>
                 </div>
                 {% endfor %}
             </div>
-        </div>
+        
         {% empty %}
         <div class="empty">등록한 상품 없음</div>
     {% endfor %}
-    
-    </main>
+    </div>
+    </main></div>
 </body>
 </html>
 </html>

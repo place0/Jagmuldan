@@ -93,6 +93,8 @@
         position: absolute;
         top: 130px;
         left: 20px;
+        font-size: 10px;
+        font-weight: bold;
       }
       .notice span {
         color: red;
@@ -205,7 +207,7 @@
 
         <div class="person">
           <div class="profile">
-            <img src="{{product.seller.image.url}}" width="50" />
+            <img src="{% static '/img/Component 1.png' %}" width="50" />
             <div class="name">
               <span>생산자 :</span>{{ product.seller.user.username }}
               <span><br />농장 이름 :</span> {{product.seller.farm_name}}
@@ -400,12 +402,14 @@
         </div>
 
         <div class="home">
-          <iconify-icon
-            icon="octicon:home-24"
-            style="color: #008d3f"
-            width="38"
-            height="38"
-          ></iconify-icon>
+          <a href="{% url 'index' %}">
+            <iconify-icon
+              icon="octicon:home-24"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
         </div>
         <div class="community">
           <a href="{% url 'community:main' %}">

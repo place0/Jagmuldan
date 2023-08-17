@@ -326,12 +326,14 @@
         </div>
 
         <div class="home">
-          <iconify-icon
-            icon="octicon:home-24"
-            style="color: #008d3f"
-            width="38"
-            height="38"
-          ></iconify-icon>
+          <a href="{% url 'index' %}">
+            <iconify-icon
+              icon="octicon:home-24"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
         </div>
         <div class="community">
           <a href="{% url 'community:main' %}">
