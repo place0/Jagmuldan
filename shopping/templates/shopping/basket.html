@@ -5,10 +5,24 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{% static '/css/basket.css' %}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <title>Document</title>
     </head>
     <body>
         <div id="frame">
+<!-- 뒤로가기 -->
+<div class="back">
+    <a href="{% url 'index' %}">
+      <iconify-icon
+        icon="ion:caret-back-outline"
+        style="color: #646464"
+        width="30"
+        height="30"
+      ></iconify-icon>
+    </a>
+  </div>
+<br>
+
         <div id="cart-container">
             <!--결제하기 화면과 연결 -->{% csrf_token %} 
             <div class="product_info">
@@ -87,8 +101,11 @@
                     </div>
                     <div class="address">
                         <form action="" method="post">
-                        <div class="edit" id="edit_link">수정하기</div>
+                        <br>
+                        <br>
+                        <div class="address_titke">주소</div>
                         <div class="address_detailed">
+                            
                             <div class="addressinfo">받는 분 <input  type="text" value="{{request.user.username}}"></div>
                             {% if not request.user.phone_number %}
                             <div class="complete">전화번호 <input  type="text" name="number" value=""></div>
@@ -100,7 +117,7 @@
                         </div>
                         <div class="address_btn">
                             <button name="action" value="update" type="button" id="address-button">
-                                완료하기
+                            수정하기
                             </button>
                         </div>
                     </from>
