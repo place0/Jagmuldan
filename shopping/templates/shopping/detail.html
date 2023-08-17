@@ -165,9 +165,10 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
-        <div class="signup">
+        <div class="login">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
         </div>
+        <div class="signup"></div>
       </nav>
       <!-- 뒤로가기 -->
       <div class="back">
@@ -209,7 +210,7 @@
             {% if not product.seller.image %}
             <img src="{% static '/img/Component 1.png' %}" width="50" />
             {% else %}
-            <img src="{{product.seller.image.url}}" width="50">
+            <img src="{{product.seller.image.url}}" width="50" />
             {% endif %}
             <div class="name">
               <span>생산자 :</span>{{ product.seller.user.username }}
