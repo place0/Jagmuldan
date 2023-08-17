@@ -8,6 +8,9 @@
             rel="stylesheet"
             href="{% static '/css/update_user_merchant.css' %}"
         />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
         <title>Document</title>
     </head>
     <body>
@@ -26,6 +29,18 @@
                             style="color: #008d3f"
                             width="35"
                             height="35"
+                        ></iconify-icon
+                    ></a>
+                </div>
+                <br /><br /><br /><br />
+                <!-- 뒤로가기 -->
+                <div class="back">
+                    <a href="{% url 'mypage' %}">
+                        <iconify-icon
+                            icon="ion:caret-back-outline"
+                            style="color: #646464"
+                            width="30"
+                            height="30"
                         ></iconify-icon
                     ></a>
                 </div>
@@ -54,7 +69,10 @@
                                     />
                                     {% endif %}
                                 </p>
-                                <p>변경 : <input type="file" name="image" /></p>
+                                <p>
+                                    프로필 변경 :
+                                    <input type="file" name="image" />
+                                </p>
                                 <br
                             /></picture>
 
@@ -103,6 +121,7 @@
                                 type="submit"
                                 id="input_btn"
                                 value="수정하기"
+                                style="height: 40px"
                             />
                         </div>
                     </div>

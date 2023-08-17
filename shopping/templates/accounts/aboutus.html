@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
         <style>
             body {
                 width: 390px;
@@ -45,24 +46,113 @@
                 color: black;
                 text-decoration: none;
             }
+            .nav_header > .logo {
+                left: 7.44%;
+                right: 81.79%;
+                top: 1.3%;
+                bottom: 93.13%;
+                position: absolute;
+            }
+            .nav_header > .logo img {
+                width: 73px;
+                height: 68px;
+                object-fit: contain;
+            }
+            .nav_header > .cart {
+                position: absolute;
+                left: 71.54%;
+                right: 19.49%;
+                top: 2.49%;
+                bottom: 93.36%;
+            }
+            /* 로그인 */
+            .nav_header > .login {
+                position: absolute;
+                left: 83.33%;
+                top: 3.55%;
+                font-size: 16px;
+                font-weight: 700;
+                color: #454444;
+            }
+            .nav_header > .signup {
+                position: absolute;
+                left: 83.33%;
+                top: 6.4%;
+                font-size: 16px;
+                font-weight: 700;
+                color: #454444;
+            }
+
+            .nav_header > .logout {
+                position: absolute;
+                left: 67%;
+                top: 6.4%;
+                font-size: 16px;
+                font-weight: 700;
+                color: #454444;
+            }
+
+            .nav_header > .mypage {
+                position: absolute;
+                left: 83.33%;
+                top: 3.55%;
+                font-size: 16px;
+                font-weight: 700;
+                color: #454444;
+            }
+
+            .nav_header > .login a,
+            .logout a,
+            .signup a,
+            .mypage a {
+                text-decoration: none;
+            }
         </style>
     </head>
     <body>
-        <div
-            style="
-                display: flex;
-                justify-content: space-between;
-                margin: 20px;
-                margin-top: 3px;
-            "
-        >
-            <img
-                src="{% static '/img/logo/4989_logo_L.png' %}"
-                style="width: 40px; height: 42px"
-            /><a href="{% url 'index' %}"> X </a>
-            <!--로고 크기 확인-->
+        <nav class="nav_header">
+            <div class="logo">
+                <a href="{% url 'accounts:about_us' %}"
+                    ><img src="{% static '/img/logo/4989_logo_L.png' %}"
+                /></a>
+            </div>
+            <div class="cart">
+                <a href="{% url 'basket' %}">
+                    <iconify-icon
+                        icon="mingcute:basket-line"
+                        style="color: #008d3f"
+                        width="35"
+                        height="35"
+                    ></iconify-icon
+                ></a>
+            </div>
+
+            {% if not request.user.is_authenticated %}
+            <div class="login">
+                <a href="{% url 'accounts:login' %}">로그인</a>
+            </div>
+            {% else %}
+            <div class="mypage">
+                <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+            </div>
+            {% endif %}
+        </nav>
+
         </div>
-        <br />
+        <br /><br>
+
+<br>
+<br><!-- 뒤로가기 -->
+<div class="back">
+    <a href="{% url 'index' %}">
+        <iconify-icon
+            icon="ion:caret-back-outline"
+            style="color: #646464"
+            width="30"
+            height="30"
+        ></iconify-icon
+    ></a>
+    </div>
 
         <div
             style="
