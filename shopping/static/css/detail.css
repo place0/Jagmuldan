@@ -230,20 +230,6 @@ li {
   border: none;
 }
 
-.heart_count {
-  position: absolute;
-  top: 55px;
-  left: 57px;
-  font-weight: bold;
-  font-size: 600;
-  color: rgba(69, 68, 68, 1);
-}
-
-.heart_count span {
-  position: absolute;
-  left: 20px;
-}
-
 /* 구매 */
 .buy {
   position: absolute;
@@ -348,105 +334,6 @@ label.yellow {
 }
 
 #half-purchase-form {
-}
-/* 반만선택하면보이는 창 (아래버튼 빼고)*/
-#half_modal {
-  position: relative;
-  width: 360px;
-  height: 150px;
-  background-color: red;
-  left: 12px;
-}
-
-#half_modal > .product_name {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-weight: 600;
-  font-size: 20px;
-  padding: 10px;
-}
-
-#half_modal > .product_count {
-  position: absolute;
-  top: 50px;
-  left: 10px;
-}
-#half_modal input[type="number"] {
-  width: 90px;
-  height: 30px;
-  border-radius: 10px;
-  border: solid rgba(0, 141, 63, 1) 1.5px;
-}
-#half_modal > .product_price {
-  position: absolute;
-  left: 40%;
-  top: 140px;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-#half_modal > .product_price_discount {
-  position: absolute;
-  left: 60%;
-  top: 140px;
-  font-size: 20px;
-  font-weight: 600;
-  color: red;
-}
-
-#half_modal > .product_leave {
-  position: absolute;
-  top: 178px;
-  left: 5%;
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.product_leave span {
-  color: red;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-#half_modal > .notice {
-  position: absolute;
-  top: 63%;
-  left: 3%;
-}
-
-.buyNow {
-  display: flex;
-  position: relative;
-  top: 200px;
-  right: 0px;
-  border-top: solid black 3px;
-}
-
-.buyNow button {
-  width: 200px;
-  height: 55px;
-  border: none;
-  color: white;
-  background-color: #008d3f;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.buyNow > .cart3 {
-  border-right: solid black 2px;
-}
-
-.buyNow > .cart3:hover {
-  border-bottom: solid black 3px;
-  border-right: solid black 3px;
-  border-left: solid black 3px;
-}
-
-.buyNow > .cart4:hover {
-  border-bottom: solid black 3px;
-  border-right: solid black 3px;
-  border-left: solid black 1px;
 }
 
 /* nav_bottom */
