@@ -61,11 +61,8 @@
             </button>
 
             <div style="text-align: center; margin-top: 30px">
-                <a href="#"> 아직 회원이 아니신가요? > <b>회원가입</b></a>
-            </div>
-            <div class="kakao">
-                <a href="#">
-                    카카오톡으로 로그인하기<b style="margin-left: 10px">></b></a
+                <a href="{% url 'accounts:signup' %}">
+                    아직 회원이 아니신가요? > <b>회원가입</b></a
                 >
             </div>
         </form>
