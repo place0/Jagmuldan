@@ -24,13 +24,13 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
+        
         <div class="signup">
           <a href="{% url 'accounts:signup' %}">회원가입</a>
         </div>
 
         {% if not request.user.is_authenticated %}
-        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        <a href="{% url 'accounts:login' %}"><div class="login">{{request.user.username}}</div></a>
         {% else %}
         <div class="logout">
           <a href="{% url 'accounts:logout' %}">로그아웃</a>
@@ -47,7 +47,9 @@
     {% elif request.user.restaurant %}
     <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
     {% endif %}
-    
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    <br>
+    <br>
 
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     {% if request.user.merchant %}
@@ -57,7 +59,7 @@
             <div class="main_pic">
                 <picture
                     ><img id="mypage_img " src="{% static '/img/마이페이지/해커톤_마이페이지.png' %}" /></picture>
-                <div class="id_font">아이디</div>
+                <div class="id_font">{{request.user.username}}</div>
             </div>
         
         <div class="main_intro">

@@ -8,14 +8,15 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="frame">
-            <div id="cart-container">
+        <div id="cart-container">
+            <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
+            <form id="cart-form" action="" method="post">
                 {% csrf_token %}
-                <!--결제하기 화면과 연결 -->{% for p in products %}
-                <form id="cart-form" action="" method="post">
-                    {% for photo in p.product.product_image.all %}
-                    <img src="{{ photo.image.url }}" width="50" /><br />
-                    {% endfor %}
+                {% for photo in p.product.product_image.all %}
+                <img src="{{ photo.image.url }}" width="50" /><br />
+                {% endfor %}
+                <div class="deliverywanted">
+
                     <input
                         type="checkbox"
                         data-real-price="{{p.product.price}}"

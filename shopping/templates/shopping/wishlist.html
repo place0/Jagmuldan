@@ -27,17 +27,19 @@
             <div class="box_1">
                 
                 <div class="img">
-                    <a href="{% url 'mypage_seller' %}">
-                        {% for photo in p.product_image.all %}
-                        <img src="{{ photo.image.url }}" width="50" /></a
-                    >{% endfor %}
+                    
+                    {% if p.product_image.all %}
+                    <img
+                      src="{{p.product_image.first.image.url}}" width="50"
+                    /><br />
+                    {% endif %}
                     <div class="heart_icon">
                         <div class="heart"></div>
                         <div class="animation-heart"></div>
                     </div>
                 </div>
                 <div class="info">
-                    <div class="info_title">{{p.title}}</div>
+                    <a href="{% url 'detail' p.id %}"><div class="info_title">{{p.title}}</a></div>
                     <div class="info_detail">
                         <div class="info_discount">32%</div>
                         <div class="info_cost">13000 원</div>
