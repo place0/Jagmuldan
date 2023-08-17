@@ -15,12 +15,12 @@
             <span>X</span>
         </div>
         <form>
-            <section class="review">
-                <div class="photo"><img src="#" /></div>
-                <div class="content">
-                    상품명: {{ product.title }}<br />
-                    수량: {{ product.total_quantity }}<br />
-
+            {% for order in orders %}
+                <section class="review">
+                    <div class="photo"><img src="#" /></div>
+                    <div class="content">
+                        상품명: {{ order.product.title }}<br />
+                        수량: {{ order.quantity }}<br />
                     <fieldset class="rate">
                         <input
                             type="radio"
@@ -60,7 +60,8 @@
                         /><label for="rating1" title="0점"></label>
                     </fieldset>
                 </div>
-            </section>
+                </section>
+            {% endfor %}
             <input
                 type="text"
                 class="reviewtext"

@@ -5,8 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static '/css/mypage.css' %}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
-
+<style>
+    .nav_bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    position: absolute;
+    bottom: 0px;
+    width: 390px;
+    height: 80px;
+    background: rgba(244, 244, 244, 1);
+}
+.nav_bottom > .logo {
+    display: flex;
+}
+</style>
 </head>
 <body>
     <div id="frame">
@@ -83,7 +99,7 @@
                 >
             </div>
             <div class="btn_review">
-                <a href="{% url 'index' %}"
+                <a href="{% url 'review_purchased_products' %}"
                     ><button>
                         <div class="btn_text">구매후기</div>
                     </button></a
@@ -98,7 +114,39 @@
         </div>
     </main>
 
-
+    <nav class="nav_bottom">
+        <div class="logo">
+            <a href="{% url 'recommend_promotion:rp' %}">
+                <iconify-icon
+                    icon="mdi:corn"
+                    style="color: #008d3f"
+                    width="45"
+                    height="43"
+                ></iconify-icon
+            ></a>
+        </div>
+        <!--홈 링크-->
+        <div class="home">
+            <a href="{% url 'index' %}">
+                <iconify-icon
+                    icon="octicon:home-24"
+                    style="color: #008d3f"
+                    width="38"
+                    height="38"
+                ></iconify-icon>
+            </a>
+        </div>
+        <div class="community">
+            <a href="{% url 'community:main' %}">
+                <iconify-icon
+                    icon="clarity:talk-bubbles-line"
+                    style="color: #008d3f"
+                    width="38"
+                    height="38"
+                ></iconify-icon
+            ></a>
+        </div>
+    </nav>
 
 
 

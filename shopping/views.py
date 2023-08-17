@@ -292,12 +292,16 @@ def basket_delete(request, id):
 
 # 절반만 구매했던 상품 필터링 > 구매한 후랑 연결 
 def half_purchased_products(request):
-    half_purchased_products = Storage.objects.filter(basket_product__customer=request.user)
+    orders = Order.objects.filter(customer=request.user, half_purchased=True)
     
     context = {
         'half_purchased_products': half_purchased_products,
     }
-    return render(request, 'shopping/half_purchased)products.html', context)
+    return render(request, 'shopping/half_purchased_products.html', {'orders': orders})
+
+def review_purchased_products(request):
+    orders = Order.objects.filter(customer=request.user)
+    return render(request, 'shopping/review.html', {'orders': orders})
 
 # 장바구니에서 구매 >> post 참고..
 def final(request):

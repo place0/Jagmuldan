@@ -26,11 +26,6 @@ def kakaoPayLogic(request):
             total_amount += price * quantity
         
         item_names.append(title)
-        print(request.POST.get('product_delivery'))
-
-        print(total_amount)
-        total_amount+=int(request.POST.get('product_delivery'))
-        print(total_amount)
         
         selected_products_data.append({
                 'id': product_id,
@@ -39,6 +34,15 @@ def kakaoPayLogic(request):
                 'quantity': quantity,
                 'half_purchased': half_purchased
         })
+    
+    print(request.POST.get('product_delivery'))
+    print(request.POST.get('product_coupon'))
+    
+
+    print(total_amount)
+    total_amount+=int(request.POST.get('product_delivery'))-int(request.POST.get('product_coupon'))
+    print(total_amount)
+
         
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02'
     _url = f'https://kapi.kakao.com/v1/payment/ready'
