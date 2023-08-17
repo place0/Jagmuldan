@@ -85,6 +85,10 @@ def paySuccess(request):
             time=datetime.now()
         )
     
+        # 장바구니에서 해당 항목 제거
+        basket_item = ShoppingBasket.objects.get(customer=request.user, product=product)
+        basket_item.delete()
+    
     _url = 'https://kapi.kakao.com/v1/payment/approve'
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02' # 입력필요
     _headers = {
@@ -100,9 +104,6 @@ def paySuccess(request):
     _res = requests.post(_url, data=_data, headers=_headers)
     _result = _res.json()
 
-            # 장바구니에서 해당 항목 제거
-    basket_item = ShoppingBasket.objects.get(customer=request.user, product=product)
-    basket_item.delete()
 
     return render(request, 'kakao/paySuccess.html')
 def payFail(request):
