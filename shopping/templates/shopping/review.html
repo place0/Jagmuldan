@@ -12,7 +12,7 @@
     <body>
         <div style="display: flex; justify-content: space-between">
             <span style="margin-left: 120px">구매 후기 쓰기</span>
-            <span>X</span>
+            <a href="{% url 'mypage' %}"><span>X</span></a>
         </div>
         <form>
             {% for order in orders %}
@@ -61,7 +61,7 @@
                     </fieldset>
                 </div>
             </section>
-
+            <br />
             {% endfor %}
         </form>
     </body>

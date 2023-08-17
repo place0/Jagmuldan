@@ -54,7 +54,7 @@
     <main>
         <div class="main_one">
             <div class="edit">{% if request.user.merchant %}
-    <a href="{% url 'update_user_merchant' %}">판매자 회원 정보 수정</a>
+   <div style="background-color: #008d3f; width:150px; height:30px; line-height:25px; text-align: center; border-radius:10px"> <a style="font-size: 10pt; color:white" href="{% url 'update_user_merchant' %}" >판매자 회원 정보 수정</a></div>
     {% elif request.user.restaurant %}
     <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
     {% endif %}
