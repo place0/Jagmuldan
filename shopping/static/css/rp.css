@@ -276,6 +276,16 @@ body {
   font-size: 15px;
   padding: 6px 0;
 }
+
+.content_crops_info li > .source {
+  font-size: 5px;
+  padding: 6px 0;
+}
+
+.content_store_info li > .adress {
+  font-size: 5px;
+  padding: 6px 0;
+}
 /* nav_bottom */
 .nav_bottom {
   display: flex;
