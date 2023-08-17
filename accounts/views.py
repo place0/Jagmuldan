@@ -80,3 +80,6 @@ def logout_view(request):
     if request.user.is_authenticated:
         logout(request)
     return redirect('index')
+
+def about_us(request):
+    return render(request, 'accounts/aboutus.html')

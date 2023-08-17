@@ -286,7 +286,7 @@ def basket(request):
 # 장바구니 삭제
 def basket_delete(request, id):
     product = get_object_or_404(Product, id=id)
-    order = ShoppingBasket.objects.get(product=product)
+    order = ShoppingBasket.objects.filter(product=product)
     order.delete()
     return redirect('basket')
 

@@ -12,9 +12,13 @@
             .usebox a {
                 color: white;
             }
+            ul{
+              list-style-type: none;
+            }
         </style>
     </head>
     <body>
+      <div class="good">
         <div style="display: flex; justify-content: space-between">
             <span style="margin-left: 160px">작물 꺼내기</span>
             <a href="{% url 'mypage' %}"
@@ -24,32 +28,36 @@
         </div>
 
         <!--<h1>Half Purchased Products</h1>-->
+        {% for order in orders %}
+        <ul style="list-style-type: none;">
 
-        <ul style="list-style: none">
-            <div style="margin-top: 40px">
-                <img
-                    src=""
-                    style="
-                        width: 320px;
-                        height: 250px;
-                        display: block;
-                        margin: 0 auto;
-                    "
-                />
-            </div>
-            <section
-                style="margin-left: 25px; margin-top: 20px; line-height: 30px"
-            >
-                {% for order in orders %}
+                
                 <li>
-                    <h2>상품명: {{ order.product.title }}</h2>
+                    {% for photo in order.product.product_image.all %}
+                    <img
+                        src="{{ photo.image.url }}"
+                        style="
+                            width: 320px;
+                            height: 250px;
+                            display: block;
+                            margin: 0 auto;
+                            padding:3px;
+                        "
+                    /><br />
+                    {% endfor %}
+                    <div style="margin-left:15px">
+                    <b>상품명: {{ order.product.title }}</b>
                     <p>수량: {{ order.quantity }}</p>
-                    Ordered At: {{ order.time|date:"d-m-Y H:i" }}<br />
+                    <p>구매 날짜: {{ order.time|date:"d-m-Y H:i" }}</p>
+                    <p>유효기간: D-13</p>
+                  </div>
+                    <br />
                 </li>
-                {% endfor %}
-                <p>유효기간: D-13</p>
+                
+                
                 <!--유효기간-->
             </section>
+            
             <div style="display: flex; justify-content: space-around">
                 <div class="usebox"><a href="#">바로 구매</a></div>
                 <!--구매 링크-->
@@ -57,38 +65,9 @@
                 <!--장바구니에 추가되도록/링크-->
             </div>
         </ul>
-        <nav class="nav_bottom">
-            <div class="logo">
-                <a href="{% url 'recommend_promotion:rp' %}">
-                    <iconify-icon
-                        icon="mdi:corn"
-                        style="color: #008d3f"
-                        width="45"
-                        height="43"
-                    ></iconify-icon
-                ></a>
-            </div>
-            <!--홈 링크-->
-            <div class="home">
-                <a href="{% url 'index' %}">
-                    <iconify-icon
-                        icon="octicon:home-24"
-                        style="color: #008d3f"
-                        width="38"
-                        height="38"
-                    ></iconify-icon>
-                </a>
-            </div>
-            <div class="community">
-                <a href="{% url 'community:main' %}">
-                    <iconify-icon
-                        icon="clarity:talk-bubbles-line"
-                        style="color: #008d3f"
-                        width="38"
-                        height="38"
-                    ></iconify-icon
-                ></a>
-            </div>
-        </nav>
+        <br><br>
+        {% endfor %}
+
+        </div>
     </body>
 </html>

@@ -71,19 +71,6 @@ def kakaoPayLogic(request):
     return redirect(_result['next_redirect_pc_url'])
 
 def paySuccess(request):
-    selected_products_data = request.session.get('selected_products_data', [])
-    for product_data in selected_products_data:
-        product = Product.objects.get(pk=product_data['id'])
-        quantity = product_data['quantity']
-        half_purchased = product_data['half_purchased']
-
-        Order.objects.create(
-            customer=request.user,
-            product=product,
-            quantity=quantity,
-            half_purchased=half_purchased,
-            time=datetime.now()
-        )
     
     _url = 'https://kapi.kakao.com/v1/payment/approve'
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02' # 입력필요
@@ -99,10 +86,25 @@ def paySuccess(request):
     }
     _res = requests.post(_url, data=_data, headers=_headers)
     _result = _res.json()
+    selected_products_data = request.session.get('selected_products_data', [])
+    for product_data in selected_products_data:
+        product = Product.objects.get(pk=product_data['id'])
+        quantity = product_data['quantity']
+        half_purchased = product_data['half_purchased']
 
-            # 장바구니에서 해당 항목 제거
-    basket_item = ShoppingBasket.objects.get(customer=request.user, product=product)
-    basket_item.delete()
+        Order.objects.create(
+            customer=request.user,
+            product=product,
+            quantity=quantity,
+            half_purchased=half_purchased,
+            time=datetime.now()
+        )
+    
+        # 장바구니에서 해당 항목 제거
+        basket_item = ShoppingBasket.objects.filter(customer=request.user, product=product).first()
+        if basket_item:  # 조건 확인
+            basket_item.delete()
+
 
     return render(request, 'kakao/paySuccess.html')
 def payFail(request):

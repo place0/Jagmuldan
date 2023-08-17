@@ -47,11 +47,13 @@
                         <div class="main_pic">
                             <picture
                                 ><p>
+                                    {% if request.user.restaurant.image %}
                                     현재:
                                     <img
                                         src="{{request.user.restaurant.image.url }}"
                                         width="50"
                                     />
+                                    {% endif %}
                                 </p>
                                 <p>변경 : <input type="file" name="image" /></p>
                                 <br
@@ -60,7 +62,7 @@
                             <div class="id">
                                 <div class="id_change">
                                     <div class="id_box">
-                                        <div class="text_id">사장님</div>
+                                        <div class="text_id"><input type="text" name="username" value="{{request.user.username}}">사장님</div>
                                         <div class="pencil_pic">
                                             <img
                                                 src="{% static '/img/마이페이지/해커톤_연필.png' %}"
@@ -102,9 +104,7 @@
                                 />
                             </div>
                         </div>
-                        <div class="move_to_edit_restaurant">
-                            <a href="">식당 홍보물 내용 수정</a>
-                        </div>
+
                         <div class="input_submit">
                             <input
                                 type="submit"

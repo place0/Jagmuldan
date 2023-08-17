@@ -207,7 +207,11 @@
 
         <div class="person">
           <div class="profile">
+            {% if not product.seller.image %}
             <img src="{% static '/img/Component 1.png' %}" width="50" />
+            {% else %}
+            <img src="{{product.seller.image.url}}">
+            {% endif %}
             <div class="name">
               <span>생산자 :</span>{{ product.seller.user.username }}
               <span><br />농장 이름 :</span> {{product.seller.farm_name}}
