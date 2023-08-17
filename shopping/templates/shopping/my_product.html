@@ -45,8 +45,8 @@
                     <a href="{% url 'update_upload' p.id %}">{{p.title}}</a><br>
                 </div>
                 <div class="thing_cost">
-                    <div class="discount">32%</div>
-                    <div class="cost">{{p.product.discounted_price}}</div>
+                    <div class="discount">{{p.discount_rate}}%</div>
+                    <div class="cost">{{p.product.discounted_price}}원</div>
                 </div>
                 <div class="buttons">
                     <div class="edit_btn">
