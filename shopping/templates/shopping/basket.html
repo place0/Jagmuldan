@@ -224,13 +224,13 @@
                         total -= couponDiscount;
 
                         $("#order-button").text(total + "원 주문하기");
-                        $("#delivery").text(only_delivery_price);
+                        $("#delivery").text(only_delivery_price+"원");
                         $("#product_delivery").val(only_delivery_price);
 
 
                         
                         console.log(only_delivery_price);
-                        $("#saved_price").text(saved_price);
+                        $("#saved_price").text(saved_price+'원');
 
                         // 쿠폰 할인 금액을 다시 계산
                         var selectedCouponValue = parseInt(
