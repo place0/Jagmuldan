@@ -42,9 +42,12 @@
             >
                 {% for order in orders %}
                 <li>
+                    {% for photo in order.product.product_image.all %}
+                        <img src="{{ photo.image.url }}" width="50"><br>
+                    {% endfor %}
                     <h2>상품명: {{ order.product.title }}</h2>
                     <p>수량: {{ order.quantity }}</p>
-                    Ordered At: {{ order.time|date:"d-m-Y H:i" }}<br />
+                    <p>구매 날짜: {{ order.time|date:"d-m-Y H:i" }}</p><br />
                 </li>
                 {% endfor %}
                 <p>유효기간: D-13</p>
