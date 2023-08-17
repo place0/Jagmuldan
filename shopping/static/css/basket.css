@@ -244,8 +244,11 @@ input[type="checkbox"]:checked::before {
     margin-right: 2%;
 }
 img {
-    width: 100%;
+    width: 150px;
     height: 150px;
+}
+.product_pic {
+    margin-right: 5%;
 }
 .title_info {
     display: flex;

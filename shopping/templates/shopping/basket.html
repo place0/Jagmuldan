@@ -27,7 +27,7 @@
                     
                     {{ p.product.title }}<br></div>
 <div class="product_detail">
-                    <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a></div></div>
+                    <a href="{% url 'basket-delete' p.product.id %}">삭제</a></div></div>
                     <div class="product_detail">
                     가격 - {{ p.product.discounted_price|floatformat:"0" }}원
                     <br>
@@ -44,7 +44,7 @@
                     {% else %}
                     0원 - 저소득층 지원
                     {%endif%}<br>
-                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
                 <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
