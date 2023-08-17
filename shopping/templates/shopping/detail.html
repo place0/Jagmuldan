@@ -452,7 +452,22 @@
         modal.addEventListener("animationend", modalCloseAnimationEnd);
       });
     </script>
-    <script></script>
+
+    <script>
+      //버튼 컬러 변경
+      const halfButton = document.getElementById("half-buy-button");
+      const fullButton = document.getElementById("full-buy-button");
+
+      halfButton.addEventListener("click", () => {
+        halfButton.style.backgroundColor = "rgba(255, 202, 13, 1)"; // 변경할 배경색
+        fullButton.style.backgroundColor = ""; // 다른 버튼의 배경색 초기화
+      });
+
+      fullButton.addEventListener("click", () => {
+        fullButton.style.backgroundColor = "rgba(255, 202, 13, 1)"; // 변경할 배경색
+        halfButton.style.backgroundColor = ""; // 다른 버튼의 배경색 초기화
+      });
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {

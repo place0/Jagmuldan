@@ -8,6 +8,7 @@
         <title>Document</title>
     </head>
     <body>
+        <div id="frame">
         <div id="cart-container">
             <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
             <form id="cart-form" action="/kakaoPayLogic/" method="post">
@@ -67,6 +68,7 @@
                         <button type="button" id="apply-coupon-button">
                             쿠폰 적용
                         </button>
+
                     </div>
                     <div class="address">
                         <div class="edit" id="edit_link">수정하기</div>
@@ -106,7 +108,7 @@
                     </div>
                 </form>
             </div>
-        </div>
+        </div></div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
@@ -257,6 +259,9 @@
             });
 
         </script>
+
+
+
 
         <script>
             function deletediv() {

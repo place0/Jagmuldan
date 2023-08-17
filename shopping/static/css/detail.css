@@ -335,7 +335,9 @@ label.yellow {
 
 #half-purchase-form {
 }
-
+.selected {
+  background-color: rgba(255, 202, 13, 1);
+}
 /* nav_bottom */
 .nav_bottom {
   display: flex;
