@@ -70,37 +70,63 @@
               <img src="{% static '/img/농작물/딸기2.jpg' %}" />
             </div>
           </li>
-          <li id="month_13">
+          <li
+            id="month_13"
+            onclick="toggleContent('month_3')"
+            data-target-month="month_3"
+          >
             <div class="month">3月</div>
             <div class="img">
               <img src="{% static '/img/농작물/미나리.jpg' %}" />
             </div>
           </li>
-          <li id="month_14">
+          <li
+            id="month_14"
+            onclick="toggleContent('month_4')"
+            data-target-month="month_4"
+          >
             <div class="month">4月</div>
             <div class="img">
               <img src="{% static '/img/농작물/개.jpg' %}" />
             </div>
           </li>
-          <li id="month_15">
+          <li
+            id="month_15"
+            onclick="toggleContent('month_5')"
+            data-target-month="month_5"
+          >
             <div class="month">5月</div>
             <div class="img">
               <img src="{% static '/img/농작물/양배추.jpg' %}" />
             </div>
           </li>
-          <li id="month_16">
+          <li
+            id="month_16"
+            onclick="toggleContent('month_6')"
+            data-target-month="month_6"
+          >
             <div class="month">6月</div>
             <div class="img">
               <img src="{% static '/img/농작물/복숭아.jpg' %}" />
             </div>
           </li>
           <li id="month_17">
-            <div class="month">7月</div>
+            <div
+              class="month"
+              onclick="toggleContent('month_7')"
+              data-target-month="month_7"
+            >
+              7月
+            </div>
             <div class="img">
               <img src="{% static '/img/농작물/토마토2.jpg' %}" />
             </div>
           </li>
-          <li id="month_18">
+          <li
+            id="month_18"
+            onclick="toggleContent('month_8')"
+            data-target-month="month_8"
+          >
             <div class="month">8月</div>
             <div class="img">
               <img src="{% static '/img/농작물/무화과.jpg' %}" />
@@ -114,15 +140,6 @@
         <ul>
           <li id="month_1" class="crop_info">
             <div class="month">1月</div>
-            <div class="month_img">
-              <img src="{% static '/img/농작물/팥.jpg' %}" />
-            </div>
-            <div class="title">팥</div>
-            <div class="text">
-              나트륨을 배출시키는데 도움을 주는 칼륨을 쌀의 10배, 바나나의 4배
-              이상 함유하고 있다. 부기 제거 및 혈압 상승 억제에 효과적으로
-              알려있다.
-            </div>
             <div class="month_img">
               <img src="{% static '/img/농작물/팥.jpg' %}" />
             </div>
@@ -147,9 +164,31 @@
               가장 많이 들어있는 비타민C는 암세포를 박멸시키는 세포의 능력을
               강화시켜 항암작용을 하고 바이러스를 죽이는 힘도 가지고 있다.
             </div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/레드향.jpg' %}" />
+            </div>
+            <div class="title">레드향</div>
+            <div class="source">작가 azerbaijan_stockers출처 Freepik</div>
+
+            <div class="text"></div>
           </li>
-          <li id="month_3" class="crop_info"></li>
-          <li id="month_4" class="crop_info"></li>
+
+          <li id="month_3" class="crop_info">
+            <div class="month">3月</div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/미나리.jpg' %}" />
+            </div>
+            <div class="title">미나리</div>
+            <div class="text"></div>
+          </li>
+          <li id="month_4" class="crop_info">
+            <div class="month">4月</div>
+            <div class="month_img">
+              <img src="{% static '/img/농작물/개.jpg' %}" />
+            </div>
+            <div class="title">개</div>
+            <div class="text"></div>
+          </li>
         </ul>
       </article>
 
@@ -158,8 +197,8 @@
         <ul>
           <li
             id="month_11"
-            onclick="toggleContent('month_1')"
-            data-target-month="month_1"
+            onclick="toggleContent('store1')"
+            data-target-store="store1"
           >
             <div class="month">아리랑 한식집</div>
             <div class="month_place">서울 양정구 가가동</div>
@@ -169,8 +208,8 @@
           </li>
           <li
             id="month_12"
-            onclick="toggleContent('month_2')"
-            data-target-month="month_2"
+            onclick="toggleContent('store_2')"
+            data-target-store="store_2"
           >
             <div class="month">울지밀면</div>
             <div class="month_place">서울 야야구 가나동</div>
@@ -178,42 +217,66 @@
               <img src="{% static '/img/음식점/울지밀면.jpg' %}" />
             </div>
           </li>
-          <li id="month_13">
+          <li
+            id="month_13"
+            onclick="toggleContent('store_3')"
+            data-target-store="store_3"
+          >
             <div class="month">농작동 닭갈비</div>
             <div class="month_place">서울 바송구 바바동</div>
             <div class="img">
               <img src="{% static '/img/음식점/닭갈비.jpg' %}" />
             </div>
           </li>
-          <li id="month_14">
+          <li
+            id="month_14"
+            onclick="toggleContent('month_4')"
+            data-target-month="month_4"
+          >
             <div class="month">샐러듀이</div>
             <div class="month_place">서울 양정구 라라동</div>
             <div class="img">
               <img src="{% static '/img/음식점/샐러드.jpg' %}" />
             </div>
           </li>
-          <li id="month_15">
+          <li
+            id="month_15"
+            onclick="toggleContent('month_5')"
+            data-target-month="month_5"
+          >
             <div class="month">김밥집</div>
             <div class="month_place">서울 양정구 나가동</div>
             <div class="img">
               <img src="{% static '/img/음식점/김밥.jpg' %}" />
             </div>
           </li>
-          <li id="month_16">
+          <li
+            id="month_16"
+            onclick="toggleContent('month_6')"
+            data-target-month="month_6"
+          >
             <div class="month">신선도</div>
             <div class="month_place">서울 날라구 가돠동</div>
             <div class="img">
               <img src="{% static '/img/음식점/고기.jpg' %}" />
             </div>
           </li>
-          <li id="month_17">
+          <li
+            id="month_17"
+            onclick="toggleContent('month_7')"
+            data-target-month="month_7"
+          >
             <div class="month">이탈리안</div>
             <div class="month_place">서울 나진구 고닥동</div>
             <div class="img">
               <img src="{% static '/img/음식점/피자.jpg' %}" />
             </div>
           </li>
-          <li id="month_18">
+          <li
+            id="month_18"
+            onclick="toggleContent('month_8')"
+            data-target-month="month_8"
+          >
             <div class="month">써니싸이드업</div>
             <div class="month_place">서울 양정구 가가동</div>
             <div class="img">
@@ -230,25 +293,19 @@
             <div class="store_img">
               <img src="{% static '/img/음식점/비빔밥.jpg' %}" />
             </div>
+            <div class="adress">서울 양정구 가가동</div>
             <div class="text">
-              나트륨을 배출시키는데 도움을 주는 칼륨을 쌀의 10배, 바나나의 4배
-              이상 함유하고 있다. 부기 제거 및 혈압 상승 억제에 효과적으로
-              알려있다.
+              신선한 유기농 재료만을 고집하는 "아리랑 한식집" <br />항상
+              신선함을 유지합니다.
             </div>
           </li>
           <li id="store2" class="store_info">
-            <div class="store">2月</div>
+            <div class="store">울지밀면</div>
             <div class="store_img">
-              <img src="{% static '/img/음식점/비빔밥.jpg' %}" />
+              <img src="{% static '/img/음식점/울지밀면.jpg' %}" />
             </div>
-            <div class="text">
-              딸기에는 수분이 89%, 탄수화물 7.1%, 이느카로틴 등이 들어있고
-              100g중에는 비타민C가 80~90mg로 귤의35mg보다 3배 가량 많아
-              천연비타민C의 보고로 손꼽히는 식품이다. 때문에 딸기 6, 7개를
-              먹으면 하루에 필요한 비타민 C의 양을 모두 섭취할 수 있다. 딸기에
-              가장 많이 들어있는 비타민C는 암세포를 박멸시키는 세포의 능력을
-              강화시켜 항암작용을 하고 바이러스를 죽이는 힘도 가지고 있다.
-            </div>
+            <div class="adress">서울 양정구 가가동</div>
+            <div class="text"></div>
           </li>
           <li id="store3" class="store_info"></li>
           <li id="store4" class="store_info"></li>
@@ -288,13 +345,13 @@
         </div>
       </nav>
     </div>
-    {% for c in crops %} {{c.month}}<br />
+    {% comment %} {% for c in crops %} {{c.month}}<br />
     {{c.crop}}<br />
     <hr />
     {% endfor %} {% for r in restaurants %} {{ r.restaurant.name }}<br />
     {{ r.restaurant.address }}<br />
     <hr />
-    {% endfor %}
+    {% endfor %} {% endcomment %}
 
     <script>
       //월작물, 음식점 홍보내용 이동하는 코드
@@ -308,6 +365,7 @@
 
         // 처음 로드 시 'crops_btn' 내용만 보이게 설정
         contentCrops.style.display = "block";
+        contentStore.style.display = "none";
 
         cropsBtnText.forEach(function (text) {
           text.style.display = "block";
@@ -354,7 +412,7 @@
       document.addEventListener("DOMContentLoaded", function () {
         var contentCropsInfo = document.getElementById("content_crops_info");
         var monthLinks = document.querySelectorAll(".content_crops li");
-        var contentStoreInfo = document.getElementById("content_crops_info");
+        var contentStoreInfo = document.getElementById("content_store_info");
         var storeLinks = document.querySelectorAll(".content_store li");
 
         // content_crops_info 숨기기
@@ -378,7 +436,7 @@
           link.addEventListener("click", function (event) {
             event.stopPropagation(); // Prevent the click event from propagating
 
-            var targetMonth = link.getAttribute("data-target-month");
+            var targetMonth = link.getAttribute("data-target-store");
             if (targetMonth) {
               toggleContent(targetMonth);
               contentStoreInfo.style.display = "block";
