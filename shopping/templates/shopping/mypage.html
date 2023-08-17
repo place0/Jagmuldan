@@ -46,7 +46,8 @@
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
         <div class="mypage">
-          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+          <div class="logout_btn">
+                <a href="{% url 'accounts:logout' %}">로그아웃</a></div>
         </div>
         {% endif %}
       </nav>
@@ -69,10 +70,9 @@
                 <picture
                     ><img id="mypage_img " src="{% static '/img/마이페이지/해커톤_마이페이지.png' %}" /></picture>
                 <div class="id_font">{{request.user.username}}</div> 
-                <div class="logout_btn">
-                <a href="{% url 'accounts:logout' %}">로그아웃</a></div>
+                
             </div>
-        
+        <br>
         <div class="main_intro">
             
         </div>
