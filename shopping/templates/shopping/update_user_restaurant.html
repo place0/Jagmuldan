@@ -8,6 +8,9 @@
             rel="stylesheet"
             href="{% static '/css/update_user_merchant.css' %}"
         />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
         <title>Document</title>
     </head>
     <body>
@@ -29,6 +32,18 @@
                         ></iconify-icon
                     ></a>
                 </div>
+                <br /><br /><br /><br />
+                <!-- 뒤로가기 -->
+                <div class="back">
+                    <a href="{% url 'mypage' %}">
+                        <iconify-icon
+                            icon="ion:caret-back-outline"
+                            style="color: #646464"
+                            width="30"
+                            height="30"
+                        ></iconify-icon
+                    ></a>
+                </div>
 
                 {% if not request.user.is_authenticated %}
                 <div class="login">
@@ -47,26 +62,29 @@
                         <div class="main_pic">
                             <picture
                                 ><p>
-                                    {% if request.user.restaurant.image %}
-                                    현재:
+                                    {% if request.user.restaurant.image %} 현재:
                                     <img
                                         src="{{request.user.restaurant.image.url }}"
                                         width="50"
                                     />
                                     {% endif %}
                                 </p>
-                                <p>변경 : <input type="file" name="image" /></p>
+                                <p>
+                                    프로필 변경 :
+                                    <input type="file" name="image" />
+                                </p>
                                 <br
                             /></picture>
 
                             <div class="id">
                                 <div class="id_change">
                                     <div class="id_box">
-                                        <div class="text_id"><input type="text" name="username" value="{{request.user.username}}">사장님</div>
-                                        <div class="pencil_pic">
-                                            <img
-                                                src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                            />
+                                        <div class="text_id">
+                                            <input
+                                                type="text"
+                                                name="username"
+                                                value="{{request.user.username}}"
+                                            />사장님
                                         </div>
                                     </div>
                                 </div>
@@ -82,11 +100,6 @@
                                     value="{{request.user.restaurant.address}}"
                                 />
                             </div>
-                            <div class="pencil_pic">
-                                <img
-                                    src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                />
-                            </div>
                         </div>
 
                         <div class="name_change">
@@ -98,18 +111,17 @@
                                     value="{{request.user.restaurant.name}}"
                                 />
                             </div>
-                            <div class="pencil_pic">
-                                <img
-                                    src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                />
-                            </div>
                         </div>
 
-                        <div class="input_submit">
+                        <div
+                            class="input_submit"
+                            style="width: 250px; height: 20px"
+                        >
                             <input
                                 type="submit"
                                 id="input_btn"
                                 value="수정하기"
+                                style="height: 40px"
                             />
                         </div>
                     </div>
