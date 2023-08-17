@@ -6,6 +6,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Document</title>
         <link rel="stylesheet" href="{% static 'css/review.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     </head>
     <body>
         <div style="display: flex; justify-content: space-between">
@@ -16,7 +18,8 @@
             <section class="review">
                 <div class="photo"><img src="#" /></div>
                 <div class="content">
-                    상품명: {{ product.title }}<br />주문수량:1<br />
+                    상품명: {{ product.title }}<br />
+                    수량: {{ product.total_quantity }}<br />
 
                     <fieldset class="rate">
                         <input
