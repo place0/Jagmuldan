@@ -29,7 +29,9 @@
         {% if not request.user.is_authenticated %}
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
-        <div class="mypage"><a href="{% url 'mypage' %}">{{request.user.username}}</a></div>
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
         {% endif %}
       </nav>
 
@@ -150,12 +152,14 @@
         </div>
 
         <div class="home">
-          <iconify-icon
-            icon="octicon:home-24"
-            style="color: #008d3f"
-            width="38"
-            height="38"
-          ></iconify-icon>
+          <a href="{% url 'index' %}">
+            <iconify-icon
+              icon="octicon:home-24"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
         </div>
         <div class="community">
           <a href="{% url 'community:main' %}">

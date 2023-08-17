@@ -15,8 +15,7 @@
                     {% for photo in p.product.product_image.all %}
                         <img src="{{ photo.image.url }}" width="50"><br>
                     {% endfor %}
-                    <input type="checkbox" class="product-checkbox" data-real-price="{{p.product.price}}" name="selected_products" data-seller="{{p.product.seller}}"
-                     value="{{ p.product.id }}" checked
+                    <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
                     data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
                     
                     {{ p.product.title }}<br>
@@ -37,10 +36,9 @@
                     {%endif%}<br>
                 도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
-                <input type="hidden" id="send_total_price" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
+                <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
-                
         
                 {% endfor %}    
                     <hr />
@@ -105,10 +103,8 @@
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
             $(document).ready(function () {
-                var finalPrice=0
                 var total = 0;
                 var couponDiscount = 0; // 쿠폰 할인 가격을 초기화
-                var send_total_price = document.getElementById('send_total_price');
 
                 $(document).ready(function () {
                     // 체크박스 선택 여부에 따라 총 주문 가격을 업데이트하는 함수
@@ -130,11 +126,9 @@
                             var real_price = parseInt(
                                 $(this).data("real-price")
                             );
-                            
-                            //상품 할인 가격 더함 ( 원래 금액 - 할인받은 금액)*수량 
+
                             saved_price += (real_price - price) * quantity;
 
-                            //판매자가 같은 경우 배송비 0원 추가 / 판매자가 다르면 배송비 2500원 추가 
                             var flag = true;
                             for (let i = 0; i < seller_list.length; i++) {
                                 console.log(seller_list[i], seller, i);
@@ -150,37 +144,29 @@
                                 seller_list.push(seller); // 판매자 정보를 배열에 추가
                             }
 
-                            //반만 구매를 했을 경우 총 금액에 더해지는 상품 값은 수량 x 2
                             if (half_purchased === "True") {
                                 total += price * quantity * 2;
-                            } else { // 반만 구매 상품이 아닌 경우 원래의 가격 x 수량 
+                            } else {
                                 total += price * quantity;
                             }
-                            //총 가격에 배송비 더함 
                             total += add;
-                            //총 배송 금액을 구하기 위해 배송비 더함 
                             only_delivery_price += add;
-                        
-                            //만약 총 구매 가격이 20000원이 넘을 경우 배송비는 0원이어야 함 
+
                             if (total - only_delivery_price >= 20000) {
-                                //이미 배송비를 더한 총 금액에서 배송비를 뺌 -> 배송비를 뺀 총 가격
                                 total -= only_delivery_price;
-                                //총 배송 가격은 0원으로 설정 
                                 only_delivery_price = 0;
                             }
-                            
                         });
 
-                     
+                        // 이미 적용된 쿠폰 할인 금액을 제외
                         var originalTotal = total;
-                        //만약 쿠폰을 선택했다면, 쿠폰으로 할인받은 가격을 뺌 
                         total -= couponDiscount;
 
                         $("#order-button").text(total + "원 주문하기");
                         $("#delivery").text(only_delivery_price);
                         $("#saved_price").text(saved_price);
 
-                        // 쿠폰 할인 금액을 다시 계산
+                        // 쿠폰 할인 금액을 다시 계산하여 출력
                         var selectedCouponValue = parseInt(
                             $("#coupon-select").val()
                         );
@@ -188,51 +174,34 @@
                             (originalTotal * selectedCouponValue) / 100;
                         couponDiscount = couponPrice;
 
-                        //만약 쿠폰을 선택했다면, 쿠폰으로 할인받은 가격을 뺌 
-                        finalPrice = originalTotal - couponDiscount;
+                        var finalPrice = originalTotal - couponDiscount;
 
-                        //총 가격 출력
                         $("#total").text(finalPrice + "원");
-                        //쿠폰으로 할인받은 금액 출력
                         $("#coupon-discount").text(couponDiscount + "원");
-                        send_total_price.value=finalPrice
-                        console.log(send_total_price.value)
-                        
                     }
 
-                    //쿠폰 적용 버튼을 선택했을 경우 
                     $("#apply-coupon-button").on("click", function () {
                         var selectedCouponValue = parseInt(
                             $("#coupon-select").val()
                         );
-                        //배송비를 불러옴 
                         var delivery = parseInt($("#delivery").text());
 
-                        //총 금액에서 배송비를 뺀 금액 저장 -> 오로지 상품 값만 가져옴  
                         var originalPrice = total - delivery; // 여기서 total 값을 사용
 
                         if (selectedCouponValue === 0) {
                             // 선택안함을 눌렀을 때 쿠폰 값을 초기화
                             couponDiscount = 0;
                         } else {
-                            // 상품 값에서 쿠폰 값만큼 할인 
                             var couponPrice =
                                 (originalPrice * selectedCouponValue) / 100;
                             couponDiscount = couponPrice; // 쿠폰 할인 가격을 저장
                         }
 
-                        //출력
-                        finalPrice = total - couponDiscount;
+                        var finalPrice = total - couponDiscount;
 
-                        //전체 가격
                         $("#total").text(finalPrice + "원");
-                        $("total_price").val(finalPrice)
                         $("#order-button").text(finalPrice + "원 주문하기");
-                        send_total_price.value=finalPrice
-
-                        //쿠폰 할인 가격 출력 
-                        $("#coupon-discount").text(couponDiscount + "원"); 
-                        
+                        $("#coupon-discount").text(couponDiscount + "원"); // 쿠폰 할인 가격을 출력
                     });
 
                     // 체크박스 변경 이벤트를 처리
@@ -244,9 +213,7 @@
                     updateTotalPrice();
                 });
             });
-
         </script>
-
         <script>
             function deletediv() {
                 const div = document.getElementById("number1");
