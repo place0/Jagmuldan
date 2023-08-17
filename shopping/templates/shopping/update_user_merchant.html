@@ -12,35 +12,30 @@
     </head>
     <body>
         <div id="frame">
-        <nav class="nav_header">
-            <div class="logo">
-              <img src="{% static '/img/logo/4989_logo_L.png' %}" />
-            </div>
-            <div class="cart">
-              <a href="{% url 'basket' %}">
-                <iconify-icon
-                  icon="mingcute:basket-line"
-                  style="color: #008d3f"
-                  width="35"
-                  height="35"
-                ></iconify-icon
-              ></a>
-            </div>
-            <div class="login">{{request.user.username}}</div>
-            <div class="signup">
-              <a href="{% url 'accounts:signup' %}">회원가입</a>
-            </div>
-    
-            {% if not request.user.is_authenticated %}
-            <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
-            {% else %}
-            <div class="logout">
-              <a href="{% url 'accounts:logout' %}">로그아웃</a>
-            </div>
-            {% endif %}
-            <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
-          </div>
-    </nav>    
+        <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <a href=""><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        {% if not request.user.is_authenticated %}
+        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        {% else %}
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
+        {% endif %}
+      </nav>
 
         <main>
             <form method="POST" action="" enctype="multipart/form-data">
@@ -60,9 +55,7 @@
         판매자님
                                     </div>
                                     <div class="pencil_pic">
-                                        <img
-                                            src="{% static 'image/해커톤_연필.png' %}"
-                                        />
+                                        <img src="{% static '/img/마이페이지/해커톤_연필.png' %}" />
                                     </div>
                                 </div></div
                         >
@@ -74,25 +67,25 @@
             <div class="main_intro_change">
                 <div class="text">한줄소개</div>
                 <div class="pencil_pic">
-                    <img src="{% static 'image/해커톤_연필.png' %}" />
+                    <img src="{% static '/img/마이페이지/해커톤_연필.png' %}" />
                 </div></div
         >
        <div class="name_change">
                 <div class="text">농장 이름 변경 <input type="text" name="farm_name" value="{{request.user.merchant.farm_name}}"></div>
                 <div class="pencil_pic">
-                    <img src="{% static 'image/해커톤_연필.png' %}" />
+                    <img src="{% static '/img/마이페이지/해커톤_연필.png' %}" />
                 </div></div
         >
         
             <div class="name_change">
                 <div class="text">농장 주소 변경 <input type="text" name="farm_adress" value="{{request.user.merchant.farm_adress}}"></div>
                 <div class="pencil_pic">
-                    <img src="{% static 'image/해커톤_연필.png' %}" />
+                    <img src="{% static '/img/마이페이지/해커톤_연필.png' %}" />
                 </div></div
         >
         <div class="input_submit">
         <input type="submit"  id="input_btn"
         value="수정하기"></div>
     </form>
-    </div></main></body>
+    </main></div></body>
 </html>
