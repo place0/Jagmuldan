@@ -7,31 +7,35 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>로그인</title>
         <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
     </head>
     <body>
         <div style="display: flex; justify-content: space-between">
-            <span style="margin-left: 150px">로그인</span>
-            <span>X</span>
+            <span style="margin-left: 160px">로그인</span>
+            <span>X</span
+            ><!--뒤로가기-->
         </div>
 
         <div
             style="
-                margin-top: 30px;
+                margin-top: 40px;
                 display: flex;
                 flex-direction: column;
                 justify-items: center;
                 align-items: center;
             "
         >
-            <img style="width: 100px; height: 150px" src="#" />
-            <b style="font-size: 15pt">서비스명</b>
+            <img
+                src="{% static '/img/logo/4989_logo_L.png' %}"
+                style="width: 180px; height: 182px"
+            />
         </div>
 
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <section class="customer_list">
                 <div>
-                    <label for="{{ form.username.id_for_label }}">이름:</label
+                    <label for="{{ form.username.id_for_label }}">이름 :</label
                     ><br />
                     <div class="graybox">{{ form.username }}</div>
                     {% if form.username.errors %}
@@ -43,7 +47,7 @@
 
                 <div>
                     <label for="{{ form.password1.id_for_label }}"
-                        >비밀번호:</label
+                        >비밀번호 :</label
                     >
                     <div class="graybox">{{ form.password }}</div>
                     {% if form.password1.errors %}
@@ -52,7 +56,9 @@
                 <p class="error">{{ form.password1.errors.as_text }}</p>
                 {% endif %}<br />
             </section>
-            <button type="submit" class="button">로그인</button>
+            <button type="submit" class="button" style="line-height: 30px">
+                로그인
+            </button>
 
             <div style="text-align: center; margin-top: 30px">
                 <a href="#"> 아직 회원이 아니신가요? > <b>회원가입</b></a>

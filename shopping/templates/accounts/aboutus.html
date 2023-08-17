@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <style>
+            * {
+                padding: 3px;
+                font-family: "Pretendard", sans-serif;
+            }
+            body {
+                width: 390px;
+                height: 844px;
+                background-color: white;
+                margin: 50px auto;
+                position: relative;
+                justify-content: center;
+                align-items: center;
+            }
+            .ment b {
+                font-size: 13pt;
+            }
+            .talk {
+                width: 200px;
+                height: 40px;
+                background-color: rgba(0, 141, 63, 1);
+                margin: 10px;
+                border-radius: 10px;
+                color: white;
+                text-align: center;
+                line-height: 40px;
+                font-weight: bold;
+                padding: 0;
+                margin-left: 0;
+            }
+            .nav_bottom {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+                position: absolute;
+                bottom: 0px;
+                width: 390px;
+                height: 80px;
+                background: rgba(244, 244, 244, 1);
+            }
+            .nav_bottom > .logo {
+                display: flex;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="display: flex; flex-direction: column; margin-left: 10px">
+            <img
+                src="{% static '/img/logo/4989_logo_L.png' %}"
+                style="width: 40px; height: 42px"
+            />
+            <!--로고 크기 확인-->
+        </div>
+        <br />
+
+        <div
+            style="
+                display: block;
+                text-align: center;
+                width: 100px;
+                height: 40px;
+                background-color: rgba(0, 141, 63, 1);
+                border-radius: 20px;
+                color: white;
+                font-size: 13pt;
+                line-height: 40px;
+                margin: 0 auto;
+            "
+        >
+            About Us
+        </div>
+        <div style="display: flex; justify-content: center">
+            <img
+                src="{% static '/img/image 12.png' %}"
+                style="width: 230px; height: 300px"
+            />
+        </div>
+
+        <div class="ment">
+            <b>단 한 명의 사람도 배고픈 밤이 없도록</b><br />
+            <b style="margin-left: 15px"
+                >단 하나의 작물도 허투루 버려지지 않도록</b
+            ><br />
+            <img
+                src="{% static '/img/image 13.png' %}"
+                style="width: 330px; height: 250px; margin: 10px auto"
+            />
+            <b>정성을 보냅니다.</b><br />
+            <b>모두를 위해, 모두와 함께합니다.</b>
+        </div>
+        <br />
+        <div class="talk" style="width: 140px">작물단은 오늘도</div>
+        <div class="talk" style="width: 120px; margin-left: 50px">
+            48개의 농가
+        </div>
+        <div class="talk" style="width: 150px; margin-left: 100px">
+            1234명의 이용자
+        </div>
+        <div class="talk" style="width: 190px; margin-left: 150px">
+            234개의 점포와 성장 중
+        </div>
+        <img
+            src="{% static '/img/image 16.png' %}"
+            style="width: 330px; height: 250px"
+        />
+        <div style="display: flex; font-size: 13pt; font-weight: bold">
+            <span
+                >지금까지 저소득층에 도움된 금액<br />
+                21,214,867원</span
+            >
+        </div>
+        <br />
+        <div class="talk" style="margin-left: 70px">구매하러 가기</div>
+        <div style="height: 150px"></div>
+        <nav class="nav_bottom">
+            <div class="logo">
+                <a href="{% url 'recommend_promotion:rp' %}">
+                    <iconify-icon
+                        icon="mdi:corn"
+                        style="color: #008d3f"
+                        width="45"
+                        height="43"
+                    ></iconify-icon
+                ></a>
+            </div>
+            <!--홈 링크 추가-->
+            <div class="home">
+                <iconify-icon
+                    icon="octicon:home-24"
+                    style="color: #008d3f"
+                    width="38"
+                    height="38"
+                ></iconify-icon>
+            </div>
+            <div class="community">
+                <a href="{% url 'community:main' %}">
+                    <iconify-icon
+                        icon="clarity:talk-bubbles-line"
+                        style="color: #008d3f"
+                        width="38"
+                        height="38"
+                    ></iconify-icon
+                ></a>
+            </div>
+        </nav>
+    </body>
+</html>

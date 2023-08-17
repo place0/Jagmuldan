@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    
+    <div id="frame">
     <nav class="nav_header">
         <div class="logo">
           <img src="{% static '/img/logo/4989_logo_L.png' %}" />
@@ -50,6 +50,7 @@
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     <br>
     <br>
+
     <a href="{% url 'accounts:logout' %}">로그아웃</a>
     {% if request.user.merchant %}
     <a href="{% url 'my_product' %}">등록 상품 관리</a><br>
@@ -111,5 +112,5 @@
     
     
     
-</body>
+</body></div>
 </html>

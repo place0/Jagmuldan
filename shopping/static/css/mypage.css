@@ -1,269 +1,151 @@
-/*반응형*/
-@media (max-width: 590px) {
-    /*나브바*/
-    /* nav_heaer */
-    .nav_header > .logo {
-        left: 7.44%;
-        right: 81.79%;
-        top: 1.3%;
-        bottom: 93.13%;
-        position: absolute;
-    }
-    .nav_header > .logo img {
-        width: 73px;
-        height: 68px;
-        object-fit: contain;
-    }
-    .nav_header > .cart {
-        position: absolute;
-        left: 71.54%;
-        right: 19.49%;
-        top: 2.49%;
-        bottom: 93.36%;
-    }
-    /* 로그인 */
-    .nav_header > .login {
-        position: absolute;
-        left: 83.33%;
-        top: 3.55%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
-    .nav_header > .signup {
-        position: absolute;
-        left: 83.33%;
-        top: 6.4%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
-
-    .nav_header > .logout {
-        position: absolute;
-        left: 67%;
-        top: 6.4%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
-
-    .nav_header > .mypage {
-        position: absolute;
-        left: 83.33%;
-        top: 3.55%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
-
-    .nav_header > .login a,
-    .logout a,
-    .signup a,
-    .mypage a {
-        text-decoration: none;
-    }
-    /*body*/
-    body {
-        margin-top: 30%;
-    }
-    /*중앙(사진이랑 수정링크)*/
-
-    .main_one {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .edit {
-        display: flex;
-        justify-content: end;
-        margin-bottom: 5%;
-    }
-    #edit_font {
-        font-weight: 500;
-    }
-    .main_pic {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .id_font {
-        font-weight: 900;
-        font-size: 120%;
-    }
-    .main_intro {
-        display: flex;
+* {
+    #frame {
+        width: 390px;
+        height: 844px;
+        background-color: white;
+        margin: 50px auto;
+        position: relative;
         justify-content: center;
-        margin-top: 5%;
-        font-size: 90%;
-    }
-    .line {
-        border-top: 1px solid #d9d9d9;
-        margin-bottom: 5%;
-    }
-    .main_two div {
-        font-size: 130%;
-        font-weight: 900;
-    }
-    #mypage_img {
-        width: 97%;
-        height: 50%;
-    }
-    /*버튼 설정*/
-    button {
-        border-style: none;
-        width: 20em;
-        height: 4em;
-        margin: 2%;
-        margin-left: 0px;
-        border-radius: 15px;
-        background-color: #008d3f;
-        color: white;
-        text-align: left;
-    }
-    .btn_text {
-        margin-left: 10%;
-    }
-    /*링크 연결 */
-    a {
-        text-decoration: none;
-        color: black;
-    }
-    .main_two {
-        display: flex;
-        flex-direction: column;
         align-items: center;
     }
 }
 
-@media (min-width: 591px) {
-    /*나브바*/
-    /* nav_heaer */
-    .nav_header > .logo {
-        left: 7.44%;
-        right: 81.79%;
-        top: 1.3%;
-        bottom: 93.13%;
-        position: absolute;
-    }
-    .nav_header > .logo img {
-        width: 73px;
-        height: 68px;
-        object-fit: contain;
-    }
-    .nav_header > .cart {
-        position: absolute;
-        left: 71.54%;
-        right: 19.49%;
-        top: 2.49%;
-        bottom: 93.36%;
-    }
-    /* 로그인 */
-    .nav_header > .login {
-        position: absolute;
-        left: 83.33%;
-        top: 3.55%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
-    .nav_header > .signup {
-        position: absolute;
-        left: 83.33%;
-        top: 6.4%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
+/*반응형*/
 
-    .nav_header > .logout {
-        position: absolute;
-        left: 67%;
-        top: 6.4%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
+/*나브바*/
+/* nav_heaer */
+.nav_header > .logo {
+    left: 7.44%;
+    right: 81.79%;
+    top: 1.3%;
+    bottom: 93.13%;
+    position: absolute;
+}
+.nav_header > .logo img {
+    width: 73px;
+    height: 68px;
+    object-fit: contain;
+}
+.nav_header > .cart {
+    position: absolute;
+    left: 71.54%;
+    right: 19.49%;
+    top: 2.49%;
+    bottom: 93.36%;
+}
+/* 로그인 */
+.nav_header > .login {
+    position: absolute;
+    left: 83.33%;
+    top: 3.55%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
+.nav_header > .signup {
+    position: absolute;
+    left: 83.33%;
+    top: 6.4%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
 
-    .nav_header > .mypage {
-        position: absolute;
-        left: 83.33%;
-        top: 3.55%;
-        font-size: 16px;
-        font-weight: 700;
-        color: #454444;
-    }
+.nav_header > .logout {
+    position: absolute;
+    left: 67%;
+    top: 6.4%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
 
-    .nav_header > .login a,
-    .logout a,
-    .signup a,
-    .mypage a {
-        text-decoration: none;
-    }
-    /*body*/
-    body {
-        margin-top: 30%;
-    }
-    /*중앙(사진이랑 수정링크)*/
+.nav_header > .mypage {
+    position: absolute;
+    left: 83.33%;
+    top: 3.55%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #454444;
+}
 
-    .main_one {
-        display: flex;
-        flex-direction: column;
-    }
+.nav_header > .login a,
+.logout a,
+.signup a,
+.mypage a {
+    text-decoration: none;
+}
+/*body*/
+body {
+    margin-top: 30%;
+}
+/*위치 조절*/
+.main_one {
+    top: 12%;
+    left: 7%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-    .edit {
-        display: flex;
-        justify-content: end;
-        margin-bottom: 5%;
-    }
-    #edit_font {
-        font-weight: 700;
-    }
-    .main_pic {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .id_font {
-        font-weight: 900;
-        font-size: 120%;
-    }
-    .main_intro {
-        display: flex;
-        justify-content: center;
-        margin-top: 5%;
-    }
-    .line {
-        border-top: 1px solid #d9d9d9;
-        margin-bottom: 5%;
-    }
-    .main_two div {
-        font-size: 160%;
-        font-weight: 900;
-    }
-    /*버튼 설정*/
-    button {
-        border-style: none;
-        width: 35em;
-        height: 5em;
-        margin: 2%;
-        margin-left: 0px;
-        border-radius: 15px;
-        background-color: #008d3f;
-        color: white;
-        text-align: left;
-    }
-    .btn_text {
-        margin-left: 10%;
-    }
-    /*링크 연결 */
-    a {
-        text-decoration: none;
-        color: black;
-    }
-    .main_two {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+.edit {
+    display: flex;
+    justify-content: end;
+    margin-bottom: 5%;
+}
+#edit_font {
+    font-weight: 500;
+}
+.main_pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.id_font {
+    font-weight: 900;
+    font-size: 120%;
+}
+.main_intro {
+    display: flex;
+    justify-content: center;
+    margin-top: 5%;
+    font-size: 90%;
+}
+.line {
+    border-top: 1px solid #d9d9d9;
+    margin-bottom: 5%;
+}
+.main_two div {
+    font-size: 130%;
+    font-weight: 900;
+}
+#mypage_img {
+    width: 97%;
+    height: 50%;
+}
+/*버튼 설정*/
+button {
+    border-style: none;
+    width: 20em;
+    height: 4em;
+    margin: 2%;
+    margin-left: 0px;
+    border-radius: 15px;
+    background-color: #008d3f;
+    color: white;
+    text-align: left;
+}
+.btn_text {
+    margin-left: 10%;
+}
+/*링크 연결 */
+a {
+    text-decoration: none;
+    color: black;
+}
+.main_two {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
