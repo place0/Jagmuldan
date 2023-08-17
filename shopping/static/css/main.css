@@ -87,8 +87,8 @@ body {
   color: white;
   text-align: center;
   align-items: center;
-  top: 13%;
-  left: 50%;
+  top: 10%;
+  left: 42%;
   transform: translate(-50%, 0%);
   margin: 0 auto;
   display: flex;
@@ -145,7 +145,7 @@ ul {
   top: 290px;
   left: 30px;
   overflow: scroll;
-  height: 800px;
+  height: 480px;
 }
 
 ul .scroll::-webkit-scrollbar {
