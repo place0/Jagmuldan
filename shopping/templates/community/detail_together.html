@@ -1,18 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/css/detail_together.css'%}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <title>Document</title>
+
 </head>
 <body>
-    {{ask.title}}<br>
-    <a href="{{ask.url}}">오픈채팅 바로가기</a><br>
-    희망 지역 - {{ask.where}}, {{ask.detail}}<br>
-    {{ask.context}}<br>
-    
-    <hr>
-    {% if ask.community.count > 0 %}
+    <div id="frame">  
+        <!-- 상단 나브바 -->
+        <nav class="nav_header">
+          <div class="logo">
+            <a href=""><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
+          </div>
+          <div class="cart">
+            <a href="{% url 'basket' %}">
+              <iconify-icon
+                icon="mingcute:basket-line"
+                style="color: #008d3f"
+                width="35"
+                height="35"
+              ></iconify-icon
+            ></a>
+          </div>
+  
+          {% if not request.user.is_authenticated %}
+          <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+          {% else %}
+          <div class="mypage">
+            <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+          </div>
+          {% endif %}
+        </nav>
+<div class="search_title"> title :    {{ask.title}}</div>
+        <div class="search_city">
+           희망 지역 - {{ask.where}}, {{ask.detail}}
+        {{ask.context}} </div>
+<div class="search_url">   <a href="{{ask.url}}">오픈채팅 바로가기</a> </div>
+
+   
+    <div class="comment_input">
+        <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="context"></input>
+        <input type="submit" value="작성">
+        </form>
+    </div>
+     <div class="comment">
+        {% if ask.community.count > 0 %}
         {% for c in ask.community.all %}
             {% if c.writer == True %}
                 글쓴이 : {{c.context}}<br>
@@ -20,15 +60,46 @@
                 익명 : {{ c.context }}<br>
             {% endif %}
         {% endfor %}
-    {% else %}
+        {% else %}
         작성된 글 없음
-    {% endif %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        <input type="text" name="context"></input>
-        <input type="submit" value="작성">
-    </form>
+        {% endif %}
+    </div>
+       <!-- 하단 나브바 -->
 
-    
+       <nav class="nav_bottom">
+        <div class="logo">
+          <a href="{% url 'recommend_promotion:rp' %}">
+            <iconify-icon
+              icon="mdi:corn"
+              style="color: #008d3f"
+              width="45"
+              height="43"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        <div class="home">
+          <a href="{% url 'index' %}">
+            <iconify-icon
+              icon="octicon:home-24"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="community">
+          <a href="{% url 'community:main' %}">
+            <iconify-icon
+              icon="clarity:talk-bubbles-line"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+      </nav>
+
+    </div>
 </body>
 </html>
