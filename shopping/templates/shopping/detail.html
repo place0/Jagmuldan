@@ -167,7 +167,6 @@
         </div>
         <div class="login">{{request.user.username}}</div>
         <div class="signup">
-          <a href="{% url 'accounts:signup' %}">회원가입</a>
         </div>
       </nav>
       <!-- 뒤로가기 -->
@@ -210,7 +209,7 @@
             {% if not product.seller.image %}
             <img src="{% static '/img/Component 1.png' %}" width="50" />
             {% else %}
-            <img src="{{product.seller.image.url}}">
+            <img src="{{product.seller.image.url}}" width="50">
             {% endif %}
             <div class="name">
               <span>생산자 :</span>{{ product.seller.user.username }}
