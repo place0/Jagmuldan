@@ -5,7 +5,7 @@ from shopping.models import Product, ShoppingBasket, Order
 from datetime import datetime
 
 def kakaoPay(request):
-    return render(request, 'kakao/kakaopay.html')
+    return render(request, 'shopping/basket.html')
 def kakaoPayLogic(request):
     selected_products = request.POST.getlist('selected_products')
     total_amount = 0  # 총 결제 금액

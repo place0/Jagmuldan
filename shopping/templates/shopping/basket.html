@@ -10,46 +10,36 @@
     <body>
         <div id="cart-container">
             <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
-            <form id="cart-form" action="" method="post">
-                {% csrf_token %}
-                {% for photo in p.product.product_image.all %}
-                <img src="{{ photo.image.url }}" width="50" /><br />
-                {% endfor %}
-                <div class="deliverywanted">
-
-                    <input
-                        type="checkbox"
-                        data-real-price="{{p.product.price}}"
-                        class="product-checkbox"
-                        name="selected_products"
-                        data-seller="{{p.product.seller}}"
-                        value="{{ p.product.id }}"
-                        checked
-                        data-product-price="{{  p.product.discounted_price|floatformat:'0' }}"
-                        data-half_purchased="{{p.half_purchased}}"
-                        data-product-quantity="{{ p.quantity }}"
-                    />
-
-                    {{ p.product.title }}<br />
-                    가격 - {{ p.product.discounted_price|floatformat:"0" }}원
-                    <br />
-                    {% if p.half_purchased %} 주문 수량 - {{
-                    p.quantity|multiply:2 }}<br />
-                    배송 수량 - {{p.quantity}}<br />
-                    반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지
-                    수량을 배송받을 수 있습니다. {% else %} 수량 -
-                    {{p.quantity}}<br />
-                    {% endif %}
-                    <a href="{% url 'basket-delete' p.product.id %}"
-                        >장바구니 삭제</a
-                    ><br />
-                    배송비 - {% if not request.user.low_income %} 2500원(따로
-                    설정) {% else %} 0원 - 저소득층 지원 {%endif%}<br />
-                    도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일
-                    제외)<br />
-                    <hr />
-                    <br />
+            <form id="cart-form" action="/kakaoPayLogic/" method="post">
+                    {% for photo in p.product.product_image.all %}
+                        <img src="{{ photo.image.url }}" width="50"><br>
                     {% endfor %}
+                    <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
+                    data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
+                    
+                    {{ p.product.title }}<br>
+                    가격 - {{ p.product.discounted_price|floatformat:"0" }}원
+                    <br>
+                    {% if p.half_purchased %}
+                        주문 수량 - {{ p.quantity|multiply:2 }}<br>
+                        배송 수량 - {{p.quantity}}<br>
+                        반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지 수량을 배송받을 수 있습니다.
+                    {% else %}
+                        수량 - {{p.quantity}}<br>
+                    {% endif %}
+                <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a><br>
+                배송비 - {% if not request.user.low_income %}
+                    2500원(따로 설정)
+                    {% else %}
+                    0원 - 저소득층 지원
+                    {%endif%}<br>
+                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+                <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
+                <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
+                <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
+                <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
+        
+                {% endfor %}    
                     <hr />
                     총 결제 금액 : <span id="total"></span><br />
                     상품 할인 :
