@@ -37,14 +37,25 @@
           </div>
           {% endif %}
         </nav>
+        <!-- 뒤로가기 -->
+      <div class="back">
+        <a href="{% url 'community:main' %}">
+          <iconify-icon
+            icon="ion:caret-back-outline"
+            style="color: #646464"
+            width="30"
+            height="30"
+          ></iconify-icon>
+        </a>
+      </div>
 <div class="search_title"> title :    {{ask.title}}</div>
-        <div class="search_city">
-           희망 지역 - {{ask.where}}, {{ask.detail}}
-        {{ask.context}} </div>
-<div class="search_url">   <a href="{{ask.url}}">오픈채팅 바로가기</a> </div>
-
-   
-    <div class="comment_input">
+<div class="search_city">
+           희망 지역 :  {{ask.where}}<br> {{ask.detail}}</div>
+<div id="search_title_text">
+        {{ask.context}} 
+<br><a href="{{ask.url}}">오픈채팅 바로가기</a> 
+    
+      <div class="comment_input">
         <form action="" method="POST">
         {% csrf_token %}
         <input type="text" name="context"></input>
@@ -64,6 +75,11 @@
         작성된 글 없음
         {% endif %}
     </div>
+    </div>
+      
+
+   
+    
        <!-- 하단 나브바 -->
 
        <nav class="nav_bottom">

@@ -1,144 +1,142 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static '/css/main.css' %}" />
-        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
-        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="frame">
-            <!-- 상단 나브바 -->
-            <nav class="nav_header">
-                <div class="logo">
-                    <a href=""
-                        ><img src="{% static '/img/logo/4989_logo_L.png' %}"
-                    /></a>
-                </div>
-                <div class="cart">
-                    <a href="{% url 'basket' %}">
-                        <iconify-icon
-                            icon="mingcute:basket-line"
-                            style="color: #008d3f"
-                            width="35"
-                            height="35"
-                        ></iconify-icon
-                    ></a>
-                </div>
-
-                {% if not request.user.is_authenticated %}
-                <div class="login">
-                    <a href="{% url 'accounts:login' %}">로그인</a>
-                </div>
-                {% else %}
-                <div class="mypage">
-                    <a href="{% url 'mypage' %}">{{request.user.username}}</a>
-                </div>
-                {% endif %}
-            </nav>
-
-            <div class="title">함께 배송해요</div>
-            <form action="" method="POST">
-                {% csrf_token %}
-                <div class="search_city">
-                    <span>지역 검색</span>
-                    <select name="where">
-                        {% for p in places %}
-                        <option value="{{p}}">{{p}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="search_detail">
-                    <span> 자세한 위치 </span>
-                    <input type="text" name="search" />
-                </div>
-                <div class="search">
-                    <button
-                        type="submit"
-                        name="action"
-                        value="local_search"
-                        style="margin-left: 10px"
-                    >
-                        검색
-                    </button>
-                </div>
-            </form>
-            <ul>
-                {% for a in asks %}
-                <li>
-                    <div class="form_title">
-                        <a href="{% url 'community:detail_together' a.id %}">
-                            {{a.title}}</a
-                        >
-                    </div>
-                    <div class="form_place">장소- {{a.where}}</div>
-                    <div class="form_detail">디테일 - {{a.detail}}</div>
-                </li>
-                {% empty %} 올라온 글 없음 {% endfor %}
-            </ul>
-
-            <div class="add">
-                <a href="{% url 'community:create_shopping_together' %}"
-                    ><iconify-icon
-                        icon="simple-line-icons:plus"
-                        style="color: rgba(255, 202, 13, 1)"
-                        width="70"
-                        height="70"
-                    ></iconify-icon
-                ></a>
-            </div>
-            <!-- 하단 나브바 -->
-
-            <nav class="nav_bottom">
-                <div class="logo">
-                    <a href="{% url 'recommend_promotion:rp' %}">
-                        <iconify-icon
-                            icon="mdi:corn"
-                            style="color: #008d3f"
-                            width="45"
-                            height="43"
-                        ></iconify-icon
-                    ></a>
-                </div>
-
-                <div class="home">
-                    <a href="{% url 'index' %}">
-                        <iconify-icon
-                            icon="octicon:home-24"
-                            style="color: #008d3f"
-                            width="38"
-                            height="38"
-                        ></iconify-icon
-                    ></a>
-                </div>
-                <div class="community">
-                    <a href="{% url 'community:main' %}">
-                        <iconify-icon
-                            icon="clarity:talk-bubbles-line"
-                            style="color: #008d3f"
-                            width="38"
-                            height="38"
-                        ></iconify-icon
-                    ></a>
-                </div>
-            </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="frame">
+      <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <a href=""><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
+        </div>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
         </div>
 
-        <script>
-            function showContent(contentId) {
-                var contents = document.getElementsByClassName("content");
-                for (var i = 0; i < contents.length; i++) {
-                    contents[i].style.display = "none";
-                }
+        {% if not request.user.is_authenticated %}
+        <div class="login">
+          <a href="{% url 'accounts:login' %}">로그인</a>
+        </div>
+        {% else %}
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
+        {% endif %}
+      </nav>
 
-                var selectedContent = document.getElementById(contentId);
-                if (selectedContent) {
-                    selectedContent.style.display = "block";
-                }
-            }
-        </script>
-    </body>
+      <div class="title">함께 배송해요</div>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <div class="search_city">
+          <span>지역 검색</span>
+          <select name="where">
+            {% for p in places %}
+            <option value="{{p}}">{{p}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="search_detail">
+          <span> 자세한 위치 </span>
+          <input type="text" name="search" />
+        </div>
+        <div class="search">
+          <button
+            type="submit"
+            name="action"
+            value="local_search"
+            style="margin-left: 10px"
+          >
+            검색
+          </button>
+        </div>
+      </form>
+      <ul class="scroll">
+        {% for a in asks %}
+        <li>
+          <div class="form_title">
+            <a href="{% url 'community:detail_together' a.id %}">
+              {{a.title}}</a
+            >
+          </div>
+          <div class="form_place">장소- {{a.where}}</div>
+          <div class="form_detail">디테일 - {{a.detail}}</div>
+        </li>
+        {% empty %} 올라온 글 없음 {% endfor %}
+      </ul>
+
+      <div class="add">
+        <a href="{% url 'community:create_shopping_together' %}"
+          ><iconify-icon
+            icon="simple-line-icons:plus"
+            style="color: rgba(255, 202, 13, 1)"
+            width="70"
+            height="70"
+          ></iconify-icon
+        ></a>
+      </div>
+      <!-- 하단 나브바 -->
+
+      <nav class="nav_bottom">
+        <div class="logo">
+          <a href="{% url 'recommend_promotion:rp' %}">
+            <iconify-icon
+              icon="mdi:corn"
+              style="color: #008d3f"
+              width="45"
+              height="43"
+            ></iconify-icon
+          ></a>
+        </div>
+
+        <div class="home">
+          <a href="{% url 'index' %}">
+            <iconify-icon
+              icon="octicon:home-24"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+        <div class="community">
+          <a href="{% url 'community:main' %}">
+            <iconify-icon
+              icon="clarity:talk-bubbles-line"
+              style="color: #008d3f"
+              width="38"
+              height="38"
+            ></iconify-icon
+          ></a>
+        </div>
+      </nav>
+    </div>
+
+    <script>
+      function showContent(contentId) {
+        var contents = document.getElementsByClassName("content");
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].style.display = "none";
+        }
+
+        var selectedContent = document.getElementById(contentId);
+        if (selectedContent) {
+          selectedContent.style.display = "block";
+        }
+      }
+    </script>
+  </body>
 </html>
