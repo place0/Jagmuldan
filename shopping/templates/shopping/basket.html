@@ -8,16 +8,22 @@
         <title>Document</title>
     </head>
     <body>
+
         <div id="frame">
-        <div id="cart-container">
+            <div id="cart-container">
             <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
-            <form id="cart-form" action="/kakaoPayLogic/" method="post">
-                <div class="product_info">
-                    <div class="product_pic">
+                    <form id="cart-form" action="/kakaoPayLogic/" method="post">
+                <div class="product_!">
+
+                    
+                            
                 {% csrf_token %} 
+                <div class="product_list">
+                    <div class="product_pic">
                     {% for photo in p.product.product_image.all %}
                         <img src="{{ photo.image.url }}" width="50"><br>
                     {% endfor %}</div>
+                    <div class="product_info_Detail">
                     <div class="product_info_more">
                         <div class="product_top">
                     <div class="product_title">
@@ -26,7 +32,7 @@
                     
                     
                     {{ p.product.title }}<br></div>
-<div class="product_detail">
+
                     <a href="{% url 'basket-delete' p.product.id %}">삭제</a></div></div>
                     <div class="product_detail">
                     가격 - {{ p.product.discounted_price|floatformat:"0" }}원
@@ -38,7 +44,7 @@
                     {% else %}
                         수량 - {{p.quantity}}<br>
                     {% endif %}
-                <br>
+                
                 배송비 - {% if not request.user.low_income %}
                     2500원(따로 설정)
                     {% else %}
@@ -49,8 +55,11 @@
                 <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
-        
-                {% endfor %}    </div></div></div>
+                    </div>
+                {% endfor %}  
+                </div>
+              
+
                     <hr />
                     총 결제 금액 : <span id="total"></span><br />
                     상품 할인 :
@@ -109,9 +118,14 @@
                     </div>
                 </form>
             </div>
-        </div></div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        
+
+
+
+</div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
             $(document).ready(function () {
                 var total = 0;
                 var couponDiscount = 0; // 쿠폰 할인 가격을 초기화
@@ -223,13 +237,17 @@
                     updateTotalPrice();
                 });
             });
-        </script>
-        <script>
+        
             function deletediv() {
                 const div = document.getElementById("number1");
 
                 div.remove();
             }
         </script>
-    </body>
+    
+
+
+
+
+</body>
 </html>

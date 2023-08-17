@@ -236,10 +236,14 @@ input[type="checkbox"]:checked::before {
 /*제품 구조*/
 .product_info {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.product_infomation {
+    display: flex;
     flex-direction: row;
     justify-content: center;
 }
-
 .info_pic {
     margin-right: 2%;
 }
