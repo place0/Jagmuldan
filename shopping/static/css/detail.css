@@ -338,6 +338,10 @@ label.yellow {
 .selected {
   background-color: rgba(255, 202, 13, 1);
 }
+
+a {
+  text-decoration: none;
+}
 /* nav_bottom */
 .nav_bottom {
   display: flex;
