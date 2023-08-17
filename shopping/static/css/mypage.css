@@ -82,7 +82,7 @@ body {
 /*위치 조절*/
 .main_one {
     top: 12%;
-    left: 7%;
+    left: 20%%;
     position: absolute;
     display: flex;
     flex-direction: column;
