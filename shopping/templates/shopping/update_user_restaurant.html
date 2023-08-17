@@ -47,8 +47,7 @@
                         <div class="main_pic">
                             <picture
                                 ><p>
-                                    {% if request.user.restaurant.image %}
-                                    현재:
+                                    {% if request.user.restaurant.image %} 현재:
                                     <img
                                         src="{{request.user.restaurant.image.url }}"
                                         width="50"
@@ -62,11 +61,12 @@
                             <div class="id">
                                 <div class="id_change">
                                     <div class="id_box">
-                                        <div class="text_id"><input type="text" name="username" value="{{request.user.username}}">사장님</div>
-                                        <div class="pencil_pic">
-                                            <img
-                                                src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                            />
+                                        <div class="text_id">
+                                            <input
+                                                type="text"
+                                                name="username"
+                                                value="{{request.user.username}}"
+                                            />사장님
                                         </div>
                                     </div>
                                 </div>
@@ -82,11 +82,6 @@
                                     value="{{request.user.restaurant.address}}"
                                 />
                             </div>
-                            <div class="pencil_pic">
-                                <img
-                                    src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                />
-                            </div>
                         </div>
 
                         <div class="name_change">
@@ -98,14 +93,12 @@
                                     value="{{request.user.restaurant.name}}"
                                 />
                             </div>
-                            <div class="pencil_pic">
-                                <img
-                                    src="{% static '/img/마이페이지/해커톤_연필.png' %}"
-                                />
-                            </div>
                         </div>
 
-                        <div class="input_submit">
+                        <div
+                            class="input_submit"
+                            style="width: 250px; height: 20px"
+                        >
                             <input
                                 type="submit"
                                 id="input_btn"
