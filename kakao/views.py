@@ -10,6 +10,7 @@ def kakaoPayLogic(request):
     selected_products = request.POST.getlist('selected_products')
     total_amount = 0  # 총 결제 금액
     item_names = []   # 상품 이름 리스트
+    selected_products_data = []
     for product_id in selected_products:
         title = request.POST.get(f'product_title_{product_id}')
         price = int(request.POST.get(f'product_price_{product_id}').split('.')[0])
@@ -25,6 +26,15 @@ def kakaoPayLogic(request):
             total_amount += price * quantity
         
         item_names.append(title)
+        
+        selected_products_data.append({
+                'id': product_id,
+                'title': title,
+                'price': price,
+                'quantity': quantity,
+                'half_purchased': half_purchased
+        })
+    
     print(request.POST.get('product_delivery'))
     print(request.POST.get('product_coupon'))
     
@@ -32,6 +42,7 @@ def kakaoPayLogic(request):
     print(total_amount)
     total_amount+=int(request.POST.get('product_delivery'))-int(request.POST.get('product_coupon'))
     print(total_amount)
+
         
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02'
     _url = f'https://kapi.kakao.com/v1/payment/ready'
@@ -56,9 +67,24 @@ def kakaoPayLogic(request):
     _res = requests.post(_url, data=_data, headers=_headers)
     _result = _res.json()
     request.session['tid'] = _result['tid']
+    request.session['selected_products_data'] = selected_products_data
     return redirect(_result['next_redirect_pc_url'])
 
 def paySuccess(request):
+    selected_products_data = request.session.get('selected_products_data', [])
+    for product_data in selected_products_data:
+        product = Product.objects.get(pk=product_data['id'])
+        quantity = product_data['quantity']
+        half_purchased = product_data['half_purchased']
+
+        Order.objects.create(
+            customer=request.user,
+            product=product,
+            quantity=quantity,
+            half_purchased=half_purchased,
+            time=datetime.now()
+        )
+    
     _url = 'https://kapi.kakao.com/v1/payment/approve'
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02' # 입력필요
     _headers = {
@@ -73,29 +99,12 @@ def paySuccess(request):
     }
     _res = requests.post(_url, data=_data, headers=_headers)
     _result = _res.json()
-    if _result.get('msg'):
-        return redirect('/payFail')
-    else:
-        # 주문 정보를 Order 모델에 저장
-        selected_products = request.session.get('selected_products', [])
-        for product_id in selected_products:
-            product = Product.objects.get(pk=product_id)
-            quantity = int(request.POST.get(f'product_quantity_{product_id}'))
-            half_purchased = request.POST.get(f'product_half_purchased_{product_id}') == 'True'
-            
-            Order.objects.create(
-                customer=request.user,
-                product=product,
-                quantity=quantity,
-                half_purchased=half_purchased,
-                time=datetime.now()
-            )
 
             # 장바구니에서 해당 항목 제거
-            basket_item = ShoppingBasket.objects.get(customer=request.user, product=product)
-            basket_item.delete()
+    basket_item = ShoppingBasket.objects.get(customer=request.user, product=product)
+    basket_item.delete()
 
-        return render(request, 'kakao/paySuccess.html')
+    return render(request, 'kakao/paySuccess.html')
 def payFail(request):
     return render(request, 'kakao/payFail.html')
 def payCancel(request):

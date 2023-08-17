@@ -25,5 +25,4 @@ urlpatterns = [
     
     path('half_purchased/', half_purchased_products, name='half_purchased_products'),
     # path('restaurant/review/')
-    path('half_ing/', half_purchased_products, name='half_ing'),
 ]

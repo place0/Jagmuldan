@@ -1,20 +1,11 @@
-<<<<<<< HEAD
-* {
-  #frame {
-=======
 #frame {
->>>>>>> upstream/main
-    width: 390px;
-    height: 844px;
-    background-color: white;
-    margin: 50px auto;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-<<<<<<< HEAD
-  }
-=======
->>>>>>> upstream/main
+  width: 390px;
+  height: 844px;
+  background-color: white;
+  margin: 50px auto;
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 
 /*링크 연결 */
@@ -244,44 +235,44 @@ input[type="checkbox"]:checked::before {
 }
 /*제품 구조*/
 .product_info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .product_infomation {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .info_pic {
-    margin-right: 2%;
+  margin-right: 2%;
 }
 img {
-    width: 150px;
-    height: 150px;
+  width: 150px;
+  height: 150px;
 }
 .product_pic {
-    margin-right: 5%;
+  margin-right: 5%;
 }
 .title_info {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 3%;
-    justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 3%;
+  justify-content: space-between;
 }
 .product_title {
-    font-size: 120%;
-    font-weight: 900;
-    margin-left: 3%;
-    display: flex;
-    flex-direction: row;
+  font-size: 120%;
+  font-weight: 900;
+  margin-left: 3%;
+  display: flex;
+  flex-direction: row;
 }
 .product_delete {
-    font-size: 120%;
-    font-weight: 900;
+  font-size: 120%;
+  font-weight: 900;
 }
 .product_top {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }
