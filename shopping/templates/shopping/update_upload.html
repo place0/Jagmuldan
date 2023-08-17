@@ -130,7 +130,7 @@ li {
             <li>
             <div class="discount2">
              <span>할인률</span
-                ><input type="number" id="price3" name="discount_rate"
+                ><input type="number" id="price3" name="discount_rate" value={{product.discount_rate}}
               />
             </div>
         </li>
@@ -138,7 +138,7 @@ li {
             <li>
             <div class="count2">
              <span>판매수량</span
-                ><input type="number" name="total_quantity" id="product_count"
+                ><input type="number" name="total_quantity" id="product_count" value="{{product.total_quantity}}"
               />
             </div>
         </li>
@@ -154,8 +154,7 @@ li {
             <li>
             <div class="ch2">
               <span>재배특징</span>
-              <textarea name="feature"  id="product_ch">
-                {{product.production_features}}</textarea
+              <textarea name="feature" value="{{product.production_features}}" id="product_ch">{{product.production_features}}</textarea
                         >
               
             </div>
