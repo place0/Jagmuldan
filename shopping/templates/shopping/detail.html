@@ -9,7 +9,142 @@
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 
     <title>Document</title>
-    <style></style>
+    <style>
+      .heart_count {
+        position: absolute;
+        top: 55px;
+        left: 57px;
+        font-weight: bold;
+        font-size: 600;
+        color: rgba(69, 68, 68, 1);
+      }
+      .heart_count span {
+        position: absolute;
+      }
+
+      #half_modal {
+        position: relative;
+        width: 360px;
+        height: 180px;
+        background-color: rgba(244, 244, 244, 1);
+        left: 12px;
+      }
+      #full_modal {
+        position: relative;
+        top: -75px;
+        left: 12px;
+        width: 360px;
+        height: 180px;
+        background-color: rgba(244, 244, 244, 1);
+      }
+      .product_name {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-weight: 600;
+        font-size: 20px;
+        padding: 10px;
+      }
+
+      .product_count {
+        position: absolute;
+        top: 50px;
+        left: 10px;
+      }
+
+      #half_modal input[type="number"],
+      #full_modal input[type="number"] {
+        width: 90px;
+        height: 30px;
+        border-radius: 10px;
+        border: solid rgba(0, 141, 63, 1) 1.5px;
+      }
+
+      .product_price {
+        position: absolute;
+        left: 140px;
+        top: 58px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+
+      .product_price_discount {
+        position: absolute;
+        left: 220px;
+        top: 56px;
+        font-size: 20px;
+        font-weight: 600;
+        color: green;
+      }
+      .product_leave {
+        position: absolute;
+        top: 90px;
+        left: 20px;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      .product_leave span {
+        color: red;
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      .notice {
+        position: absolute;
+        top: 130px;
+        left: 20px;
+      }
+      .notice span {
+        color: red;
+      }
+
+      .buyNow {
+        display: flex;
+        position: absolute;
+        width: 390px;
+        top: 303px;
+        right: -2px;
+        border-top: solid black 3px;
+      }
+
+      .buyNow button,
+      .buyNow_2 button {
+        width: 200px;
+        height: 55px;
+        border: none;
+        color: white;
+        background-color: #008d3f;
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .buyNow_2 {
+        display: flex;
+        position: absolute;
+        width: 390px;
+        top: 303px;
+        right: -3px;
+        border-top: solid black 3px;
+      }
+      .cart3 {
+        border-right: solid black 2px;
+      }
+
+      .cart4 {
+        border-left: solid black 2px;
+      }
+
+      .cart3:hover {
+        border-bottom: solid black 3px;
+        border-right: solid black 3px;
+        border-left: solid black 3px;
+      }
+
+      .cart4:hover {
+        border-bottom: solid black 3px;
+        border-right: solid black 3px;
+        border-left: solid black 1px;
+      }
+    </style>
   </head>
   <body>
     <div id="frame">
@@ -35,12 +170,14 @@
       </nav>
       <!-- 뒤로가기 -->
       <div class="back">
-        <iconify-icon
-          icon="ion:caret-back-outline"
-          style="color: #646464"
-          width="30"
-          height="30"
-        ></iconify-icon>
+        <a href="{% url 'index' %}">
+          <iconify-icon
+            icon="ion:caret-back-outline"
+            style="color: #646464"
+            width="30"
+            height="30"
+          ></iconify-icon>
+        </a>
       </div>
 
       <!-- 사진 -->
@@ -49,7 +186,7 @@
         <img src="{{photo.image.url}}" width="50" /><br />
         {% endfor %}
       </div>
-      <!-- 상세내용(스크롤필요) -->
+      <!-- 상세내용 -->
       <div id="detail">
         <div class="detail_title">{{ product.title }}</div>
         <ul class="detail_info">
@@ -79,21 +216,37 @@
       <!-- 하트/구매 -->
       <div class="buy_nav">
         <!-- 하트 -->
-        <button class="heart" onclick="addLike(), removeLike()">
-          <i class="xi-heart-o xi-2x"></i>
+        <button class="heart">
+          {% if product in request.user.like_product.all %}
+          <a
+            href="{% url 'add_remove_whishlist' product.id %}"
+            class="like-btn"
+            data-product-id="{{ product.id }}"
+            ><iconify-icon
+              icon="ph:heart-fill"
+              style="color: #f24e1e"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+          {% else %}
+          <a
+            href="{% url 'add_remove_whishlist' product.id %}"
+            class="like-btn"
+            data-product-id="{{ product.id }}"
+          >
+            <iconify-icon
+              icon="ph:heart-bold"
+              style="color: #f24e1e"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+          {% endif %}
         </button>
-        {% if product in request.user.like_product.all %}
-        <a href="{% url 'add_remove_whishlist' product.id %}" class="like-btn" data-product-id="{{ product.id }}"
-          >찜 취소</a
-        >
-        {% else %}
-        <a href="{% url 'add_remove_whishlist' product.id %}" class="like-btn" data-product-id="{{ product.id }}"
-          >찜하기</a
-        >
-        {% endif %}
+
         <!-- 하트개수 담김 -->
         <div class="heart_count">
-          123
           <span id="like-count">{{product.like_product.count}}</span>
         </div>
 
@@ -109,7 +262,7 @@
       </div>
 
       <!-- 구매모달창 -->
-      <form action="" id="buy_modal_form">
+      <form action="" id="buy_modal_form" method="post">
         <div id="buy_modal">
           {% comment %} 숨기는버튼 {% endcomment %}
           <div class="hiddenBtn">
@@ -132,31 +285,28 @@
             </button>
           </div>
           {% comment %} 반만담기 선택하면 나오는 폼 {% endcomment %}
-          <form
-            action=""
-            method="post"
-            id="half-purchase-form"
-            class="product_info"
-          >
-            <div class="product_name">{{ product.title }}</div>
-            <div class="product_count">
-              {% csrf_token %}
-              <input
-                type="number"
-                name="total_quantity"
-                min="1"
-                required
-                placeholder="총 결제할 수량"
-              />
-            </div>
-            <div class="product_price">{{product.price}}원></div>
-            <div class="product_price_discount">
-              {{ discount_price|floatformat:"0" }}원
-            </div>
-            <div class="product_leave">잔여수량 <span>30</span> 개</div>
-            <div class="notice">
-              ※ 단순 변심으로 교환/환불이 불가한 상품입니다.
-              <br />※ 이 상품은 반만 배송됩니다.
+          <form action="" method="post" id="half-purchase-form">
+            <div id="half_modal">
+              <div class="product_name">{{ product.title }}</div>
+              <div class="product_count">
+                {% csrf_token %}
+                <input
+                  type="number"
+                  name="total_quantity"
+                  min="1"
+                  required
+                  placeholder="총 결제할 수량"
+                />
+              </div>
+              <div class="product_price">{{product.price}}원></div>
+              <div class="product_price_discount">
+                {{ discount_price|floatformat:"0" }}원
+              </div>
+              <div class="product_leave">잔여수량 <span>30</span> 개</div>
+              <div class="notice">
+                ※ 단순 변심으로 교환/환불이 불가한 상품입니다.
+                <br />※ 이 상품은 <span>반만</span> 배송됩니다.
+              </div>
             </div>
 
             <div class="buyNow">
@@ -189,27 +339,29 @@
             id="full-purchase-form"
             class="product_info"
           >
-            <div class="product_name2">{{ product.title }}</div>
-            <div class="product_count2">
-              {% csrf_token %}
-              <input
-                type="number"
-                name="quantity"
-                min="1"
-                required
-                placeholder="배송받을 수량"
-              />
+            <div id="full_modal">
+              <div class="product_name">{{ product.title }}</div>
+              <div class="product_count">
+                {% csrf_token %}
+                <input
+                  type="number"
+                  name="quantity"
+                  min="1"
+                  required
+                  placeholder="배송받을 수량"
+                />
+              </div>
+              <div class="product_price">{{product.price}}원></div>
+              <div class="product_price_discount">
+                {{ discount_price|floatformat:"0" }}원
+              </div>
+              <div class="product_leave">잔여수량 <span>30</span> 개</div>
+              <div class="notice">
+                ※ 단순 변심으로 교환/환불이 불가한 상품입니다.
+                <br />※ 이 상품은 <span>전체 </span>배송됩니다.
+              </div>
             </div>
-            <div class="product_price2">{{product.price}}원></div>
-            <div class="product_price_discount2">
-              {{ discount_price|floatformat:"0" }}원
-            </div>
-            <div class="product_leave2">잔여수량 <span>30</span> 개</div>
-            <div class="notice2">
-              ※ 단순 변심으로 교환/환불이 불가한 상품입니다.
-              <br />※ 이 상품은 전체 배송됩니다.
-            </div>
-            <div class="buyNow2">
+            <div class="buyNow_2">
               <button
                 type="submit"
                 name="action"
@@ -276,12 +428,10 @@
       btn.addEventListener("click", () => {
         modal.style.display = "flex";
         modal.style.animation = "modalSlideIn 0.6s ease-in";
-
-        // 이전에 등록된 animationend 이벤트 리스너를 제거합니다.
-        modal.removeEventListener("animationend", modalCloseAnimationEnd);
       });
 
       closeBtn.addEventListener("click", () => {
+        btn.style.display = "flex";
         modal.style.animation = "modalSlideOut 0.6s ease-in";
 
         // animationend 이벤트가 끝날 때 실행되는 함수
@@ -291,65 +441,14 @@
 
           // animationend 이벤트 리스너를 제거합니다.
           modal.removeEventListener("animationend", modalCloseAnimationEnd);
+          btn.style.display = "flex";
         };
 
         // animationend 이벤트 리스너를 등록합니다.
         modal.addEventListener("animationend", modalCloseAnimationEnd);
       });
     </script>
-    <script>
-      //반만, 전체 담기 form 보이는 창
-
-      const fullBuyButton = document.getElementById("full-buy-button");
-      const halfBuyButton = document.getElementById("half-buy-button");
-      const fullPurchaseForm = document.getElementById("full-purchase-form");
-      const halfPurchaseForm = document.getElementById("half-purchase-form");
-
-      // Show the full purchase form by default
-      fullPurchaseForm.style.display = "block";
-
-      fullBuyButton.addEventListener("click", function () {
-        fullPurchaseForm.style.display = "block";
-        halfPurchaseForm.style.display = "none";
-      });
-
-      halfBuyButton.addEventListener("click", function () {
-        halfPurchaseForm.style.display = "block";
-        fullPurchaseForm.style.display = "none";
-      });
-    </script>
-
-    <script>
-      // 하트누르기!!
-      const pushHeartBtn = document.querySelector(".heart");
-      let clickCount = 0;
-      let count = 123;
-
-      function addLike() {
-        clickCount++;
-        if (clickCount % 2 === 1) {
-          // 홀수 번 클릭 시
-          pushHeartBtn.innerHTML = '<i class="xi-heart xi-2x"></i>';
-          pushHeartBtn.style.color = "red";
-          countPlus();
-        } else {
-          // 짝수 번 클릭 시
-          pushHeartBtn.innerHTML = '<i class="xi-heart-o xi-2x"></i>';
-          pushHeartBtn.style.color = "";
-          countMinus();
-        }
-      }
-
-      function countPlus() {
-        count = count + 1;
-        document.querySelector(".heart_count").innerHTML = count;
-      }
-
-      function countMinus() {
-        count = count - 1;
-        document.querySelector(".heart_count").innerHTML = count;
-      }
-    </script>
+    <script></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
       $(document).ready(function () {
@@ -376,7 +475,5 @@
         $("#additional-form, #half-purchase-form, #full-purchase-form").hide();
       });
     </script>
-
-
   </body>
 </html>

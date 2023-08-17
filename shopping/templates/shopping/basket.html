@@ -8,32 +8,25 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="frame">
-            <div id="cart-container">
-                {% csrf_token %}
+        <div id="cart-container">
+           
                 <!--결제하기 화면과 연결 -->{% for p in products %}
                 <form id="cart-form" action="" method="post">
-                    <div class="info">
-                        <div class="info_pic">
-                            {% for photo in p.product.product_image.all %}
-                            <img src="{{ photo.image.url }}" width="50" /><br />
-                            {% endfor %}
-                        </div>
-                        <div class="detail_info">
-                            <div class="title_info">
-                                <div class="product_title">
-                                    <input
-                                        type="checkbox"
-                                        data-real-price="{{p.product.price}}"
-                                        class="product-checkbox"
-                                        name="selected_products"
-                                        data-seller="{{p.product.seller}}"
-                                        value="{{ p.product.id }}"
-                                        checked
-                                        data-product-price="{{  p.product.discounted_price|floatformat:'0' }}"
-                                        data-half_purchased="{{p.half_purchased}}"
-                                        data-product-quantity="{{ p.quantity }}"
-                                    />
+                    {% for photo in p.product.product_image.all %}
+                    <img src="{{ photo.image.url }}" width="50" /><br />
+                    {% endfor %}
+                    <input
+                        type="checkbox"
+                        data-real-price="{{p.product.price}}"
+                        class="product-checkbox"
+                        name="selected_products"
+                        data-seller="{{p.product.seller}}"
+                        value="{{ p.product.id }}"
+                        checked
+                        data-product-price="{{  p.product.discounted_price|floatformat:'0' }}"
+                        data-half_purchased="{{p.half_purchased}}"
+                        data-product-quantity="{{ p.quantity }}"
+                    />
 
                                     <div class="product_title_">
                                         {{ p.product.title }}

@@ -37,7 +37,7 @@
                     </div>
                 </div>
                 <div class="info">
-                    <div class="info_title">{{p.title}}</div>
+                    <a href="{% url 'detail' p.id %}"><div class="info_title">{{p.title}}</a></div>
                     <div class="info_detail">
                         <div class="info_discount">32%</div>
                         <div class="info_cost">13000 원</div>

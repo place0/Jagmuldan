@@ -16,7 +16,10 @@
             ><!--뒤로가기-->
         </div>
         <div style="margin-top: 50px; display: flex; justify-content: center">
-            <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+            <img
+                src="{% static '/img/logo/4989_logo_L.png' %}"
+                style="width: 180px; height: 182px"
+            />
         </div>
         <form method="post">
             {% csrf_token %}
@@ -55,5 +58,6 @@
             <br /><br />
             <button type="submit" class="button">회원가입</button>
         </form>
+        <br /><br />
     </body>
 </html>

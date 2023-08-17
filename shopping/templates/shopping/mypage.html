@@ -24,13 +24,13 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
+        
         <div class="signup">
           <a href="{% url 'accounts:signup' %}">회원가입</a>
         </div>
 
         {% if not request.user.is_authenticated %}
-        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        <a href="{% url 'accounts:login' %}"><div class="login">{{request.user.username}}</div></a>
         {% else %}
         <div class="logout">
           <a href="{% url 'accounts:logout' %}">로그아웃</a>
@@ -47,7 +47,9 @@
     {% elif request.user.restaurant %}
     <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
     {% endif %}
-    
+    <a href="{% url 'accounts:logout' %}">로그아웃</a>
+    <br>
+    <br>
 
    
     {% if request.user.merchant %}
