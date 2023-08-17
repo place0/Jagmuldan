@@ -36,8 +36,8 @@
                 <div class="info">
                     <a href="{% url 'detail' p.id %}" id="info_title"><div class="info_title">{{p.title}}</a></div>
                     <div class="info_detail">
-                        <div class="info_discount">32%</div>
-                        <div class="info_cost">13000 원</div>
+                        <div class="info_discount">{{p.discount_rate}}%</div>
+                        <div class="info_cost">{{p.discounted_price|floatformat:"0"}}원</div>
                     </div>
                 </div>
                 

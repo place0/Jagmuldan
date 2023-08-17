@@ -46,7 +46,8 @@
         <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
         {% else %}
         <div class="mypage">
-          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+          <div class="logout_btn">
+                <a href="{% url 'accounts:logout' %}">로그아웃</a></div>
         </div>
         {% endif %}
       </nav>
@@ -54,7 +55,7 @@
     <main>
         <div class="main_one">
             <div class="edit">{% if request.user.merchant %}
-    <a href="{% url 'update_user_merchant' %}">판매자 회원 정보 수정</a>
+   <div style="background-color: #008d3f; width:150px; height:30px; line-height:25px; text-align: center; border-radius:10px"> <a style="font-size: 10pt; color:white" href="{% url 'update_user_merchant' %}" >판매자 회원 정보 수정</a></div>
     {% elif request.user.restaurant %}
     <a href="{% url 'update_user_restaurant' %}">음식점 회원 정보 수정</a>
     {% endif %}
@@ -69,10 +70,9 @@
                 <picture
                     ><img id="mypage_img " src="{% static '/img/마이페이지/해커톤_마이페이지.png' %}" /></picture>
                 <div class="id_font">{{request.user.username}}</div> 
-                <div class="logout_btn">
-                <a href="{% url 'accounts:logout' %}">로그아웃</a></div>
+                
             </div>
-        
+        <br>
         <div class="main_intro">
             
         </div>

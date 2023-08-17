@@ -236,7 +236,7 @@ input[type="checkbox"]:checked::before {
 /*제품 구조*/
 .product_info {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 .product_infomation {

@@ -1,191 +1,222 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static '/css/upload.css' %}" />
-    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <title>Document</title>
-  </head>
-  <body>
-    <div id="frame">
-      <!-- 상단 나브바 -->
-      <nav class="nav_header">
-        <div class="logo">
-          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static '/css/upload.css' %}" />
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="frame">
+            <!-- 상단 나브바 -->
+            <nav class="nav_header">
+                <div class="logo">
+                    <img src="{% static '/img/logo/4989_logo_L.png' %}" />
+                </div>
+                <div class="cart">
+                    <a href="{% url 'basket' %}">
+                        <iconify-icon
+                            icon="mingcute:basket-line"
+                            style="color: #008d3f"
+                            width="35"
+                            height="35"
+                        ></iconify-icon
+                    ></a>
+                </div>
+                {% if not request.user.is_authenticated %}
+                <div class="login">
+                    <a href="{% url 'accounts:login' %}">로그인</a>
+                </div>
+                {% else %}
+                <div class="mypage">
+                    <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+                </div>
+                {% endif %}
+            </nav>
+
+            <!-- 뒤로가기 -->
+            <div class="back">
+                <a href="{% url 'index' %}">
+                    <iconify-icon
+                        icon="ion:caret-back-outline"
+                        style="color: #646464"
+                        width="30"
+                        height="30"
+                    ></iconify-icon
+                ></a>
+            </div>
+
+            <!-- 상세내용입력 폼-->
+            <form
+                method="POST"
+                action="{% url 'upload' %}"
+                enctype="multipart/form-data"
+            >
+                {% csrf_token %}
+                <!-- 사진 보여지는 부분 -->
+
+                <div id="img_contain"></div>
+
+                <div class="file_upload">
+                    <label for="image" style="font-size: 8pt; padding: 5px"
+                        >사진 업로드</label
+                    >
+                    <input
+                        type="file"
+                        id="image"
+                        accept="image/*"
+                        onchange="setThumbnail(event);"
+                        multiple
+                        type="file"
+                        name="imgs"
+                    />
+                </div>
+                <!-- 종류선택 -->
+                <div class="select">
+                    <div>종류선택</div>
+                    <input
+                        type="radio"
+                        id="fruit"
+                        name="type"
+                        value="과일"
+                    /><label for="fruit"
+                        ><span style="line-height: 35px">과일</span></label
+                    >
+                    <input
+                        type="radio"
+                        id="vegi"
+                        name="type"
+                        value="채소"
+                    /><label for="vegi"
+                        ><span style="line-height: 35px">채소</span></label
+                    >
+                </div>
+                <!-- 상품이름 ~ 상품등록  -->
+                <div id="detail">
+                    <!-- 상품이름 -->
+                    <div class="name">
+                        <label for="product_name"
+                            ><span>상품이름</span
+                            ><input
+                                type="text"
+                                name="title"
+                                value=""
+                                id="product_name"
+                            />
+                        </label>
+                    </div>
+                    <!-- 가격 -->
+                    <div class="price">
+                        <label for="price2"
+                            ><span>가격</span
+                            ><input
+                                type="price"
+                                name="price"
+                                value=""
+                                id="price2"
+                        /></label>
+                    </div>
+                    <!-- 할인률 -->
+                    <div class="discount">
+                        <label for="price3"
+                            ><span>할인률</span
+                            ><input
+                                type="number"
+                                id="price3"
+                                name="discount_rate"
+                        /></label>
+                    </div>
+                    <!-- 판매수량 -->
+                    <div class="count">
+                        <label for=""
+                            ><span>판매수량</span
+                            ><input
+                                type="number"
+                                name="total_quantity"
+                                id="product_count"
+                        /></label>
+                    </div>
+                    <!-- 생산지 -->
+                    <div class="place">
+                        <label for=""
+                            ><span>생산지</span
+                            ><input
+                                type="text"
+                                name="origin"
+                                value=""
+                                id="product_place"
+                        /></label>
+                    </div>
+                    <!-- 재배특징 -->
+                    <div class="ch">
+                        <label for=""
+                            ><span>재배특징</span>
+                            <input type="text" name="feature" id="product_ch"
+                        /></label>
+                    </div>
+
+                    <!-- 상품등록하기 -->
+                    <div class="suBmit">
+                        <input
+                            type="submit"
+                            value="상품등록하기"
+                            placeholder="상품등록하기"
+                        />
+                    </div>
+                </div>
+            </form>
+
+            <!-- 하단 나브바 -->
+            <nav class="nav_bottom">
+                <div class="logo">
+                    <a href="{% url 'recommend_promotion:rp' %}">
+                        <iconify-icon
+                            icon="mdi:corn"
+                            style="color: #008d3f"
+                            width="45"
+                            height="43"
+                        ></iconify-icon
+                    ></a>
+                </div>
+
+                <div class="home">
+                    <a href="{% url 'index' %}">
+                        <iconify-icon
+                            icon="octicon:home-24"
+                            style="color: #008d3f"
+                            width="38"
+                            height="38"
+                        ></iconify-icon
+                    ></a>
+                </div>
+                <div class="community">
+                    <a href="{% url 'community:main' %}">
+                        <iconify-icon
+                            icon="clarity:talk-bubbles-line"
+                            style="color: #008d3f"
+                            width="38"
+                            height="38"
+                        ></iconify-icon
+                    ></a>
+                </div>
+            </nav>
         </div>
-        <div class="cart">
-          <a href="{% url 'basket' %}">
-            <iconify-icon
-              icon="mingcute:basket-line"
-              style="color: #008d3f"
-              width="35"
-              height="35"
-            ></iconify-icon
-          ></a>
-        </div>
-        {% if not request.user.is_authenticated %}
-        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
-        {% else %}
-        <div class="mypage">
-          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
-        </div>
-        {% endif %}
-      </nav>
 
-      <!-- 뒤로가기 -->
-      <div class="back">
-        <a href="{% url 'index' %}">
-          <iconify-icon
-            icon="ion:caret-back-outline"
-            style="color: #646464"
-            width="30"
-            height="30"
-          ></iconify-icon
-        ></a>
-      </div>
+        <script>
+            function setThumbnail(event) {
+                var reader = new FileReader();
 
-      <!-- 상세내용입력 폼-->
-      <form
-        method="POST"
-        action="{% url 'upload' %}"
-        enctype="multipart/form-data"
-      >
-        {% csrf_token %}
-        <!-- 사진 보여지는 부분 -->
+                reader.onload = function (event) {
+                    var img = document.createElement("img");
+                    img.setAttribute("src", event.target.result);
+                    document.querySelector("div#img_contain").appendChild(img);
+                };
 
-        <div id="img_contain"></div>
-
-        <div class="file_upload">
-          <label for="image">사진업로드</label>
-          <input
-            type="file"
-            id="image"
-            accept="image/*"
-            onchange="setThumbnail(event);"
-            multiple
-            type="file"
-            name="imgs"
-          />
-        </div>
-        <!-- 종류선택 -->
-        <div class="select">
-          <div>종류선택</div>
-          <input type="radio" id="fruit" name="type" value="과일" /><label
-            for="fruit"
-            ><span>과일</span></label
-          >
-          <input type="radio" id="vegi" name="type" value="채소" /><label
-            for="vegi"
-            ><span>채소</span></label
-          >
-        </div>
-        <!-- 상품이름 ~ 상품등록  -->
-        <div id="detail">
-          <!-- 상품이름 -->
-          <div class="name">
-            <label for="product_name"
-              ><span>상품이름</span
-              ><input type="text" name="title" value="" id="product_name" />
-            </label>
-          </div>
-          <!-- 가격 -->
-          <div class="price">
-            <label for="price2"
-              ><span>가격</span
-              ><input type="price" name="price" value="" id="price2"
-            /></label>
-          </div>
-          <!-- 할인률 -->
-          <div class="discount">
-            <label for="price3"
-              ><span>할인률</span
-              ><input type="number" id="price3" name="discount_rate"
-            /></label>
-          </div>
-          <!-- 판매수량 -->
-          <div class="count">
-            <label for=""
-              ><span>판매수량</span
-              ><input type="number" name="total_quantity" id="product_count"
-            /></label>
-          </div>
-          <!-- 생산지 -->
-          <div class="place">
-            <label for=""
-              ><span>생산지</span
-              ><input type="text" name="origin" value="" id="product_place"
-            /></label>
-          </div>
-          <!-- 재배특징 -->
-          <div class="ch">
-            <label for=""
-              ><span>재배특징</span>
-              <input type="text" name="feature" id="product_ch"
-            /></label>
-          </div>
-
-          <!-- 상품등록하기 -->
-          <div class="suBmit">
-            <input
-              type="submit"
-              value="상품등록하기"
-              placeholder="상품등록하기"
-            />
-          </div>
-        </div>
-      </form>
-
-      <!-- 하단 나브바 -->
-      <nav class="nav_bottom">
-        <div class="logo">
-          <a href="{% url 'recommend_promotion:rp' %}">
-            <iconify-icon
-              icon="mdi:corn"
-              style="color: #008d3f"
-              width="45"
-              height="43"
-            ></iconify-icon
-          ></a>
-        </div>
-
-        <div class="home">
-          <a href="{% url 'index' %}">
-            <iconify-icon
-              icon="octicon:home-24"
-              style="color: #008d3f"
-              width="38"
-              height="38"
-            ></iconify-icon
-          ></a>
-        </div>
-        <div class="community">
-          <a href="{% url 'community:main' %}">
-            <iconify-icon
-              icon="clarity:talk-bubbles-line"
-              style="color: #008d3f"
-              width="38"
-              height="38"
-            ></iconify-icon
-          ></a>
-        </div>
-      </nav>
-    </div>
-
-    <script>
-      function setThumbnail(event) {
-        var reader = new FileReader();
-
-        reader.onload = function (event) {
-          var img = document.createElement("img");
-          img.setAttribute("src", event.target.result);
-          document.querySelector("div#img_contain").appendChild(img);
-        };
-
-        reader.readAsDataURL(event.target.files[0]);
-      }
-    </script>
-  </body>
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
+    </body>
 </html>
