@@ -44,4 +44,6 @@ label {
 }
 input {
     margin-left: 12px;
+    width: 160px;
+    height: 28px;
 }
