@@ -28,16 +28,28 @@
             <div class="box1" style="color: white; font-weight: bold">사용 완료</div> 
         </section>
 
-        <section style="display: flex">
-            <section class="box">
-                <img src="" class="keep" /> <!--저장된 상품 사진이 뜨도록-->
-                <div class="cover">
-                    <b>완료</b>
-                </div>
-                <br />
-                <div class="explanation">{{ product.title }}</div>
-            </section>
+        <ul style="list-style: none">
+          {% for product in half_done %}
+          <!--여기 수정-->
 
+          <section style="display: flex">
+              <li>
+                  <section class="box" style="padding: 0">
+                      <img src="#" class="keep" />
+                      <!--상품 사진 들어갈 자리-->
+                      <div class="cover">
+                          <b>유효 기간</b>
+                          <!--유효기간 들어갈 자리-->
+                      </div>
+                      
+                      <div class="explanation">{{ product.title }}</div>
+                  </section>
+              </li>
+              
+              {% endfor %}
+
+      </ul>
+<!--하단바-->
             <nav class="nav_bottom">
                 <div class="logo">
                   <a href="{% url 'recommend_promotion:rp' %}">
