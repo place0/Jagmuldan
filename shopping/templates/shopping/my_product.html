@@ -29,7 +29,9 @@
     <main>
 
         <div class="main_box">
+            
             {% for p in products %}
+            <div class="group">
             <div class="pic">
                 {% if p.product_image.all %}
                     <img
@@ -37,6 +39,7 @@
                     /><br />
                     {% endif %}
             </div>
+            
             <div class="thing_info">
                 <div class="thing_title">
                     <a href="{% url 'update_upload' p.id %}">{{p.title}}</a><br>
@@ -55,13 +58,15 @@
                     </div>
                 </div>
             </div>
-        
+        </div>
         {% empty %}
         <div class="empty">등록한 상품 없음</div>
     {% endfor %}
     </div>
+
 </div>
     </main>
+
 </body>
 </html>
 </html>
