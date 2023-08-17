@@ -1,15 +1,15 @@
 /*중앙(사진이랑 수정링크)*/
-* {
-    #frame {
-        width: 390px;
-        height: 844px;
-        background-color: white;
-        margin: 50px auto;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-    }
+
+#frame {
+    width: 390px;
+    height: 844px;
+    background-color: white;
+    margin: 50px auto;
+    position: relative;
+    justify-content: center;
+    align-items: center;
 }
+
 /*위치 조절*/
 .main_one {
     top: 30%;
@@ -149,9 +149,7 @@ a {
 .mypage a {
     text-decoration: none;
 }
-body {
-    margin-top: 30%;
-}
+
 /*레스토랑*/
 .move_to_edit_restaurant {
     display: flex;
