@@ -20,7 +20,7 @@ def kakaoPayLogic(request):
 
         # half_purchased인 경우 가격과 수량 조정
         if half_purchased:
-            total_amount += price * quantity * 2
+            total_amount += price * quantity 
         else:
             total_amount += price * quantity
         
