@@ -16,11 +16,11 @@
         </div>
         <form>
             {% for order in orders %}
-                <section class="review">
-                    <div class="photo"><img src="#" /></div>
-                    <div class="content">
-                        상품명: {{ order.product.title }}<br />
-                        수량: {{ order.quantity }}<br />
+            <section class="review">
+                <div class="photo"><img src="#" /></div>
+                <div class="content">
+                    상품명: {{ order.product.title }}<br />
+                    수량: {{ order.quantity }}<br />
                     <fieldset class="rate">
                         <input
                             type="radio"
@@ -60,18 +60,9 @@
                         /><label for="rating1" title="0점"></label>
                     </fieldset>
                 </div>
-                </section>
+            </section>
+
             {% endfor %}
-            <input
-                type="text"
-                class="reviewtext"
-                placeholder="후기를 적어주세요."
-            /><br />
-            <div class="filediv">
-                <input type="file" class="reviewfile" />
-                <b>사진 첨부하기</b>
-            </div>
-            <input type="submit" value="완료하기" class="submit" />
         </form>
     </body>
     <script>
