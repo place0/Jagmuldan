@@ -75,10 +75,7 @@
 .mypage a {
     text-decoration: none;
 }
-/*body*/
-body {
-    margin-top: 30%;
-}
+
 /*위치 조절*/
 .main_one {
     top: 12%;
@@ -93,6 +90,8 @@ body {
     display: flex;
     justify-content: end;
     margin-bottom: 5%;
+    font-weight: bold;
+    font-size: 100%;
 }
 #edit_font {
     font-weight: 500;
