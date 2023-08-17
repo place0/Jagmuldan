@@ -20,11 +20,16 @@ def kakaoPayLogic(request):
 
         # half_purchased인 경우 가격과 수량 조정
         if half_purchased:
-            total_amount += price * quantity 
+            total_amount += price * quantity * 2
         else:
             total_amount += price * quantity
         
         item_names.append(title)
+    print(request.POST.get('product_delivery'))
+
+    print(total_amount)
+    total_amount+=int(request.POST.get('product_delivery'))
+    print(total_amount)
         
     _admin_key = '4c5a240e7c426e334c4ef4808ff9dc02'
     _url = f'https://kapi.kakao.com/v1/payment/ready'

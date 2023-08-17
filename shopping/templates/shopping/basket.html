@@ -37,9 +37,11 @@
                     {%endif%}<br>
                 도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
-                <input type="hidden" id="send_total_price" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
+                <input type="hidden"  name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
+                
+                
                 
         
                 {% endfor %}    
@@ -50,6 +52,7 @@
                     ><br />
                     쿠폰 할인 : <span id="coupon-discount"></span>원<br />
                     배송비 : <span id="delivery"></span><br />
+                    <input type="hidden" id="product_delivery" name="product_delivery" value="2500">
                     <br />
                     <div class="point_title">쿠폰</div>
                     <div class="coupon">
@@ -78,6 +81,7 @@
                             완료하기
                         </button>
                     </div>
+                    
                     <div class="option_delivery">
                         <input type="checkbox" id="delivery-checkbox" />이
                         주소를 기본 주소로 사용하기
@@ -132,7 +136,7 @@
                             );
                             
                             //상품 할인 가격 더함 ( 원래 금액 - 할인받은 금액)*수량 
-                            saved_price += (real_price - price) * quantity;
+                            
 
                             //판매자가 같은 경우 배송비 0원 추가 / 판매자가 다르면 배송비 2500원 추가 
                             var flag = true;
@@ -153,8 +157,10 @@
                             //반만 구매를 했을 경우 총 금액에 더해지는 상품 값은 수량 x 2
                             if (half_purchased === "True") {
                                 total += price * quantity * 2;
+                                saved_price += (real_price - price) * quantity *2;
                             } else { // 반만 구매 상품이 아닌 경우 원래의 가격 x 수량 
                                 total += price * quantity;
+                                saved_price += (real_price - price) * quantity;
                             }
                             //총 가격에 배송비 더함 
                             total += add;
@@ -178,6 +184,12 @@
 
                         $("#order-button").text(total + "원 주문하기");
                         $("#delivery").text(only_delivery_price);
+                        $("#product_delivery").val(only_delivery_price);
+                        
+
+
+                        
+                        console.log(only_delivery_price);
                         $("#saved_price").text(saved_price);
 
                         // 쿠폰 할인 금액을 다시 계산
@@ -195,8 +207,7 @@
                         $("#total").text(finalPrice + "원");
                         //쿠폰으로 할인받은 금액 출력
                         $("#coupon-discount").text(couponDiscount + "원");
-                        send_total_price.value=finalPrice
-                        console.log(send_total_price.value)
+                        
                         
                     }
 
@@ -228,7 +239,6 @@
                         $("#total").text(finalPrice + "원");
                         $("total_price").val(finalPrice)
                         $("#order-button").text(finalPrice + "원 주문하기");
-                        send_total_price.value=finalPrice
 
                         //쿠폰 할인 가격 출력 
                         $("#coupon-discount").text(couponDiscount + "원"); 
