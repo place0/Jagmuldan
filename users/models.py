@@ -30,7 +30,7 @@ class User(AbstractUser):
     
 class Merchant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='merchant')
-    image = models.ImageField(upload_to='merchant/', default='merchant/Koala.png')
+    image = models.ImageField(upload_to='merchant/', default='merchant/jagmuldan.png')
     farm_name = models.CharField(max_length=50)
     farm_adress=models.CharField(max_length=50)
 
@@ -42,7 +42,7 @@ class Restaurant(models.Model):
     address = models.CharField(max_length=200) 
     user = models.OneToOneField(User, on_delete=models.CASCADE,  related_name='restaurant')
     description=models.CharField(max_length=100)
-    image = models.ImageField(upload_to='restaurant_user/', default='restaurant_user/Koala.png')
+    image = models.ImageField(upload_to='restaurant_user/')
     def __str__(self):
         return self.name
 
