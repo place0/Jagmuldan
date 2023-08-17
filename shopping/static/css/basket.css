@@ -277,3 +277,8 @@ img {
     justify-content: space-between;
     flex-direction: row;
 }
+.address_titke {
+    font-weight: 1000;
+    font-size: 120%;
+    margin-bottom: 3%;
+}

@@ -31,9 +31,11 @@
         <div class="main_box">
             {% for p in products %}
             <div class="pic">
-                {% for photo in p.product_image.all %}
-            <img src="{{ photo.image.url }}" width="50"><br>
-            {% endfor %}
+                {% if p.product_image.all %}
+                    <img
+                      src="{{p.product_image.first.image.url}}" width="50"
+                    /><br />
+                    {% endif %}
             </div>
             <div class="thing_info">
                 <div class="thing_title">
@@ -41,11 +43,11 @@
                 </div>
                 <div class="thing_cost">
                     <div class="discount">32%</div>
-                    <div class="cost">13000 원</div>
+                    <div class="cost">{{p.product.discounted_price}}</div>
                 </div>
                 <div class="buttons">
                     <div class="edit_btn">
-                        <button type="submit" id="edit">수정</button>
+                        <a href="{% url 'update_upload' p.id %}"><button type="submit" id="edit">수정</button></a>
                     </div>
                     <div class="delete_btn">
                         <a href="{% url 'delete_product' p.id %}">
@@ -58,7 +60,8 @@
         <div class="empty">등록한 상품 없음</div>
     {% endfor %}
     </div>
-    </main></div>
+</div>
+    </main>
 </body>
 </html>
 </html>
