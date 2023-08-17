@@ -27,7 +27,7 @@
       <!-- 상단 나브바 -->
       <nav class="nav_header">
         <div class="logo">
-          <a href=""><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
+          <a href="{% url 'accounts:about_us' %}"><img src="{% static '/img/logo/4989_logo_L.png' %}" /></a>
         </div>
         <div class="cart">
           <a href="{% url 'basket' %}">
