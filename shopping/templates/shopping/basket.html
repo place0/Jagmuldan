@@ -52,6 +52,7 @@
                     <span id="saved_price">{{saved_price|floatformat:"0"}}</span
                     ><br />
                     쿠폰 할인 : <span id="coupon-discount"></span>원<br />
+                    <input type="hidden" id="product_coupon" name="product_coupon" value="0">
                     배송비 : <span id="delivery"></span><br />
                     <input type="hidden" id="product_delivery" name="product_delivery" value="2500">
                     <br />
@@ -67,6 +68,7 @@
                         <button type="button" id="apply-coupon-button">
                             쿠폰 적용
                         </button>
+
                     </div>
                     <div class="address">
                         <div class="edit" id="edit_link">수정하기</div>
@@ -242,6 +244,7 @@
 
                         //쿠폰 할인 가격 출력 
                         $("#coupon-discount").text(couponDiscount + "원"); 
+                        $('#product_coupon').val(couponDiscount);
                         
                     });
 
@@ -256,6 +259,9 @@
             });
 
         </script>
+
+
+
 
         <script>
             function deletediv() {
