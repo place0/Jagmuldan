@@ -58,9 +58,13 @@
     width: 100%;
 }
 
-.info_title {
+#info_title {
     font-weight: 1000;
     font-size: 120%;
+    color: black;
+}
+a {
+    text-decoration: none;
 }
 .info_detail {
     display: flex;
@@ -93,3 +97,7 @@ img {
     justify-content: center;
 }
 /*하트 아이콘*/
+.main_box {
+    display: flex;
+    flex-direction: column;
+}
