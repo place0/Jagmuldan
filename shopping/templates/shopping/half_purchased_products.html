@@ -19,7 +19,7 @@
         <!--<h1>Half Purchased Products</h1>-->
 
         <ul style="list-style: none;">
-            {% for product in half_purchased_products %}
+            
             <div style="margin-top: 40px">
                 <img
                     src=""
@@ -32,12 +32,14 @@
                 />
             </div>
             <section style="margin-left: 25px; margin-top: 20px; line-height: 30px">
-            <li>
-                <h2>상품명: {{ product.title }}</h2>
-                <p>수량: {{ product.total_quantity }}</p>
-                <p>가격: {{ product.price }}</p>
-                <p>할인율: {{ product.discount_rate }}%</p>
-                <p>유효기간: D-13</p> <!--유효기간-->
+              {% for order in orders %}
+              <li>
+                  <h2>상품명: {{ order.product.title }}</h2>
+                  <p>수량: {{ order.quantity }}</p>
+                  Ordered At: {{ order.time|date:"d-m-Y H:i" }}<br>
+              </li>
+              {% endfor %}
+                  <p>유효기간: D-13</p> <!--유효기간-->
             </section>
             <div style="display: flex; justify-content: space-around">
                 <div class="usebox"><a href="#">바로 구매</a></div> <!--구매 링크-->
@@ -45,8 +47,7 @@
             </div>
 
                 <p><a href="#">Purchase Remaining Half</a></p>
-            </li>
-            {% endfor %}
+            
         </ul>
         <nav class="nav_bottom">
             <div class="logo">
