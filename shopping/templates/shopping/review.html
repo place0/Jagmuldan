@@ -17,7 +17,11 @@
         <form>
             {% for order in orders %}
             <section class="review">
-                <div class="photo"><img src="#" /></div>
+                <div class="photo">
+                    {% for photo in order.product.product_image.all %}
+                        <img src="{{ photo.image.url }}"/>
+                    {% endfor %}
+                </div>
                 <div class="content">
                     상품명: {{ order.product.title }}<br />
                     수량: {{ order.quantity }}<br />
