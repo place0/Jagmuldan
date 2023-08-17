@@ -45,7 +45,7 @@
                 </div>
                 <div class="buttons">
                     <div class="edit_btn">
-                        <button type="submit" id="edit">수정</button>
+                        <a href="{% url 'update_upload' p.id %}"><button type="submit" id="edit">수정</button></a>
                     </div>
                     <div class="delete_btn">
                         <a href="{% url 'delete_product' p.id %}">

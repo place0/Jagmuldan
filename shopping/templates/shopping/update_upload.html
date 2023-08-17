@@ -1,71 +1,196 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    </head>
-    <body>
-        <div id="frame">
-            <form
-                method="POST"
-                action="{% url 'update_upload' product.id %}"
-                enctype="multipart/form-data"
-            >
-                {% csrf_token %} {% if product.type == "과일" %}
-                <input type="radio" name="type" value="과일" checked />과일
-                <input type="radio" name="type" value="채소" />채소<br />
-                {% else %}
-                <input type="radio" name="type" value="과일" />과일
-                <input
-                    type="radio"
-                    name="type"
-                    value="채소"
-                    checked
-                />채소<br />
-                {% endif %} 상품 이름-<input
-                    type="text"
-                    name="title"
-                    value="{{product.title}}"
-                /><br />
-                가격-<input
-                    type="price"
-                    name="price"
-                    value="{{product.price}}"
-                /><br />
-                생산지-<input
-                    type="text"
-                    name="origin"
-                    value="{{product.origin}}"
-                /><br />
-                재배 특징-<textarea name="feature">
-{{product.production_features}}</textarea
-                ><br />
-                기존 이미지 <br />
-                {% for photo in product.product_image.all %}
-                <img src="{{photo.image.url}}" width="50" /><br />
-                {% endfor %} 사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                사진 업로드-<input
-                    multiple="multiple"
-                    type="file"
-                    name="imgs"
-                /><br />
-                <input type="submit" value="상품 수정하기" />
-            </form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static '/css/upload.css' %}" />
+    <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <title>Document</title>
+    <style> 
+        .name2, .price2, .discount2, .count2, .place2, .ch2 {
+
+        }
+li {
+    list-style: none;
+    padding : 5px 10px;
+}
+
+.suBmit2 {
+    display: flex;
+
+    position:relative ;
+    left: 10%;
+}
+    
+    </style>
+  </head>
+  <body>
+    <div id="frame">
+      <!-- 상단 나브바 -->
+      <nav class="nav_header">
+        <div class="logo">
+          <img src="{% static '/img/logo/4989_logo_L.png' %}" />
         </div>
-    </body>
+        <div class="cart">
+          <a href="{% url 'basket' %}">
+            <iconify-icon
+              icon="mingcute:basket-line"
+              style="color: #008d3f"
+              width="35"
+              height="35"
+            ></iconify-icon
+          ></a>
+        </div>
+        {% if not request.user.is_authenticated %}
+        <div class="login"><a href="{% url 'accounts:login' %}">로그인</a></div>
+        {% else %}
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
+        {% endif %}
+      </nav>
+
+      <!-- 뒤로가기 -->
+      <div class="back">
+        <a href="{% url 'index' %}">
+          <iconify-icon
+            icon="ion:caret-back-outline"
+            style="color: #646464"
+            width="30"
+            height="30"
+          ></iconify-icon
+        ></a>
+      </div>
+      <form
+        method="POST"
+        action="{% url 'update_upload' product.id %}"
+        enctype="multipart/form-data"
+      >
+        {% csrf_token %}
+        <!-- 사진 보여지는 부분 -->
+        <div id="img_contain">
+          {% for photo in product.product_image.all %}
+          <img src="{{photo.image.url}}" width="50" />
+        </div>
+
+        <div class="file_upload">
+            {% endfor %}
+          <label for="image">사진업로드</label>
+          <input
+          multiple="multiple"
+          type="file"
+          name="imgs"
+          id="image"
+          accept="image/*"
+          onchange="setThumbnail(event);"
+        />
+        </div>
+
+      
+      
+        <!-- 종류선택 -->
+
+        <div class="select">
+          <div>종류선택</div>
+          {% if product.type == "과일" %}
+          <input
+            type="radio"
+            id="fruit"
+            name="type"
+            value="과일"
+            checked
+          /><label for="fruit"><span>과일</span></label>
+          <input type="radio" id="vegi" name="type" value="채소" /><label
+            for="vegi"
+            ><span>채소</span></label
+          >
+          {% else %}
+          <input
+            type="radio"
+            id="fruit"
+            name="type"
+            value="과일"
+          
+          /><label for="fruit"><span>과일</span></label>
+          <input type="radio" id="vegi" name="type" value="채소"  checked/><label
+            for="vegi"
+            ><span>채소</span></label
+          >
+        </div>
+
+        {% comment %} <input type="radio" name="type" value="과일" />과일
+        <input type="radio" name="type" value="채소" checked />채소<br /> {% endcomment %}
+        {% endif %} 
+
+           <!-- 상품이름 ~ 상품등록  -->
+           <ul>
+            <li>
+        
+            <!-- 상품이름 -->
+            <div class="name2">
+             <span>상품이름</span
+                ><input type="text" name="title"   value="{{product.title}}" id="product_name" />
+            
+         
+         </li>
+            <!-- 가격 -->
+            <li>
+            <div class="price2">
+              <span>가격</span
+                ><input type="price" name="price" value="{{product.price}}"id="price2"
+              />
+            </div>
+        </li>
+            <!-- 할인률 -->
+            <li>
+            <div class="discount2">
+             <span>할인률</span
+                ><input type="number" id="price3" name="discount_rate"
+              />
+            </div>
+        </li>
+            <!-- 판매수량 -->
+            <li>
+            <div class="count2">
+             <span>판매수량</span
+                ><input type="number" name="total_quantity" id="product_count"
+              />
+            </div>
+        </li>
+            <!-- 생산지 -->
+            <li>
+            <div class="place2">
+             <span>생산지</span
+                ><input type="text" name="origin"  value="{{product.origin}}"id="product_place"
+              />
+            </div>
+        </li>
+            <!-- 재배특징 -->
+            <li>
+            <div class="ch2">
+              <span>재배특징</span>
+              <textarea name="feature"  id="product_ch">
+                {{product.production_features}}</textarea
+                        >
+              
+            </div>
+        </li>
+    </ul>
+ <!-- 상품수정하기 -->
+ <div class="suBmit2">
+    <input
+      type="submit"
+      value="상품수정하기"
+      placeholder="상품등록하기"
+    />
+  </div>
+        
+      </form>
+
+
+     
+    </div>
+  </body>
 </html>
