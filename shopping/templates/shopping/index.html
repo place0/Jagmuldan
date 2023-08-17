@@ -81,7 +81,7 @@
         {% for product in products %}
         <div data-type="{{ product.type }}">
           {% for photo in product.product_image.all %}
-          <img src="{{photo.image.url}}" width="345px" height="170px" />
+          <img src="{{photo.image.url}}" />
           {% endfor %}
           <p>"{{best.title}}"</p>
         </div>
@@ -128,8 +128,7 @@
       <!-- 광고 배너 -->
 
       <div class="ad">
-        <img src="/image/홍보물_임영웅.png" alt="" />
-        <img src="{% static '/img/홍보물_임영웅.png' %}" />
+        <img src="{% static '/img/임영웅홍보물2.png' %}" alt="" />
       </div>
       <div class="ad_x">
         <button>x</button>
