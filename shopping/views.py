@@ -299,6 +299,10 @@ def half_purchased_products(request):
     }
     return render(request, 'shopping/half_purchased_products.html', {'orders': orders})
 
+def review_purchased_products(request):
+    orders = Order.objects.filter(customer=request.user)
+    return render(request, 'shopping/review.html', {'orders': orders})
+
 # 장바구니에서 구매 >> post 참고..
 def final(request):
     if request.method == "POST":

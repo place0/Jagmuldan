@@ -24,5 +24,6 @@ urlpatterns = [
     path('add_remove_whishlist/<int:id>/', add_remove_whishlist, name='add_remove_whishlist'),
     
     path('half_purchased/', half_purchased_products, name='half_purchased_products'),
+    path('review_purchased/', review_purchased_products, name='review_purchased_products')
     # path('restaurant/review/')
 ]
