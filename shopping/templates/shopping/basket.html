@@ -41,7 +41,8 @@
                 <input type="hidden"  name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
-                
+                {% empty %}
+                없음
                 
                 
         
