@@ -1,148 +1,87 @@
-@media (max-width: 590px) {
-    /*내가 찜한 상품*/
-    .title {
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        grid-template-areas: "one" "two" "three";
-        margin: 5%;
-    }
-    .bincan {
-        grid-area: "one";
-    }
-    .cancled {
-        grid-area: "three";
-        display: flex;
-        justify-content: right;
-    }
-    #btn_delete {
-        border-style: none;
-        font-size: 180%;
-    }
-    .title_text {
-        grid-area: "two";
-        display: flex;
+* {
+    #frame {
+        width: 390px;
+        height: 844px;
+        background-color: white;
+        margin: 50px auto;
+        position: relative;
         justify-content: center;
-        font-size: 140%;
-        font-weight: 950;
+        align-items: center;
     }
-    #delete_img {
-        width: 130%;
-    }
-    /*제품*/
-    .box_1 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 10%;
-    }
-    .img {
-        justify-content: center;
-        display: flex;
-        margin-right: 5%;
-        margin-left: 2%;
-    }
-    .info_title {
-        font-weight: 1000;
-        font-size: 93%;
-    }
-    .info_detail {
-        display: flex;
-        flex-direction: row;
-        margin-top: 8%;
-    }
-    .info_discount {
-        margin-right: 3%;
-        font-size: 100%;
-        font-weight: 900;
-        color: #008d3f;
-    }
-    .info_cost {
-        font-size: 100%;
-        font-weight: 900;
-    }
-    /*이미지*/
-    #saved_img {
-        width: 100%;
-        height: 95%;
-    }
-    /*없을 때*/
-    .empty {
-        font-size: 150%;
-        font-weight: 900;
-        color: #008d3f;
-        margin-top: 30%;
-        display: flex;
-        justify-content: center;
-    }
-    /*하트 아이콘*/
 }
-@media (min-width: 591px) {
-    /*내가 찜한 상품*/
-    .title {
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
-        grid-template-areas: "one" "two" "three";
-        margin: 5%;
-    }
-    .bincan {
-        grid-area: "one";
-    }
-    .cancled {
-        grid-area: "three";
-        display: flex;
-        justify-content: right;
-    }
-    #btn_delete {
-        border-style: none;
-        font-size: 180%;
-    }
-    .title_text {
-        grid-area: "two";
-        display: flex;
-        justify-content: center;
-        font-size: 150%;
-        font-weight: 1000;
-    }
-    #delete_img {
-        width: 160%;
-    }
-    /*제품*/
-    .box_1 {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-    }
-    .img {
-        margin-right: 3%;
-    }
-    .info_title {
-        margin-top: 5%;
-        font-weight: 900;
-        font-size: 120%;
-    }
-    .info_detail {
-        display: flex;
-        flex-direction: row;
-        margin-top: 15%;
-    }
-    .info_discount {
-        margin-right: 3%;
-        font-size: 130%;
-        font-weight: 900;
-        color: #008d3f;
-    }
-    .info_cost {
-        font-size: 130%;
-        font-weight: 900;
-    }
-    /*없을 때*/
-    .empty {
-        font-size: 150%;
-        font-weight: 900;
-        color: #008d3f;
-        margin-top: 30%;
-        display: flex;
-        justify-content: center;
-    }
-    /*하트 아이콘*/
+/*내가 찜한 상품*/
+.title {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas: "one" "two" "three";
+    margin: 5%;
 }
+.bincan {
+    grid-area: "one";
+}
+.cancled {
+    grid-area: "three";
+    display: flex;
+    justify-content: right;
+}
+#btn_delete {
+    border-style: none;
+    font-size: 180%;
+}
+.title_text {
+    grid-area: "two";
+    display: flex;
+    justify-content: center;
+    font-size: 140%;
+    font-weight: 950;
+}
+#delete_img {
+    width: 130%;
+}
+/*제품*/
+.box_1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 10%;
+}
+.img {
+    justify-content: center;
+    display: flex;
+    margin-right: 5%;
+    margin-left: 2%;
+}
+.info_title {
+    font-weight: 1000;
+    font-size: 93%;
+}
+.info_detail {
+    display: flex;
+    flex-direction: row;
+    margin-top: 8%;
+}
+.info_discount {
+    margin-right: 3%;
+    font-size: 100%;
+    font-weight: 900;
+    color: #008d3f;
+}
+.info_cost {
+    font-size: 100%;
+    font-weight: 900;
+}
+/*이미지*/
+#saved_img {
+    width: 100%;
+    height: 95%;
+}
+/*없을 때*/
+.empty {
+    font-size: 150%;
+    font-weight: 900;
+    color: #008d3f;
+    margin-top: 30%;
+    display: flex;
+    justify-content: center;
+}
+/*하트 아이콘*/

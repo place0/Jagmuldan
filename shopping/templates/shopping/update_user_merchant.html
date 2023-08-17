@@ -11,6 +11,7 @@
         <title>Document</title>
     </head>
     <body>
+        <div id="frame">
         <nav class="nav_header">
             <div class="logo">
               <img src="{% static '/img/logo/4989_logo_L.png' %}" />
@@ -38,8 +39,8 @@
             </div>
             {% endif %}
             <div class="mypage"><a href="{% url 'mypage' %}">마이페이지</a></div>
-          </nav>
-    
+          </div>
+    </nav>    
 
         <main>
             <form method="POST" action="" enctype="multipart/form-data">
@@ -67,7 +68,7 @@
                         >
                     </div>
                 </div>
-            </div>
+            
         
       
             <div class="main_intro_change">
@@ -92,6 +93,6 @@
         <div class="input_submit">
         <input type="submit"  id="input_btn"
         value="수정하기"></div>
-    </main></form>
-    </body>
+    </form>
+    </div></main></body>
 </html>
