@@ -178,7 +178,6 @@ input[type="text"]:focus {
   top: 28%;
   width: 345px;
   height: 170px;
-  background-image: url(/Jagmuldan/shopping/static/img/농작물/옥수수1.png);
   overflow: hidden;
   border: #008d3f solid 3px;
   border-radius: 10px;
@@ -204,6 +203,7 @@ input[type="text"]:focus {
   font-size: 25px;
   font-weight: 600;
 }
+
 /* 상품 리스트 */
 #product_list_fruit,
 #product_list_vegi,
@@ -220,7 +220,7 @@ input[type="text"]:focus {
 #product_list_all::-webkit-scrollbar {
   width: 1px;
 }
-ul {
+#product_list_all ul {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -229,7 +229,7 @@ ul {
   padding: 10px;
 }
 
-li {
+#product_list_all li {
   list-style: none;
   width: 150px;
   height: 150px;
@@ -239,7 +239,7 @@ li {
   position: relative;
 }
 
-li img {
+#product_list_all li img {
   position: absolute;
   width: 150px;
   height: 150px;
@@ -247,15 +247,15 @@ li img {
   object-fit: cover;
 }
 
-li .infoBox {
+#product_list_all li .infoBox {
   position: absolute;
   width: 150px;
-  height: 110px;
+  height: 150px;
   background: rgba(217, 217, 217, 0.65);
   opacity: 0;
 }
 
-li .infoBox:hover {
+#product_list_all li .infoBox:hover {
   animation: modalSlideIn 0.3s ease-in;
   opacity: 1;
 }
@@ -270,7 +270,7 @@ li .infoBox:hover {
   }
 }
 /* 상품이름 title */
-li .infoBox span {
+#product_list_all li .infoBox span {
   font-weight: 700;
   font-size: 20px;
   color: #454444;
@@ -279,7 +279,7 @@ li .infoBox span {
   left: 7%;
 }
 /* 상품 가격 price */
-li .infoBox p {
+#product_list_all li .infoBox p {
   position: absolute;
   top: 20%;
   left: 7%;
@@ -296,7 +296,7 @@ li .infoBox p {
   font-weight: lighter;
 }
 
-li .infoBox a button {
+#product_list_all li .infoBox a button {
   border: none;
   background-color: #008d3f;
   color: #454444;
