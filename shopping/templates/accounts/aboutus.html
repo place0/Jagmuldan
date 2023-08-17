@@ -7,10 +7,6 @@
         <title>Document</title>
         <link rel="stylesheet" href="{% static '/css/font.css'%}" />
         <style>
-            * {
-                padding: 3px;
-                font-family: "Pretendard", sans-serif;
-            }
             body {
                 width: 390px;
                 height: 844px;
@@ -19,6 +15,7 @@
                 position: relative;
                 justify-content: center;
                 align-items: center;
+                font-family: "Pretendard", sans-serif;
             }
             .ment b {
                 font-size: 13pt;
@@ -36,19 +33,17 @@
                 padding: 0;
                 margin-left: 0;
             }
-            .nav_bottom {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-                position: absolute;
-                bottom: 0px;
+            img {
                 width: 390px;
-                height: 80px;
-                background: rgba(244, 244, 244, 1);
+                height: 300px;
             }
-            .nav_bottom > .logo {
-                display: flex;
+            a:visited {
+                color: black;
+                text-decoration: none;
+            }
+            a {
+                color: black;
+                text-decoration: none;
             }
         </style>
     </head>
@@ -80,7 +75,7 @@
         </div>
         <div style="display: flex; justify-content: center">
             <img
-                src="{% static '/img/image 12.png' %}"
+                src="{% static '/img/logo/어바웃어스/image 12.png' %}"
                 style="width: 230px; height: 300px"
             />
         </div>
@@ -91,9 +86,9 @@
                 >단 하나의 작물도 허투루 버려지지 않도록</b
             ><br />
             <img
-                src="{% static '/img/image 13.png' %}"
+                src="{% static '/img/logo/어바웃어스/image 13.png' %}"
                 style="width: 330px; height: 250px; margin: 10px auto"
-            />
+            /><br />
             <b>정성을 보냅니다.</b><br />
             <b>모두를 위해, 모두와 함께합니다.</b>
         </div>
@@ -108,8 +103,9 @@
         <div class="talk" style="width: 190px; margin-left: 150px">
             234개의 점포와 성장 중
         </div>
+        <br />
         <img
-            src="{% static '/img/image 16.png' %}"
+            src="{% static '/img/logo/어바웃어스/image 16.png' %}"
             style="width: 330px; height: 250px"
         />
         <div style="display: flex; font-size: 13pt; font-weight: bold">
@@ -119,40 +115,9 @@
             >
         </div>
         <br />
-        <div class="talk" style="margin-left: 70px">구매하러 가기</div>
+        <a href="{% url 'index' %}"
+            ><div class="talk" style="margin-left: 70px">구매하러 가기</div></a
+        >
         <div style="height: 150px"></div>
-        <nav class="nav_bottom">
-            <div class="logo">
-                <a href="{% url 'recommend_promotion:rp' %}">
-                    <iconify-icon
-                        icon="mdi:corn"
-                        style="color: #008d3f"
-                        width="45"
-                        height="43"
-                    ></iconify-icon
-                ></a>
-            </div>
-            <!--홈 링크 추가-->
-            <div class="home">
-                <a href="{% url 'index' %}">
-                    <iconify-icon
-                        icon="octicon:home-24"
-                        style="color: #008d3f"
-                        width="38"
-                        height="38"
-                    ></iconify-icon
-                ></a>
-            </div>
-            <div class="community">
-                <a href="{% url 'community:main' %}">
-                    <iconify-icon
-                        icon="clarity:talk-bubbles-line"
-                        style="color: #008d3f"
-                        width="38"
-                        height="38"
-                    ></iconify-icon
-                ></a>
-            </div>
-        </nav>
     </body>
 </html>
