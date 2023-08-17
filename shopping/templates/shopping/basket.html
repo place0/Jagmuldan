@@ -86,18 +86,24 @@
 
                     </div>
                     <div class="address">
+                        <form action="" method="post">
                         <div class="edit" id="edit_link">수정하기</div>
                         <div class="address_detailed">
-                            <div class="addressinfo">받는 분</div>
-                            <div class="complete">전화번호</div>
-                            <div class="option">주소</div>
-                            <div class="wanted">상세 주소</div>
+                            <div class="addressinfo">받는 분 <input  type="text" value="{{request.user.username}}"></div>
+                            {% if not request.user.phone_number %}
+                            <div class="complete">전화번호 <input  type="text" name="number" value=""></div>
+                            {% else %}
+                            <div class="complete">전화번호 <input  type="text" name="number" value="{{request.user.phone_number}}">
+                            {% endif %}
+                            <div class="option">주소 <input  type="text" name="adress" value="{{request.user.address}}"></div>
+                            <div class="wanted">상세 주소 <input  type="text" name="detail_adress" value="{{request.user.detail_adress}}"></div>
                         </div>
-                    </div>
-                    <div class="address_btn">
-                        <button type="submit" id="address-button">
-                            완료하기
-                        </button>
+                        <div class="address_btn">
+                            <button name="action" value="update" type="button" id="address-button">
+                                완료하기
+                            </button>
+                        </div>
+                    </from>
                     </div>
                     
                     <div class="option_delivery">

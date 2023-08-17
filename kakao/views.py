@@ -106,8 +106,8 @@ def paySuccess(request):
             basket_item.delete()
 
 
-    return render(request, 'kakao/paySuccess.html')
+    return render(request, 'shopping/basket.html')
 def payFail(request):
-    return render(request, 'kakao/payFail.html')
+    return render(request, 'shopping/basket.html')
 def payCancel(request):
-    return render(request, 'kakao/payCancel.html')
+    return render(request, 'shopping/basket.html')
