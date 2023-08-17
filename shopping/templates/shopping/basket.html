@@ -80,7 +80,7 @@
                     상품 할인 :
                     <span id="saved_price">{{saved_price|floatformat:"0"}}</span
                     ><br />
-                    쿠폰 할인 : <span id="coupon-discount"></span>원<br />
+                    쿠폰 할인 : <span id="coupon-discount"></span><br />
                     <input type="hidden" id="product_coupon" name="product_coupon" value="0">
                     배송비 : <span id="delivery"></span><br />
                     <input type="hidden" id="product_delivery" name="product_delivery" value="2500">
@@ -224,13 +224,13 @@
                         total -= couponDiscount;
 
                         $("#order-button").text(total + "원 주문하기");
-                        $("#delivery").text(only_delivery_price);
+                        $("#delivery").text(only_delivery_price+"원");
                         $("#product_delivery").val(only_delivery_price);
 
 
                         
                         console.log(only_delivery_price);
-                        $("#saved_price").text(saved_price);
+                        $("#saved_price").text(saved_price+'원');
 
                         // 쿠폰 할인 금액을 다시 계산
                         var selectedCouponValue = parseInt(
