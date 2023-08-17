@@ -110,10 +110,10 @@
                             {% if not request.user.phone_number %}
                             <div class="complete">전화번호 <input  type="text" name="number" value=""></div>
                             {% else %}
-                            <div class="complete">전화번호 <input  type="text" name="number" value="{{request.user.phone_number}}">
+                            <div class="complete">전화번호 <input  type="text" name="number" value="">
                             {% endif %}
-                            <div class="option">주소 <input  type="text" name="adress" value="{{request.user.address}}"></div>
-                            <div class="wanted">상세 주소 <input  type="text" name="detail_adress" value="{{request.user.detail_adress}}"></div>
+                            <div class="option">주소 <input  type="text" name="adress" value=""></div>
+                            <div class="wanted">상세 주소 <input  type="text" name="detail_adress" value=""></div>
                         </div>
                         <div class="address_btn">
                             <button name="action" value="update" type="button" id="address-button">
