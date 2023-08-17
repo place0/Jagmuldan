@@ -68,7 +68,7 @@
             <div class="main_pic">
                 <picture
                     ><img id="mypage_img " src="{% static '/img/마이페이지/해커톤_마이페이지.png' %}" /></picture>
-                <div class="id_font">아이디</div> 
+                <div class="id_font">{{request.user.username}}</div> 
                 <div class="logout_btn">
                 <a href="{% url 'accounts:logout' %}">로그아웃</a></div>
             </div>
