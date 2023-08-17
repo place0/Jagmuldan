@@ -8,18 +8,24 @@
         <link rel="stylesheet" href="{% static 'css/half_use.css' %}" />
         <link rel="stylesheet" href="{% static '/css/font.css'%}" />
         <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+        <style>
+            .usebox a {
+                color: white;
+            }
+        </style>
     </head>
     <body>
         <div style="display: flex; justify-content: space-between">
-            <span style="margin-left: 130px">작물 꺼내기</span>
-            <a href="#"><span>X</span><!--뒤로가기--></a>
+            <span style="margin-left: 160px">작물 꺼내기</span>
+            <a href="#"
+                ><span>X</span
+                ><!--뒤로가기--></a
+            >
         </div>
 
-        
         <!--<h1>Half Purchased Products</h1>-->
 
-        <ul style="list-style: none;">
-            
+        <ul style="list-style: none">
             <div style="margin-top: 40px">
                 <img
                     src=""
@@ -31,56 +37,58 @@
                     "
                 />
             </div>
-            <section style="margin-left: 25px; margin-top: 20px; line-height: 30px">
-              {% for order in orders %}
-              <li>
-                  <h2>상품명: {{ order.product.title }}</h2>
-                  <p>수량: {{ order.quantity }}</p>
-                  Ordered At: {{ order.time|date:"d-m-Y H:i" }}<br>
-              </li>
-              {% endfor %}
-                  <p>유효기간: D-13</p> <!--유효기간-->
+            <section
+                style="margin-left: 25px; margin-top: 20px; line-height: 30px"
+            >
+                {% for order in orders %}
+                <li>
+                    <h2>상품명: {{ order.product.title }}</h2>
+                    <p>수량: {{ order.quantity }}</p>
+                    Ordered At: {{ order.time|date:"d-m-Y H:i" }}<br />
+                </li>
+                {% endfor %}
+                <p>유효기간: D-13</p>
+                <!--유효기간-->
             </section>
             <div style="display: flex; justify-content: space-around">
-                <div class="usebox"><a href="#">바로 구매</a></div> <!--구매 링크-->
-                <div class="usebox"><a href="#">장바구니</a></div> <!--장바구니에 추가되도록/링크-->
+                <div class="usebox"><a href="#">바로 구매</a></div>
+                <!--구매 링크-->
+                <div class="usebox"><a href="#">장바구니</a></div>
+                <!--장바구니에 추가되도록/링크-->
             </div>
-
-                <p><a href="#">Purchase Remaining Half</a></p>
-            
         </ul>
         <nav class="nav_bottom">
             <div class="logo">
-              <a href="{% url 'recommend_promotion:rp' %}">
-                <iconify-icon
-                  icon="mdi:corn"
-                  style="color: #008d3f"
-                  width="45"
-                  height="43"
-                ></iconify-icon
-              ></a>
+                <a href="{% url 'recommend_promotion:rp' %}">
+                    <iconify-icon
+                        icon="mdi:corn"
+                        style="color: #008d3f"
+                        width="45"
+                        height="43"
+                    ></iconify-icon
+                ></a>
             </div>
-    <!--홈 링크-->
-    <div class="home">
-      <a href="{% url 'index' %}">
-          <iconify-icon
-              icon="octicon:home-24"
-              style="color: #008d3f"
-              width="38"
-              height="38"
-          ></iconify-icon>
-      </a>
-  </div>
+            <!--홈 링크-->
+            <div class="home">
+                <a href="{% url 'index' %}">
+                    <iconify-icon
+                        icon="octicon:home-24"
+                        style="color: #008d3f"
+                        width="38"
+                        height="38"
+                    ></iconify-icon>
+                </a>
+            </div>
             <div class="community">
-              <a href="{% url 'community:main' %}">
-                <iconify-icon
-                  icon="clarity:talk-bubbles-line"
-                  style="color: #008d3f"
-                  width="38"
-                  height="38"
-                ></iconify-icon
-              ></a>
+                <a href="{% url 'community:main' %}">
+                    <iconify-icon
+                        icon="clarity:talk-bubbles-line"
+                        style="color: #008d3f"
+                        width="38"
+                        height="38"
+                    ></iconify-icon
+                ></a>
             </div>
-          </nav>
+        </nav>
     </body>
 </html>
