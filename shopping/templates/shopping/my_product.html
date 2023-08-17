@@ -46,7 +46,7 @@
                 </div>
                 <div class="thing_cost">
                     <div class="discount">{{p.discount_rate}}%</div>
-                    <div class="cost">{{p.product.discounted_price}}원</div>
+                    <div class="cost">{{p.discounted_price|floatformat:"0"}}원</div>
                 </div>
                 <div class="buttons">
                     <div class="edit_btn">
