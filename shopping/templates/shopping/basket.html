@@ -8,17 +8,39 @@
         <title>Document</title>
     </head>
     <body>
-        <div id="cart-container">
+
+        <div id="frame">
+            <div id="cart-container">
             <!--결제하기 화면과 연결 -->{% csrf_token %} {% for p in products %}
-            <form id="cart-form" action="/kakaoPayLogic/" method="post">
+                    <form id="cart-form" action="/kakaoPayLogic/" method="post">
+                <div class="product_!">
+
+                    
+                            
                 {% csrf_token %} 
+                <div class="product_list">
+                    <div class="product_pic">
                     {% for photo in p.product.product_image.all %}
                         <img src="{{ photo.image.url }}" width="50"><br>
+<<<<<<< HEAD
                     {% endfor %}
                     <input type="checkbox" class="product-checkbox" name="selected_products" value="{{ p.product.id }}" checked
+=======
+                    {% endfor %}</div>
+                    <div class="product_info_Detail">
+                    <div class="product_info_more">
+                        <div class="product_top">
+                    <div class="product_title">
+                        <input type="checkbox" class="product-checkbox" data-real-price="{{p.product.price}}" name="selected_products" data-seller="{{p.product.seller}}"
+                     value="{{ p.product.id }}" checked
+>>>>>>> upstream/main
                     data-product-price="{{  p.product.discounted_price|floatformat:'0' }}" data-half_purchased="{{p.half_purchased}}" data-product-quantity="{{ p.quantity }}">
                     
-                    {{ p.product.title }}<br>
+                    
+                    {{ p.product.title }}<br></div>
+
+                    <a href="{% url 'basket-delete' p.product.id %}">삭제</a></div></div>
+                    <div class="product_detail">
                     가격 - {{ p.product.discounted_price|floatformat:"0" }}원
                     <br>
                     {% if p.half_purchased %}
@@ -28,19 +50,34 @@
                     {% else %}
                         수량 - {{p.quantity}}<br>
                     {% endif %}
-                <a href="{% url 'basket-delete' p.product.id %}">장바구니 삭제</a><br>
+                
                 배송비 - {% if not request.user.low_income %}
                     2500원(따로 설정)
                     {% else %}
                     0원 - 저소득층 지원
                     {%endif%}<br>
-                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><hr><br>
+                도착 예정일 - {{arrive_day}}{{arrive_day|date:"l"}}(일요일 제외)<br><br>
                 <input type="hidden" name="product_title_{{p.product.id}}" value="{{ p.product.title }}">
+<<<<<<< HEAD
                 <input type="hidden" name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
                 <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
                 <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
+=======
+                <input type="hidden"  name="product_price_{{p.product.id}}" value="{{ p.product.discounted_price }}">
+                <input type="hidden" name="product_quantity_{{p.product.id}}" value="{{ p.quantity }}">
+                <input type="hidden" name="product_half_purchased_{{p.product.id}}" value="{{ p.half_purchased }}">
+<<<<<<< HEAD
+                
+                
+                
+=======
+                    </div>
+                {% endfor %}  
+                </div>
         
-                {% endfor %}    
+>>>>>>> 34499ac419317b6623260d1f4dc4b7e60632f9e5
+>>>>>>> upstream/main
+        
                     <hr />
                     총 결제 금액 : <span id="total"></span><br />
                     상품 할인 :
@@ -48,6 +85,7 @@
                     ><br />
                     쿠폰 할인 : <span id="coupon-discount"></span>원<br />
                     배송비 : <span id="delivery"></span><br />
+                    <input type="hidden" id="product_delivery" name="product_delivery" value="2500">
                     <br />
                     <div class="point_title">쿠폰</div>
                     <div class="coupon">
@@ -76,6 +114,7 @@
                             완료하기
                         </button>
                     </div>
+                    
                     <div class="option_delivery">
                         <input type="checkbox" id="delivery-checkbox" />이
                         주소를 기본 주소로 사용하기
@@ -99,9 +138,14 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        
+
+
+
+</div>
+
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js">
             $(document).ready(function () {
                 var total = 0;
                 var couponDiscount = 0; // 쿠폰 할인 가격을 초기화
@@ -126,8 +170,14 @@
                             var real_price = parseInt(
                                 $(this).data("real-price")
                             );
+<<<<<<< HEAD
 
                             saved_price += (real_price - price) * quantity;
+=======
+                            
+                            //상품 할인 가격 더함 ( 원래 금액 - 할인받은 금액)*수량 
+                            
+>>>>>>> upstream/main
 
                             var flag = true;
                             for (let i = 0; i < seller_list.length; i++) {
@@ -146,8 +196,14 @@
 
                             if (half_purchased === "True") {
                                 total += price * quantity * 2;
+<<<<<<< HEAD
                             } else {
+=======
+                                saved_price += (real_price - price) * quantity *2;
+                            } else { // 반만 구매 상품이 아닌 경우 원래의 가격 x 수량 
+>>>>>>> upstream/main
                                 total += price * quantity;
+                                saved_price += (real_price - price) * quantity;
                             }
                             total += add;
                             only_delivery_price += add;
@@ -164,6 +220,12 @@
 
                         $("#order-button").text(total + "원 주문하기");
                         $("#delivery").text(only_delivery_price);
+                        $("#product_delivery").val(only_delivery_price);
+                        
+
+
+                        
+                        console.log(only_delivery_price);
                         $("#saved_price").text(saved_price);
 
                         // 쿠폰 할인 금액을 다시 계산하여 출력
@@ -178,6 +240,11 @@
 
                         $("#total").text(finalPrice + "원");
                         $("#coupon-discount").text(couponDiscount + "원");
+<<<<<<< HEAD
+=======
+                        
+                        
+>>>>>>> upstream/main
                     }
 
                     $("#apply-coupon-button").on("click", function () {
@@ -201,7 +268,14 @@
 
                         $("#total").text(finalPrice + "원");
                         $("#order-button").text(finalPrice + "원 주문하기");
+<<<<<<< HEAD
                         $("#coupon-discount").text(couponDiscount + "원"); // 쿠폰 할인 가격을 출력
+=======
+
+                        //쿠폰 할인 가격 출력 
+                        $("#coupon-discount").text(couponDiscount + "원"); 
+                        
+>>>>>>> upstream/main
                     });
 
                     // 체크박스 변경 이벤트를 처리
@@ -221,5 +295,10 @@
                 div.remove();
             }
         </script>
-    </body>
+    
+
+
+
+
+</body>
 </html>
