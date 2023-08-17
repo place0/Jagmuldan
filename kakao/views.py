@@ -14,7 +14,8 @@ def kakaoPayLogic(request):
         title = request.POST.get(f'product_title_{product_id}')
         price = int(request.POST.get(f'product_price_{product_id}').split('.')[0])
         price = int(float(price))
-        quantity = int(request.POST.get(f'product_quantity_{product_id}'))
+        quantity = int(request.POST.get(f'product_quantity_{product_id}').split('.')[0])
+        quantity = int(float(quantity))
         half_purchased = request.POST.get(f'product_half_purchased_{product_id}') == 'True'
 
         # half_purchased인 경우 가격과 수량 조정

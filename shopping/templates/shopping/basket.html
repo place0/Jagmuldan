@@ -22,8 +22,8 @@
                     가격 - {{ p.product.discounted_price|floatformat:"0" }}원
                     <br>
                     {% if p.half_purchased %}
-                        주문 수량 - {{ p.quantity|multiply:2 }}<br>
-                        배송 수량 - {{p.quantity}}<br>
+                        주문 수량 - {{ p.quantity|multiply:2|floatformat:"0" }}<br>
+                        배송 수량 - {{p.quantity|floatformat:"0" }}<br>
                         반만 배송 상품입니다. 결제 후 마이페이지 내 곳간에서 나머지 수량을 배송받을 수 있습니다.
                     {% else %}
                         수량 - {{p.quantity}}<br>
