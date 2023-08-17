@@ -95,34 +95,17 @@ li {
         <div class="select">
           <div>종류선택</div>
           {% if product.type == "과일" %}
-          <input
-            type="radio"
-            id="fruit"
-            name="type"
-            value="과일"
-            checked
-          /><label for="fruit"><span>과일</span></label>
-          <input type="radio" id="vegi" name="type" value="채소" /><label
-            for="vegi"
-            ><span>채소</span></label
-          >
+            <input type="radio" id="fruit" name="type" value="과일" checked />
+            <label for="fruit"><span>과일</span></label>
+            <input type="radio" id="vegi" name="type" value="채소" />
+            <label for="vegi"><span>채소</span></label>
           {% else %}
-          <input
-            type="radio"
-            id="fruit"
-            name="type"
-            value="과일"
-          
-          /><label for="fruit"><span>과일</span></label>
-          <input type="radio" id="vegi" name="type" value="채소"  checked/><label
-            for="vegi"
-            ><span>채소</span></label
-          >
-        </div>
+            <input type="radio" id="fruit" name="type" value="과일" />
+            <label for="fruit"><span>과일</span></label>
+            <input type="radio" id="vegi" name="type" value="채소" checked />
+            <label for="vegi"><span>채소</span></label>
+          {% endif %}
 
-        {% comment %} <input type="radio" name="type" value="과일" />과일
-        <input type="radio" name="type" value="채소" checked />채소<br /> {% endcomment %}
-        {% endif %} 
 
            <!-- 상품이름 ~ 상품등록  -->
            <ul>
