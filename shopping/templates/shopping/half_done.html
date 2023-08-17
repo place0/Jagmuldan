@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>사용 가능</title>
+        <link rel="stylesheet" href="{% static 'css/half_done.css' %}">
+        <link rel="stylesheet" href="{% static '/css/font.css'%}" />
+        <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+
+    </head>
+    <body>
+        <div style="display: flex; justify-content: space-between">
+            <span style="margin-left: 120px">내 곳간 보기</span>
+            <span>X</span> <!--뒤로가기-->
+        </div>
+        <section
+            style="
+                display: flex;
+                justify-content: space-evenly;
+                margin-top: 40px;
+            "
+        >
+            <div class="box1" >
+                <a href="#">사용 가능</a> <!--ing로 이동-->
+            </div>
+            <div class="box1" style="color: white; font-weight: bold">사용 완료</div> 
+        </section>
+
+        <section style="display: flex">
+            <section class="box">
+                <img src="" class="keep" /> <!--저장된 상품 사진이 뜨도록-->
+                <div class="cover">
+                    <b>완료</b>
+                </div>
+                <br />
+                <div class="explanation">{{ product.title }}</div>
+            </section>
+
+            <nav class="nav_bottom">
+                <div class="logo">
+                  <a href="{% url 'recommend_promotion:rp' %}">
+                    <iconify-icon
+                      icon="mdi:corn"
+                      style="color: #008d3f"
+                      width="45"
+                      height="43"
+                    ></iconify-icon
+                  ></a>
+                </div>
+        <!--홈링크추가-->
+                <div class="home">
+                  <iconify-icon
+                    icon="octicon:home-24"
+                    style="color: #008d3f"
+                    width="38"
+                    height="38"
+                  ></iconify-icon>
+                </div>
+                <div class="community">
+                  <a href="{% url 'community:main' %}">
+                    <iconify-icon
+                      icon="clarity:talk-bubbles-line"
+                      style="color: #008d3f"
+                      width="38"
+                      height="38"
+                    ></iconify-icon
+                  ></a>
+                </div>
+              </nav>
+    </body>
+</html>

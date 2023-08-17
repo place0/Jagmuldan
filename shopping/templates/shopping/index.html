@@ -76,6 +76,7 @@
       <!-- 가장 잘 나가는 상품 -->
       <div class="hot">
         <div><span>오늘의 HOT 상품!</span></div>
+<<<<<<< HEAD
         {% for product in products %}
         <div data-type="{{ product.type }}">
           {% for photo in product.product_image.all %}
@@ -84,6 +85,16 @@
           <p>"{{best.title}}"</p>
         </div>
         {% endfor %}
+=======
+        <p>{{best.title}}</p>
+        {% for photo in best.product_image.all %}
+            <img
+              src="{{photo.image.url}}"
+              width="150px,"
+              height="150px"
+            /><br />
+            {% endfor %}
+>>>>>>> upstream/main
       </div>
 
       <article id="product_list_all">
