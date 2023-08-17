@@ -64,6 +64,13 @@
       <div class="hot">
         <div><span>오늘의 HOT 상품!</span></div>
         <p>{{best.title}}</p>
+        {% for photo in best.product_image.all %}
+            <img
+              src="{{photo.image.url}}"
+              width="150px,"
+              height="150px"
+            /><br />
+            {% endfor %}
       </div>
 
       <article id="product_list_all">
