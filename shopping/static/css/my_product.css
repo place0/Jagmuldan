@@ -26,6 +26,7 @@
 #btn_delete {
     border-style: none;
     font-size: 180%;
+    background-color: transparent;
 }
 .title_text {
     grid-area: "two";
