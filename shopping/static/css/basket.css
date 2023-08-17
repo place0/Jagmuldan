@@ -285,3 +285,13 @@ img {
     font-size: 120%;
     margin-bottom: 3%;
 }
+.back {
+    display: flex;
+    flex-direction: row;
+}
+.web_title {
+    font-size: 140%;
+    font-weight: 950;
+    margin-left: 2%;
+    color: #008d3f;
+}
