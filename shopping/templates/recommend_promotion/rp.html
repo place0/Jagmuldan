@@ -26,10 +26,15 @@
             ></iconify-icon
           ></a>
         </div>
-        <div class="login">{{request.user.username}}</div>
-        <div class="signup">
-          <a href="{% url 'accounts:signup' %}">회원가입</a>
+        {% if not request.user.is_authenticated %}
+        <div class="login">
+          <a href="{% url 'accounts:login' %}">로그인</a>
         </div>
+        {% else %}
+        <div class="mypage">
+          <a href="{% url 'mypage' %}">{{request.user.username}}</a>
+        </div>
+        {% endif %}
       </nav>
 
       <!-- 월작물/음식점 이동 버튼 -->
@@ -173,10 +178,10 @@
             <div class="text">
               일본에서 서지향에 한라봉의 꽃가루를 교배해 개발한 만감류 품종 -
               만감류는 생산 시기가 늦은 감귤류로 감귤나무와 오렌지 품종을 교배해
-              만든 것 ㆍ‘감귤’과 모양이 비슷하나 크기가 더 크고 색이 붉어
-              레드향이라 불림 - 껍질이 얇고 과육이 부드럽고 당도가 높아 어린이와
-              노인들에게 선호 - 레드향의 품종명인 ‘감평’은 맛이 달고 과형이
-              평평하다는 뜻임
+              만든 것이다ㆍ‘감귤’과 모양이 비슷하나 크기가 더 크고 색이 붉어
+              레드향이라 불린다.- 껍질이 얇고 과육이 부드럽고 당도가 높아
+              어린이와 노인들에게 선호한다. - 레드향의 품종명인 ‘감평’은 맛이
+              달고 과형이 평평하다는 뜻이다.
             </div>
           </li>
 
@@ -186,17 +191,111 @@
               <img src="{% static '/img/농작물/미나리.jpg' %}" />
             </div>
             <div class="title">미나리</div>
-            <div class="text"></div>
+            <div class="text">
+              아시아 원산의 여러해살이 작물로 논, 습지, 무가 등에서 재배되고
+              특유의 향긋함과 부드러운 식감이 특징인 식재료이다.봄의 기운을 가득
+              담은 푸른색 미나리의 '미'는 물을 뜻하며 봄철 나무는 물이 올라야
+              성장한다.미나리는 봄의 기운을 물을 통해 우리 몸에 전달하며 간의
+              기능을 도와 춘곤증을 없애는 좋은 채소이다. 미나리는 비타민 A,
+              비타민 B1,B2, 비타민 C 등과 무기질이 풍부하게 함유된 아랄리성
+              식품으로 고지방 식단으로 인해 산성으로 변한 체질을 중화하는 데
+              효과가 있고 칼륨이 많이 함유되어 있어 체내의 중금속과 나트룸 등의
+              해로운 성분을 배출하는 데 도움을 준다.
+            </div>
           </li>
           <li id="month_4" class="crop_info">
             <div class="month">4月</div>
             <div class="month_img">
               <img src="{% static '/img/농작물/개.jpg' %}" />
             </div>
-            <div class="title">개</div>
-            <div class="text"></div>
+            <div class="title">게</div>
+            <div class="text">
+              게는 절지동물 십각목 파행아목에 속하는 갑각류의 총칭으로 피행아 목
+              중에서도 가장 진화된 동물이다.게는 키토산이라는 성분이 있는데
+              키토산 성분은 혈관에 쌓여있는 콜레스테롤을 제거해줌으로써
+              혈액순환을 높여주고 혈압을 낮춰주기 때문에 고혈압, 부정맥, 뇌졸중,
+              심근경색 등과 같은 심혈관 질환 예방에 좋다. 그리고 키틴의 경우에도
+              콜레스테롤 줄여주고 혈압을 상승해주고 혈관건강에 도움이 된다.
+              그리고 게는 오메가 3 지방산이 많이 함유되어 있으며 뇌세포를
+              활성화시켜주는데 효과적이다.
+            </div>
           </li>
         </ul>
+        <li id="month_5" class="crop_info">
+          <div class="month">5月</div>
+          <div class="month_img">
+            <img src="{% static '/img/농작물/양배추.jpg' %}" />
+          </div>
+          <div class="title">양배추</div>
+          <div class="text">
+            양배추(洋白菜, 문화어: 가두배추)는 브라시카 올레라케아의 재배종이다.
+            날로 먹거나 양배추말이 등 쪄서 먹는다. 비타민 C가 풍부하며
+            안토시아닌이라는 주요한 색소 성분이 함유되어있어 보통 자주색 띠를
+            보여준다.양배추는 식용 식물로서의 평범한 목적 외에도 역사적으로 여러
+            가지 건강상의 이익을 위한 약초로 사용되어 왔다. 예를 들어, 고대
+            그리스인들은 완하제로 야채를 섭취하고 버섯 중독, 안약, 그리고
+            타박상을 치료하는 데 사용되는 보형물에 양배추 주스를 해독제로
+            사용하도록 권장했다.양배추는 암, 특히 대장암의 위험성을 저하시킨다.
+          </div>
+        </li>
+        <li id="month_6" class="crop_info">
+          <div class="month">6月</div>
+          <div class="month_img">
+            <img src="{% static '/img/농작물/복숭아.jpg' %}" />
+          </div>
+          <div class="title">복숭아</div>
+          <div class="text">
+            복숭아나무의 열매로 사과, 배와 더불어서 대표적인 인기 과일이다.
+            여러해살이 식물로 싹 터서 잎과 줄기가 자라 열매를 맺기까지
+            3년~5년정도 걸린다. 겨울이 지나고 4월쯤 잎보다 먼저 분홍색 꽃이
+            피고, 꽃이 지면 열매가 생기고 익는다. 과육은 씨 주변이 분홍색이 도는
+            흰색과 씨 주변이 붉은 기가 도는 노란색으로 나뉜다. 수분이 많은지라
+            달고 시원한 맛이 있으며, 과일이 익은 정도나 종류, 품종 등에 따라
+            묘하게 식감이 다르다. 복숭아의 종류는 껍질에 나는 털의 유무에 따라
+            크게 털복숭아(유모계)와 천도복숭아(무모계)로 구분한다.체내에 흡수가
+            빠른 각종 당류 및 비타민과 무기질 등이 풍부하여 피로회복에 많은
+            도움이 된다. 팩틴성분이 있어서 장에 좋아서 변비에도 도움이 되며
+            피부에도 좋다. 또한 혈액순환을 도와 심장병이나 관상동맥경화 같은
+            혈관질환을 예방해주며, 혈압을 낮춰주는 칼륨이 체내 나트륨 배출을
+            조절해 고혈압을 예방하는데 도움을 준다고 한다.
+          </div>
+        </li>
+        <li id="month_7" class="crop_info">
+          <div class="month">7月</div>
+          <div class="month_img">
+            <img src="{% static '/img/농작물/토마토2.jpg' %}" />
+          </div>
+          <div class="title">토마토</div>
+          <div class="text">
+            토마토는 미국 타임지가 선정한 건강에 좋은 10대 슈퍼푸드 중 하나다.
+            토마토는 비타민C, 칼륨, 식이섬유 등의 영양소가 풍부하고, 특히
+            라이코펜이라는 항산화 성분이 많이 들어 있다. 라이코펜은 암 예방,
+            노화 방지, 혈압 조절 등의 효능이 있다.
+          </div>
+        </li>
+        <li id="month_8" class="crop_info">
+          <div class="month">8月</div>
+          <div class="month_img">
+            <img src="{% static '/img/농작물/무화과.jpg' %}" />
+          </div>
+          <div class="title">무화과</div>
+          <div class="text">
+            무화과는 뽕나무과이며 소아시아가 무화과의 원산지며 그중에서도
+            이집트에서 약 4천 년 전 심은 기록이 있어 가장 오래된 과일나무로
+            알려져 있다. 또한 무화과는 맛도 뛰어나나 몸에 좋은 과일이기도 하다.
+            동의보감에는 ‘맛은 달고 음식을 잘 먹게 하며 설사를 멎게 한다’라고
+            기록되어 있다. 무화과에 함유되어 있는 안토시아닌 성분이 눈 망막을
+            건강하게 하고 눈의 혈류를 좋게 하기 때문에 눈을 건강하게 하여 시력을
+            개선하는 데 도움을 준다. 무화과에 함유되어 있는 비타민 B6 성분이
+            머리를 맑게 하고 스트레스를 해소하는 데 도움을 준다. 다른 음식에서는
+            보기 드물게 비타민 B6를 유독 많이 함유하고 있다. 무화과에는
+            피신이라는 성분이 소화를 촉진하고 장 건강에 도움을 주는 것으로 이
+            피신은 단백질 분해 효소 중 하나로 육류를 섭취할 때 소화 장애를 겪는
+            사람들이 무화과를 함께 섭취하면 소화에 도움을 받을 수 있다. 또한
+            펙틴 성분도 다량 함유되어 있는데 위장 운동을 활발하게 하며, 위장을
+            보호하기도 하여 대장암과 위암 예방에 도움을 준다.
+          </div>
+        </li>
       </article>
 
       <!-- 음식점 -->
@@ -314,8 +413,54 @@
             <div class="adress">서울 양정구 가가동</div>
             <div class="text"></div>
           </li>
-          <li id="store3" class="store_info"></li>
-          <li id="store4" class="store_info"></li>
+          <li id="store3" class="store_info">
+            <div class="store">농작동 닭갈비</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/닭갈비.jpg' %}" />
+            </div>
+            <div class="adress">서울 바송구 바바동</div>
+            <div class="text"></div>
+          </li>
+          <li id="store4" class="store_info">
+            <div class="store">샐러듀이</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/샐러드.jpg' %}" />
+            </div>
+            <div class="adress">서울 양정구 바바가동</div>
+            <div class="text"></div>
+          </li>
+          <li id="store5" class="store_info">
+            <div class="store">김밥집</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/김밥.jpg' %}" />
+            </div>
+            <div class="adress">서울 양정구 나가동</div>
+            <div class="text"></div>
+          </li>
+          <li id="store6" class="store_info">
+            <div class="store">신선도</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/써니.jpg' %}" />
+            </div>
+            <div class="adress">서울 날라구 가돠동</div>
+            <div class="text"></div>
+          </li>
+          <li id="store7" class="store_info">
+            <div class="store">이탈리안</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/피자.jpg' %}" />
+            </div>
+            <div class="adress">서울 나진구 고닥동</div>
+            <div class="text"></div>
+          </li>
+          <li id="store8" class="store_info">
+            <div class="store">김밥집</div>
+            <div class="store_img">
+              <img src="{% static '/img/음식점/김밥.jpg' %}" />
+            </div>
+            <div class="adress">서울 양정구 가가동</div>
+            <div class="text"></div>
+          </li>
         </ul>
       </article>
       <!-- 하단 나브바 -->
