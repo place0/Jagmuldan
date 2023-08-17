@@ -27,7 +27,7 @@
 }
 
 .box {
-    width: 180px;
+    width: 150px;
     height: 220px;
     margin: 10px;
     padding: 0;
@@ -75,4 +75,12 @@ body {
     position: relative;
     justify-content: center;
     align-items: center;
+}
+a:visited {
+    color: black;
+    text-decoration: none;
+}
+a {
+    color: black;
+    text-decoration: none;
 }
