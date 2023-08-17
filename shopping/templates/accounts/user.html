@@ -12,8 +12,10 @@
     <body>
         <div style="display: flex; justify-content: space-between">
             <span style="margin-left: 120px">고객으로 회원가입</span>
-            <span>X</span
-            ><!--뒤로가기-->
+            <a href="{% url 'accounts:signup' %}"
+                ><span>X</span
+                ><!--뒤로가기--></a
+            >
         </div>
         <div style="margin-top: 50px; display: flex; justify-content: center">
             <img
