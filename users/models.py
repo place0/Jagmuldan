@@ -30,7 +30,7 @@ class User(AbstractUser):
     
 class Merchant(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name='merchant')
-    image = models.ImageField(upload_to='merchant/', default='merchant/jagmuldan.png')
+    image = models.ImageField(upload_to='merchant/')
     farm_name = models.CharField(max_length=50)
     farm_adress=models.CharField(max_length=50)
 

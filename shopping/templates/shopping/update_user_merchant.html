@@ -43,7 +43,9 @@
             <div class="main_one">
                 <div class="main_pic">
                     <picture
-                        >  <p>현재: <img src="{{request.user.merchant.image.url }}" width="50"></p>
+                        >  
+                        {% if request.user.merchant.image %}<p>현재: <img src="{{request.user.merchant.image.url }}" width="50"></p>
+                        {% endif %}
                         <p>변경 : <input type="file" name="image"></p></picture>
 
                     <div class="id">

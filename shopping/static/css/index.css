@@ -181,6 +181,7 @@ input[type="text"]:focus {
   overflow: hidden;
   border: #008d3f solid 3px;
   border-radius: 10px;
+  object-fit: cover;
 }
 .hot img {
   object-fit: cover;

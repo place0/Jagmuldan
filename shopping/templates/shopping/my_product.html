@@ -31,11 +31,8 @@
         <div class="main_box">
             {% for p in products %}
             <div class="pic">
-                {% if p.product_image.all %}
-                    <img
-                      src="{{p.product_image.first.image.url}}" width="50"
-                    /><br />
-                    {% endif %}
+                {% for photo in p.product_image.all %}
+            <img src="{{ photo.image.url }}" width="50"><br>
             </div>
             <div class="thing_info">
                 <div class="thing_title">
