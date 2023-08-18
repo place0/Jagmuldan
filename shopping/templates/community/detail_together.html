@@ -66,9 +66,9 @@
         {% if ask.community.count > 0 %}
         {% for c in ask.community.all %}
             {% if c.writer == True %}
-                글쓴이 : {{c.context}}<br>
+                <strong>글쓴이</strong> : {{c.context}}<br>
             {% else %}
-                익명 : {{ c.context }}<br>
+                <strong>익명</strong> : {{ c.context }}<br>
             {% endif %}
         {% endfor %}
         {% else %}
