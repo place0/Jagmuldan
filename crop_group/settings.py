@@ -32,14 +32,9 @@ def get_secret(setting):
 SECRET_KEY = get_secret("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-
-ALLOWED_HOSTS = ['port-0-jagmuldan-ac2nllga551b.sel3.cloudtype.app', 'localhost', '127.0.0.1', '.cloudtype.app' ]
-CSRF_TRUSTED_ORIGINS = ['https://*.cloudtype.app']
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
