@@ -35,7 +35,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 DEBUG = False
 
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".cloudtype.app"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".cloudtype.app", "port-0-jagmuldan-ac2nllga551b.sel3.cloudtype.app"]
 CSRF_TRUSTED_ORIGINS = ['https://*.cloudtype.app']
 
 CORS_ORIGIN_ALLOW_ALL = True
