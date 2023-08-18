@@ -21,7 +21,7 @@ def get_next_business_day(current_date):
 
 # 메인페이지
 def index(request):
-    products=Product.objects.all()
+    products=Product.objects.all().order_by('-id')
     if request.method=="POST":
         search=request.POST['search']
         products=Product.objects.filter(title__contains=search)
