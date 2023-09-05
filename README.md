@@ -2,8 +2,6 @@
 작물단
 <br><br>
 
-링크연결! 👉 [4989](http://43.202.146.56:8000/)
-
 #### 농촌과 도시의 디지털 격차를 해결하고, 저소득층이 잉여농산물을 저렴하게 구매할 수 있는 서비스
 
 <br><br>
@@ -19,7 +17,6 @@
 # ⭐ Main Feature
 
 주된 기능은 잉여농산물 판매와 잉여 농산물 구매인 농작물 구매 이커머스 입니다. 잉여 농산물 구매 기능의 경우, 반만 담을 수 있는 키핑 서비스와 과일 채소 필터링을 통해 편리한 검색 서비스를 지원합니다. 특히 카카오 결제를 지원하여 편리한 구매가 가능합니다 
-<예시>
 
 <br><br>
   
@@ -32,30 +29,110 @@
 
 <br><br>
 
-# 📂 Project Structure
-
-<br><br>
-
-# ⚒ CI/CD
 
 
-<br><br>
-  
-# 👨‍💻 Role & Contribution
 
+# ⚒ period
 
-전체 개발 일정 및 이슈 관리
+- 2023.07.17 ~ 2023.08.18
+
+<br/>
+
 
 <br><br>
   
 # 👨‍👩‍👧‍👦 Developer
 
-<ul>
-  <li>장소영</li>
-  <li>김은서</li>
-  <li>김현지</li>
-  <li>성주현</li>
-  <li>이현주</li>
-  
-  
-</ul>
+<table border="" cellspacing="0" cellpadding="0" width="100%">
+    <tr width="100%">
+        <td align="center"><a href= "https://github.com/won0324">김현지</a></td>
+        <td  align="center"><a href= "https://github.com/OHseugyeon">이현주</a></td>
+        <td  align="center"><a href= "https://github.com/7beunseo">성주현</a></td>
+        <td  align="center"><a href= "https://github.com/LGAIN">김은서</a></td>
+        <td  align="center"><a href= "https://github.com/newoceanwave">장소영</a></td>
+    </tr>
+    <tr width="100%">
+      <td  align="center"><p>프론트엔드</p></td>
+      <td  align="center"><p>프론트엔드</p></td>
+      <td  align="center"><p>프론트엔드</p></td>
+     <td  align="center">백엔드</td>
+      <td  align="center">백엔드</td>
+   </tr>
+        <tr width="100%">
+      <td  align="center"><p>프론트엔드, 디자인</p></td>
+      <td  align="center"><p>프론트엔드</p></td>
+     <td  align="center">프론트엔드, 디자인</td>
+      <td  align="center">상품등록, 장바구니</td>
+      <td  align="center">카카오 결제 연결, 디자인</td>
+   </tr>
+</table>
+<br><br>
+
+# 📂 Project Structure
+
+```
+📂 jagmuldan
+ ├─ crop_group
+ │  ├─ __init__.py
+ │  ├─ asgi.py
+ │  ├─ settings.py
+ │  ├─ urls.py
+ │  └─ wsgi.py
+ ├─ shopping/
+ │  ├─ static
+ │  │  ├─ css/
+ │  │  ├─ media/
+ │  ├─ templates/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ forms.py
+ │  ├─ tests.py
+ │  └─ views.py
+ ├─ community/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ forms.py
+ │  ├─ urls.py
+ │  ├─ tests.py
+ │  └─ views.py
+ ├─ accounts/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ forms.py
+ │  ├─ tests.py
+ │  └─ views.py
+ ├─ kakao/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  └─ views.py
+ ├─ users/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  └─ views.py
+ ├─ recommend_promotion/
+ │  ├─ __init__.py
+ │  ├─ admin.py
+ │  ├─ apps.py
+ │  ├─ apps.py
+ │  ├─ models.py
+ │  ├─ tests.py
+ │  └─ views.py
+ └─ manage.py
+
+```
